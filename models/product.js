@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 
-const UserSchema = new Schema({
+const ProductSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -25,6 +25,10 @@ const UserSchema = new Schema({
         type:String,
         required: true
     },
+    country: {
+        type:String,
+        required: true
+    },
     state: {
         type:String,
         required: true
@@ -37,11 +41,11 @@ const UserSchema = new Schema({
         type:String,
         required: false
     },
-    orders: {
-        type: Array,
-        required: false
+    password: {
+        type: String,
+        required: true
     }
 
 })
 
-module.exports = User = mongoose.model('user',UserSchema)
+module.exports = Product = mongoose.model('product',UserSchema)
