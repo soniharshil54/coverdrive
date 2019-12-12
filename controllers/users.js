@@ -6,13 +6,13 @@ exports.register_user = function(req, res) {
     const newUser = new User(
         {
             _id: new mongoose.Types.ObjectId(),
-            name: "john doe",
-            email: "john@yahoo.com",
-            dob: "30-07-1998",
-            contact: "8686868686",
-            address: "vraj street",
-            state: "gujarat",
-            city: "surat"
+            name: req.body.name,
+            email: req.body.email,
+            dob: req.body.dob,
+            contact: req.body.contact,
+            address: req.body.address,
+            state: req.body.state,
+            city: req.body.city
         }
     )
         newUser.save()
@@ -33,14 +33,25 @@ exports.get_user = function(req, res){
 }
 
 exports.get_all_users = function(req, res){
-    app.get("/get",(req,res,next) => {
-        Users.find()
+        User.find()
              .then(result=>res.json(result))
              .catch(err=>res.json(err))
-    
-        Users.countDocuments()	
-              .then(result=>console.log(result))
-              .catch(err=>console.log(err))	 
-    
-    })
+}
+
+exports.count_users = function(req, res){
+    User.countDocuments()	
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))	
+}
+
+exports.delete_user = function(req, res){
+    User.findOneAndRemove({_id:req.params.did})
+    .then(result=> res.json({"result":"user deteted","deleteduser":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_user = function(req, res){
+    User.findOneAndUpdate({_id:req.params.eid},req.body)
+    .then(result=> res.json({"result":"user updated","updateduser":result}))
+    .catch(err=>res.status(404).json(err))
 }

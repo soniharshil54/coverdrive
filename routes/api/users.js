@@ -8,7 +8,7 @@ const checkAuth = require("../../middlewares/checkAuth")
 
 
 // GET request to get specific user. 
-  router.get('/user/:uid', user_controller.get_user);
+  router.get('/getuser/:uid', user_controller.get_user);
 
 // GET request to get specific user. 
 router.get('/users', user_controller.get_all_users);  
@@ -17,12 +17,12 @@ router.get('/users', user_controller.get_all_users);
  router.post('/register', user_controller.register_user);
 
 // GET request for count of friends of a specific user. 
- //router.get('/countusers', user_controller.user_count_users);
+ router.get('/countusers', user_controller.count_users);
 
  // GET request for count of friends of a specific user. 
- //router.delete('/deleteuser', user_controller.user_delete_user);
+ router.delete('/deleteuser/:did', user_controller.delete_user);
 
 // GET request for count of friends requests of a specific user. 
-//  router.put('/updateuser/:uid', user_controller.user_update_user);
+ router.put('/edituser/:eid', user_controller.edit_user);
 
 module.exports = router
