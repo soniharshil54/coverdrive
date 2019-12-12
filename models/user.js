@@ -37,11 +37,10 @@ const UserSchema = new Schema({
         type:String,
         required: false
     },
-    orders: {
-        type: Array,
-        required: false
-    }
-
+    orders: [{
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Order'
+      }]
 })
 
 module.exports = User = mongoose.model('user',UserSchema)

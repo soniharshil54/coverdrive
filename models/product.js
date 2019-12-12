@@ -7,6 +7,17 @@ const ProductSchema = new Schema({
         type: String,
         required: true
     },
+    categories: {
+        type: [
+            {
+                category:[{
+                    subcategory:String,
+                    image:String,
+                    available_status:Number
+                }]
+            }
+        ]
+    },
     email: {
         type: String,
         required: true,

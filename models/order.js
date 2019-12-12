@@ -3,49 +3,53 @@ const Schema = mongoose.Schema
 
 const OrderSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
-    name : {
+    user_name : {
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        required: true,
-        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-        unique: true
+    products: [String],
+    user_details: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Admin'
     },
-    contact: {
+    payment_type: {
         type: Number,
         required:true
     },
-    dob: {
+    paid_status: {
         type: String
         
     }  ,
-    address: {
+    order_summary: {
+        type:[{
+            product: String,
+            amount: Number
+        }]
+    },
+    total_amount: {
+        type:Number,
+        required: true
+    },
+    offer: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Offer'
+    },
+    discount: {
+        type:Number,
+        required: true
+    },
+    payable_amount: {
         type:String,
         required: true
     },
-    country: {
-        type:String,
-        required: true
-    },
-    state: {
-        type:String,
-        required: true
-    },
-    city: {
-        type:String,
-        required: true
-    },
-    profile: {
+    date_ordered: {
         type:String,
         required: false
     },
-    password: {
+    date_delivered: {
         type: String,
         required: true
     }
-
 })
 
 module.exports = Order = mongoose.model('order',OrderSchema)
