@@ -26,10 +26,16 @@ exports.register_user = function(req, res) {
         })
 }
 
-exports.get_user = function(req, res){
-    User.findOne({_id:req.params.uid})
-    .then(result=>res.json(result))
-    .catch(err=>res.json(err))
+exports.get_user = async function(req, res){
+    let user = await User.findOne({_id:req.params.uid})
+    if(user){
+        res.json(user)
+        return
+    }
+    else{
+        res.json({"error":"user not found"})
+        return
+    }
 }
 
 exports.get_all_users = function(req, res){

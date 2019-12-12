@@ -3,9 +3,9 @@ const mongoose = require('mongoose')
 const db = require("./configs/config").mongoURI
 const cors = require("cors")
 const userRoutes = require("./routes/api/users")
-// const adminRoutes = require("./routes/api/admins")
+const adminRoutes = require("./routes/api/admins")
 // const orderRoutes = require("./routes/api/orders")
-// const productRoutes = require("./routes/api/products")
+const productRoutes = require("./routes/api/products")
 // const pincodeRoutes = require("./routes/api/pincodes")
 // const offerRoutes = require("./routes/api/offers")
 const bodyParser = require("body-parser")
@@ -28,9 +28,9 @@ mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, ()=> c
 //   next();
 // });
 app.use("/api/user",userRoutes)
-// app.use("/api/admin",adminRoutes)
+app.use("/api/admin",adminRoutes)
 // app.use("/api/order",orderRoutes)
-// app.use("/api/product",productRoutes)
+app.use("/api/product",productRoutes)
 // app.use("/api/pincode",pincodeRoutes)
 // app.use("/api/offer",offerRoutes)
 // app.use('/productimagesuploads', express.static('productimagesploads'));
