@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
-
+mongoose.set('useCreateIndex', true)
 const UserSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
@@ -9,7 +9,6 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true,
         match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
         unique: true
     },
@@ -32,10 +31,6 @@ const UserSchema = new Schema({
     city: {
         type:String,
         required: true
-    },
-    profile: {
-        type:String,
-        required: false
     },
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
