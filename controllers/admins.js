@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const Admin = require("../models/admin")
+const jwt = require("jsonwebtoken")
 
 exports.register_admin = function(req, res) {
     Admin.find({email: req.body.email})
@@ -59,7 +60,8 @@ exports.get_all_admins = function(req, res){
 }
 
 exports.login_admin = function(req, res){
-    User.find({email:req.body.email})
+    console.log(req.body.email)
+    Admin.find({email:req.body.email})
     .exec()
     .then(admin => {
         console.log(admin)
@@ -84,11 +86,11 @@ exports.login_admin = function(req, res){
                         expiresIn: '1h'
                     })
 
-                    return res.status(200).header("Access-Control-Allow-Origin", "*").json({message: "auth successfull", token:token, user: user})
+                    return res.status(200).header("Access-Control-Allow-Origin", "*").json({message: "auth successfull", token:token, admin: admin})
 
             }
 
-            res.status(402).header("Access-Control-Allow-Origin", "*").json({message: "wrong password"})
+            res.status(401).header("Access-Control-Allow-Origin", "*").json({message: "wrong password"})
         })
 
 
