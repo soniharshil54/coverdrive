@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 
 var product_controller = require('../../controllers/products');
+var phonecase_controller = require('../../controllers/phonecases')
 
 const checkAuth = require("../../middlewares/checkAuth")
 
@@ -14,10 +15,13 @@ const checkAuth = require("../../middlewares/checkAuth")
 //  router.get('/products', user_controller.user_get_products);
 
  // GET request to get all users. 
- router.post('/addproduct', product_controller.add_product);
+ //router.post('/addproduct', product_controller.add_product);
 
   // GET request to get all users. 
-  router.post('/addcategory', product_controller.add_category);
+  router.post('/addcompany', phonecase_controller.add_company);
+
+  // GET request to get all users. 
+  //router.post('/addcategory', product_controller.add_category);
  
 
  // GET request to get all users. 

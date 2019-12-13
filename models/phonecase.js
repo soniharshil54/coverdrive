@@ -17,8 +17,8 @@ const PhonecaseSchema = new Schema({
         ref: 'Order'
       }],
     available_status: {
-        type: Number,
-        default: 1
+        type: Boolean,
+        default: true
     }  
 })
 
