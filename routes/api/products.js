@@ -18,7 +18,7 @@ router.post('/addslipperbottle', product_controller.add_slipperbottle);
 
 router.post('/addwallclock', product_controller.add_wallclock);
 
-router.post('/addkeychain', product_controller.add_keychain);
+router.post('/addwatch', product_controller.add_watch);
 
 // GET request to get specific user. 
 //  router.get('/product/:pid', user_controller.user_get_user);

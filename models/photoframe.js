@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const TotebagSchema = new Schema({
+const PhotoframeSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -24,18 +24,14 @@ const TotebagSchema = new Schema({
         type: String,
         required: true
     },
-    pick_image_size : {
-        type: String,
-        required: true
-    },
     description : {
         type : String,
         required : true
     },
     available_status : {
         type : Number,
-        required : true
+        default: 1
     } 
 })
 
-module.exports = Totebag = mongoose.model('totebag',TotebagSchema)
+module.exports = Photoframe = mongoose.model('photoframe',PhotoframeSchema)

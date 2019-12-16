@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const CaricatureSchema = new Schema({
+const PopholderSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -24,10 +24,6 @@ const CaricatureSchema = new Schema({
         type: String,
         required: true
     },
-    pick_image_size : {
-        type: String,
-        required: true
-    },
     description : {
         type : String,
         required : true
@@ -38,4 +34,4 @@ const CaricatureSchema = new Schema({
     } 
 })
 
-module.exports = Caricature = mongoose.model('caricature',CaricatureSchema)
+module.exports = Popholder = mongoose.model('popholder',PopholderSchema)

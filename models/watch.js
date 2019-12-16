@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const PopsocketSchema = new Schema({
+const WatchSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -38,4 +38,4 @@ const PopsocketSchema = new Schema({
     } 
 })
 
-module.exports = Popsocket = mongoose.model('popsocket',PopsocketSchema)
+module.exports = Watch = mongoose.model('watch',WatchSchema)

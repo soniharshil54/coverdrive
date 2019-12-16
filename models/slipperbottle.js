@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const MousepadSchema = new Schema({
+const SlipperbottleSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -24,10 +24,6 @@ const MousepadSchema = new Schema({
         type: String,
         required: true
     },
-    pick_image_size : {
-        type: String,
-        required: true
-    },
     description : {
         type : String,
         required : true
@@ -38,4 +34,4 @@ const MousepadSchema = new Schema({
     } 
 })
 
-module.exports = Mousepad = mongoose.model('mousepad',MousepadSchema)
+module.exports = Slipperbottle = mongoose.model('slipperbottle',SlipperbottleSchema)
