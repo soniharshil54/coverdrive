@@ -6,6 +6,10 @@ var product_controller = require('../../controllers/products');
 const checkAuth = require("../../middlewares/checkAuth")
 
 
+router.get('/keychains', product_controller.get_keychains)
+
+router.put('/editkeychain/:kid', product_controller.edit_keychain)
+
 router.post('/addkeychain', product_controller.add_keychain);
 
 router.post('/addmug', product_controller.add_mug);

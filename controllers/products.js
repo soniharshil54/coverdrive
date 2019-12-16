@@ -1,8 +1,10 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const Product = require("../models/product")
+const Keychain = require("../models/keychain")
 
 exports.add_keychain = function(req, res){
+    console.log(req.body)
     const newKeychain = new Keychain(
         {
             _id: new mongoose.Types.ObjectId(),
@@ -11,8 +13,7 @@ exports.add_keychain = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newKeychain.save()
@@ -24,6 +25,20 @@ exports.add_keychain = function(req, res){
         console.log(err)
         res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
     })
+}
+
+exports.edit_keychain = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Keychain.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.get_keychains = function(req, res){
+    Keychain.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
 }
 
 exports.add_mug = function(req, res){

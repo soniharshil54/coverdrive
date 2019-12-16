@@ -2,6 +2,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 const db = require("./configs/config").mongoURI
 const cors = require("cors")
+const app = express()
+const bodyParser = require("body-parser")
+
+//app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 const userRoutes = require("./routes/api/users")
 const adminRoutes = require("./routes/api/admins")
 const phonecaseRoutes = require("./routes/api/phonecases")
@@ -9,12 +15,8 @@ const phonecaseRoutes = require("./routes/api/phonecases")
 const productRoutes = require("./routes/api/products")
 // const pincodeRoutes = require("./routes/api/pincodes")
 // const offerRoutes = require("./routes/api/offers")
-const bodyParser = require("body-parser")
-const app = express()
 
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
+
 
 
 
