@@ -25,6 +25,10 @@ const PhonemodelSchema = new Schema({
         type: Number,
         default: 299
     }, 
+    req_image_size : {
+        type: String,
+        required: true
+    },
     orders: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'Order'

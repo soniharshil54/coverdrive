@@ -6,6 +6,19 @@ var product_controller = require('../../controllers/products');
 const checkAuth = require("../../middlewares/checkAuth")
 
 
+router.post('/addkeychain', product_controller.add_keychain);
+
+router.post('/addmug', product_controller.add_mug);
+
+router.post('/addphotoframe', product_controller.add_photoframe);
+
+router.post('/addpopholder', product_controller.add_popholder);
+
+router.post('/addslipperbottle', product_controller.add_slipperbottle);
+
+router.post('/addwallclock', product_controller.add_wallclock);
+
+router.post('/addkeychain', product_controller.add_keychain);
 
 // GET request to get specific user. 
 //  router.get('/product/:pid', user_controller.user_get_user);
