@@ -60,6 +60,7 @@ exports.get_all_admins = function(req, res){
 }
 
 exports.login_admin = function(req, res){
+    console.log(req.body)
     console.log(req.body.email)
     Admin.find({email:req.body.email})
     .exec()
@@ -120,4 +121,31 @@ exports.edit_admin = function(req, res){
     Admin.findOneAndUpdate({_id:req.params.eid},req.body)
     .then(result=> res.json({"result":"admin updated","updatedadmin":result}))
     .catch(err=>res.status(404).json(err))
+}
+
+exports.change_password = function(res, res){
+    Admin.findOne({_id:req.params.pid})
+    .exec()
+    .then(admin => {
+        bcrypt.compare(req.body.oldpassword, admin[0].password, (err,result) => {
+            if(err){
+                console.log(err)
+            }
+            else{
+                bcrypt.hash(req.body.newpassword,10,(err,hash) => {
+                    if(err){
+                        return res.status(500).json({error:err})
+                    }
+                    else {
+                        let reqBody = {
+                            password : hash
+                        }
+                        Admin.findOneAndUpdate({_id:req.params.eid},reqBody)
+                        .then(result=> res.json({"result":"password updated","updatedpassword":result}))
+                        .catch(err=>res.status(404).json(err))
+                    }
+                })
+            }
+        })
+    })
 }

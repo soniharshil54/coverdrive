@@ -17,6 +17,8 @@ router.get('/admins', admin_controller.get_all_admins);
  // GET request to get all users. 
  router.post('/register', admin_controller.register_admin);
 
+ router.put('/changepassword', admin_controller.change_password);
+
 // GET request for count of friends of a specific user. 
  router.get('/countusers', admin_controller.count_admins);
 
