@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const Product = require("../models/product")
 const Keychain = require("../models/keychain")
+const ObjectId = mongoose.Types.ObjectId
 
 exports.add_keychain = function(req, res){
     console.log(req.body)
@@ -33,6 +34,27 @@ exports.edit_keychain = function(req, res){
     Keychain.findOneAndUpdate({_id:req.params.kid},req.body)
     .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
     .catch(err=>res.status(404).json(err))
+}
+
+exports.delete_keychains = function(req, res){
+    //console.log(req.body)
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     //req.body => [{'_id' : ".." , "name" : "john"}]
+    usersDelete.push(new ObjectId(item));
+});
+
+Keychain.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+
+    // console.log(idsArrayf)
+    // var idsArray = idsArrayf.map(a => {return new ObjectId(a)})
+    // console.log(idsArray)
+    // Keychain.deleteMany({ id: {$in : idsArray} })
+    // .then(result => console.log(result))
+    // .catch(err => console.log(err))
+    // res.json({"delete":"was called"})
 }
 
 exports.get_keychains = function(req, res){

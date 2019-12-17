@@ -10,6 +10,10 @@ router.get('/keychains', product_controller.get_keychains)
 
 router.put('/editkeychain/:kid', product_controller.edit_keychain)
 
+router.delete('/deletekeychains', product_controller.delete_keychains)
+
+
+
 router.post('/addkeychain', product_controller.add_keychain);
 
 router.post('/addmug', product_controller.add_mug);
