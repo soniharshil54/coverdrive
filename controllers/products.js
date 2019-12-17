@@ -2,6 +2,12 @@ const express = require("express")
 const mongoose = require("mongoose")
 const Product = require("../models/product")
 const Keychain = require("../models/keychain")
+const Mug = require("../models/mug")
+const Photoframe = require("../models/photoframe")
+const Popholder = require("../models/popholder")
+const Slipperbottle = require("../models/slipperbottle")
+const Wallclock = require("../models/wallclock")
+const Watch = require("../models/watch")
 const ObjectId = mongoose.Types.ObjectId
 
 exports.add_keychain = function(req, res){
@@ -28,6 +34,7 @@ exports.add_keychain = function(req, res){
     })
 }
 
+
 exports.edit_keychain = function(req, res){
     console.log(req.body)
     console.log(req.params)
@@ -37,7 +44,6 @@ exports.edit_keychain = function(req, res){
 }
 
 exports.delete_keychains = function(req, res){
-    //console.log(req.body)
     var idsArrayf = req.body.todeleteids;
     var usersDelete = [];
     idsArrayf.forEach(function(item){     //req.body => [{'_id' : ".." , "name" : "john"}]
@@ -47,18 +53,46 @@ exports.delete_keychains = function(req, res){
 Keychain.deleteMany({'_id':{'$in': usersDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
-
-    // console.log(idsArrayf)
-    // var idsArray = idsArrayf.map(a => {return new ObjectId(a)})
-    // console.log(idsArray)
-    // Keychain.deleteMany({ id: {$in : idsArray} })
-    // .then(result => console.log(result))
-    // .catch(err => console.log(err))
-    // res.json({"delete":"was called"})
 }
 
 exports.get_keychains = function(req, res){
     Keychain.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_mugs = function(req, res){
+    Mug.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_photoframes = function(req, res){
+    Photoframe.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_popholders = function(req, res){
+    Popholder.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_slipperbottles = function(req, res){
+    Slipperbottle.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_wallclocks = function(req, res){
+    Wallclock.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_watches = function(req, res){
+    Watch.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
@@ -72,8 +106,7 @@ exports.add_mug = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newMug.save()
@@ -96,8 +129,7 @@ exports.add_photoframe = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newPhotoframe.save()
@@ -120,8 +152,7 @@ exports.add_popholder = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newPopholder.save()
@@ -144,8 +175,7 @@ exports.add_slipperbottle = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newSlipperbottle.save()
@@ -168,8 +198,7 @@ exports.add_wallclock = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newWallclock.save()
@@ -192,8 +221,7 @@ exports.add_watch = function(req, res){
             h_image: "path/head.jpg",
             in_image: "path/in.jpg",
             price: req.body.price,
-            description: req.body.description,
-            availability_status: req.body.availability_status
+            description: req.body.description
         }
     )
     newWatch.save()
@@ -206,6 +234,7 @@ exports.add_watch = function(req, res){
         res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
     })
 }
+
 
 exports.add_product = function(req, res) {
     const newProduct = new Product(

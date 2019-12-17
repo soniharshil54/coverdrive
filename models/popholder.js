@@ -12,16 +12,16 @@ const PopholderSchema = new Schema({
         type: String,
         required: true
     },
-    header_image : {
+    h_image : {
+        type: String,
+        required: true
+    },
+    in_image : {
         type: String,
         required: true
     },
     price : {
         type: Number,
-        required: true
-    },
-    in_image : {
-        type: String,
         required: true
     },
     description : {
@@ -30,8 +30,8 @@ const PopholderSchema = new Schema({
     },
     available_status : {
         type : Number,
-        required : true
-    } 
+        default : 1
+    }
 })
 
 module.exports = Popholder = mongoose.model('popholder',PopholderSchema)

@@ -12,16 +12,16 @@ const PhotoframeSchema = new Schema({
         type: String,
         required: true
     },
-    header_image : {
+    h_image : {
+        type: String,
+        required: true
+    },
+    in_image : {
         type: String,
         required: true
     },
     price : {
         type: Number,
-        required: true
-    },
-    in_image : {
-        type: String,
         required: true
     },
     description : {
@@ -30,8 +30,8 @@ const PhotoframeSchema = new Schema({
     },
     available_status : {
         type : Number,
-        default: 1
-    } 
+        default : 1
+    }
 })
 
 module.exports = Photoframe = mongoose.model('photoframe',PhotoframeSchema)

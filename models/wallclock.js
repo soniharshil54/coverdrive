@@ -12,20 +12,16 @@ const WallclockSchema = new Schema({
         type: String,
         required: true
     },
-    header_image : {
+    h_image : {
         type: String,
-        required: true
-    },
-    price : {
-        type: Number,
         required: true
     },
     in_image : {
         type: String,
         required: true
     },
-    pick_image_size : {
-        type: String,
+    price : {
+        type: Number,
         required: true
     },
     description : {
@@ -34,8 +30,8 @@ const WallclockSchema = new Schema({
     },
     available_status : {
         type : Number,
-        required : true
-    } 
+        default : 1
+    }
 })
 
 module.exports = Wallclock = mongoose.model('wallclock',WallclockSchema)

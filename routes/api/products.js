@@ -8,25 +8,41 @@ const checkAuth = require("../../middlewares/checkAuth")
 
 router.get('/keychains', product_controller.get_keychains)
 
-router.put('/editkeychain/:kid', product_controller.edit_keychain)
+router.get('/mugs', product_controller.get_mugs)
 
-router.delete('/deletekeychains', product_controller.delete_keychains)
+router.get('/watchs', product_controller.get_watches)
+
+router.get('/slipperbottles', product_controller.get_slipperbottles)
+
+router.get('/wallclocks', product_controller.get_wallclocks)
+
+router.get('/popholders', product_controller.get_popholders)
+
+router.get('/photoframes', product_controller.get_photoframes)
+
+router.put('/edit/keychain/:kid', product_controller.edit_keychain)
+
+router.delete('/delete/keychain', product_controller.delete_keychains)
 
 
 
-router.post('/addkeychain', product_controller.add_keychain);
+router.post('/add/keychain', product_controller.add_keychain);
 
-router.post('/addmug', product_controller.add_mug);
+router.post('/add/mug', product_controller.add_mug);
 
-router.post('/addphotoframe', product_controller.add_photoframe);
+//router.post('/add/popholder', product_controller.add_popholder);
 
-router.post('/addpopholder', product_controller.add_popholder);
+//router.post('/addmug', product_controller.add_mug);
 
-router.post('/addslipperbottle', product_controller.add_slipperbottle);
+router.post('/add/photoframe', product_controller.add_photoframe);
 
-router.post('/addwallclock', product_controller.add_wallclock);
+router.post('/add/popholder', product_controller.add_popholder);
 
-router.post('/addwatch', product_controller.add_watch);
+router.post('/add/slipperbottle', product_controller.add_slipperbottle);
+
+router.post('/add/wallclock', product_controller.add_wallclock);
+
+router.post('/add/watch', product_controller.add_watch);
 
 // GET request to get specific user. 
 //  router.get('/product/:pid', user_controller.user_get_user);
