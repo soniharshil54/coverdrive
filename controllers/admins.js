@@ -62,17 +62,17 @@ exports.get_all_admins = function(req, res){
 exports.login_admin = function(req, res){
     console.log(req.body)
     console.log(req.body.email)
-    Admin.find({email:req.body.email})
+    Admin.findOne({_id:req.params.cid})
     .exec()
     .then(admin => {
         console.log(admin)
         if(admin.length < 1){
-            return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"admin with this mail doesnt exist"})
+            return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"admin with this mail doesnt exist", status:403})
         }
 
         bcrypt.compare(req.body.password, admin[0].password, (err,result) => {
             if(err){
-                return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"wrong password"})
+                return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"wrong password", status: 403})
             }
             if(result){
                 const token = jwt.sign(
@@ -87,11 +87,11 @@ exports.login_admin = function(req, res){
                         expiresIn: '1h'
                     })
 
-                    return res.status(200).header("Access-Control-Allow-Origin", "*").json({message: "auth successfull", token:token, admin: admin})
+                    return res.status(200).header("Access-Control-Allow-Origin", "*").json({message: "auth successfull", token:token, admin: admin, status: 200})
 
             }
 
-            res.status(401).header("Access-Control-Allow-Origin", "*").json({message: "wrong password"})
+            res.status(401).header("Access-Control-Allow-Origin", "*").json({message: "wrong password", status:403})
         })
 
 
@@ -123,15 +123,19 @@ exports.edit_admin = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-exports.change_password = function(res, res){
-    Admin.findOne({_id:req.params.pid})
-    .exec()
+exports.change_password = function(req, res){
+    Admin.findOne({_id:req.params.cid})
     .then(admin => {
-        bcrypt.compare(req.body.oldpassword, admin[0].password, (err,result) => {
+        console.log(admin)
+        console.log(req.body)
+        bcrypt.compare(req.body.oldpassword, admin.password, (err,result) => {
             if(err){
                 console.log(err)
+                return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"old password is wrong", status:401})
             }
-            else{
+            else if(result){
+                console.log(result)
+                console.log("passmatched")
                 bcrypt.hash(req.body.newpassword,10,(err,hash) => {
                     if(err){
                         return res.status(500).json({error:err})
@@ -140,11 +144,15 @@ exports.change_password = function(res, res){
                         let reqBody = {
                             password : hash
                         }
-                        Admin.findOneAndUpdate({_id:req.params.eid},reqBody)
-                        .then(result=> res.json({"result":"password updated","updatedpassword":result}))
+                        Admin.findOneAndUpdate({_id:req.params.cid},reqBody, {useFindAndModify: false})
+                        .then(result=> res.status(200).json({"result":"password updated","updatedpassword":result}))
                         .catch(err=>res.status(404).json(err))
                     }
                 })
+            }
+            else {
+                console.log("its in ekse")
+                return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"old password is wrong", status:401})
             }
         })
     })
