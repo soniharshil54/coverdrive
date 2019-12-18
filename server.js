@@ -4,6 +4,7 @@ const db = require("./configs/config").mongoURI
 const cors = require("cors")
 const app = express()
 const bodyParser = require("body-parser")
+const fs = require("fs")
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -37,7 +38,7 @@ app.use("/api/product",productRoutes)
 app.use("/api/phonecase", phonecaseRoutes)
 // app.use("/api/pincode",pincodeRoutes)
 // app.use("/api/offer",offerRoutes)
-// app.use('/productimagesuploads', express.static('productimagesploads'));
+ app.use('/admin/uploads', express.static('uploads'));
 
 
 const port = process.env.PORT || 5600;

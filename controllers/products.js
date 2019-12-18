@@ -1,5 +1,6 @@
 const express = require("express")
 const mongoose = require("mongoose")
+const multer = require("multer")
 const Product = require("../models/product")
 const Keychain = require("../models/keychain")
 const Mug = require("../models/mug")
@@ -9,6 +10,13 @@ const Slipperbottle = require("../models/slipperbottle")
 const Wallclock = require("../models/wallclock")
 const Watch = require("../models/watch")
 const ObjectId = mongoose.Types.ObjectId
+
+
+
+
+// exports.add_keychain_image = function(){
+
+// }  
 
 exports.add_keychain = function(req, res){
     console.log(req.body)
@@ -25,8 +33,8 @@ exports.add_keychain = function(req, res){
     )
     newKeychain.save()
     .then((result => {
-        console.log(result)
-        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added"})
+        //console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})
     }))
     .catch(err => {
         console.log(err)
