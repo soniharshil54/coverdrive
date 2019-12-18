@@ -47,9 +47,12 @@ router.put('/keychain/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1
   name: 'inImage', maxCount: 1
 }]),(req,res,next) => {
   console.log(req.files)
-  let imageData = {
-    h_image : req.files?req.files.hImage[0].originalname:"uploads/noimage.png",
-    in_image : req.files?req.files.inImage[0].originalname:"uploads/noimage.png",
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
   }
   Keychain.findOneAndUpdate({_id:req.params.pid},imageData)
   .then(result=> {
