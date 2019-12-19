@@ -1,9 +1,10 @@
 const express = require("express")
 const router = express.Router()
 const multer = require("multer")
+let Tshirt = require("../../models/tshirt")
 
 var product_controller = require('../../controllers/products');
-var phonecase_controller = require('../../controllers/phonecases')
+var tshirt_controller = require('../../controllers/tshirts')
 
 const checkAuth = require("../../middlewares/checkAuth")
 
@@ -44,22 +45,19 @@ const upload = multer({
  // GET request to get all users. 
  //router.post('/addproduct', product_controller.add_product);
 
- router.put('/addimage/:pid',upload.fields([{name: 'image_2d', maxCount: 1}, {
-  name: 'image_3d', maxCount: 1}, {name: 'image_4d', maxCount: 1}]),(req,res,next) => {
+ router.put('/addimage/:pid',upload.fields([{name: 'h_image', maxCount: 1}, {
+  name: 'in_image', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
-  if(req.files.image_2d){
-    imageData.image_2d = req.files.image_2d[0].originalname
+  if(req.files.h_image){
+    imageData.h_image = req.files.h_image[0].originalname
   }
-  if(req.files.image_3d){
-    imageData.image_3d = req.files.image_3d[0].originalname
-  }
-  if(req.files.image_4d){
-    imageData.image_4d = req.files.image_4d[0].originalname
+  if(req.files.in_image){
+    imageData.in_image = req.files.in_image[0].originalname
   }
   console.log("below data")
   console.log(imageData)
-  Phonecase.findOneAndUpdate({_id:req.params.pid},imageData)
+  Tshirt.findOneAndUpdate({_id:req.params.pid},imageData)
   .then(result=> {
     //console.log(result)
     res.json({"result":"keychain image updated","updatedkeychain":result})
@@ -72,17 +70,17 @@ const upload = multer({
 })
 
   // GET request to get all users. 
-  router.post('/addcompany', phonecase_controller.add_company);
+  router.post('/addtype', tshirt_controller.add_type);
 
-  router.get('/companies', phonecase_controller.get_companies)
+  router.get('/types', tshirt_controller.get_types)
 
-  router.get('/getphonecases', phonecase_controller.get_phonecases)
+  router.get('/gettshirts', tshirt_controller.get_tshirts)
 
-  router.post('/addphonecase', phonecase_controller.add_phonecase);
+  router.post('/addtshirt', tshirt_controller.add_tshirt);
 
-  router.delete('/deletephonecase', phonecase_controller.delete_phonecases)
+  router.delete('/deletetshirt', tshirt_controller.delete_tshirts)
 
-  router.put('/editphonecase/:eid', phonecase_controller.edit_phonecase)
+  router.put('/edittshirt/:eid', tshirt_controller.edit_tshirt)
 
   // GET request to get all users. 
   //router.post('/addcategory', product_controller.add_category);
