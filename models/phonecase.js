@@ -32,6 +32,10 @@ const PhonecaseSchema = new Schema({
       type : String,
       required : true
   },
+  size : {
+    type : String,
+    default: "36x63"
+},
   available_status : {
       type : Number,
       default : 1

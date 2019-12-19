@@ -54,7 +54,7 @@ exports.edit_keychain = function(req, res){
 exports.delete_keychains = function(req, res){
     var idsArrayf = req.body.todeleteids;
     var usersDelete = [];
-    idsArrayf.forEach(function(item){     //req.body => [{'_id' : ".." , "name" : "john"}]
+    idsArrayf.forEach(function(item){     
     usersDelete.push(new ObjectId(item));
 });
 
