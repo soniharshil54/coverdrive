@@ -2,6 +2,7 @@ const express = require("express")
 const router = express.Router()
 const multer = require("multer")
 const Keychain = require("../../models/keychain")
+const Mainslide = require("../../models/mainslide")
 
 var product_controller = require('../../controllers/products');
 
@@ -33,13 +34,15 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-router.put('/addslider/:productname',upload.single('productslide'),(req,res,next) => {
+router.put('/addslider/:pid',upload.single('modal_slider_image'),(req,res,next) => {
+  console.log("below file")
   console.log(req.file)
+  console.log(req.params.pid)
   let imageData = {}
-  if(req.files.productslide){
-    imageData.silde_name = req.files.productslide[0].originalname
+  if(req.file){
+    imageData.slider_image = req.file.originalname
   }
-  Mainslide.findOneAndUpdate({product_name:req.params.productname},imageData)
+  Mainslide.findOneAndUpdate({_id:req.params.pid},imageData)
   .then(result=> res.json({"result":"keychain image updated","updatedkeychain":result}))
   .catch(err=>res.status(404).json(err))
 })
@@ -69,6 +72,146 @@ router.put('/keychain/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1
     )
 })
 
+router.put('/photoframe/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
+  name: 'inImage', maxCount: 1
+}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
+  }
+  Photoframe.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/mug/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
+  name: 'inImage', maxCount: 1
+}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
+  }
+  Mug.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/popholder/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
+  name: 'inImage', maxCount: 1
+}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
+  }
+  Popholder.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/watch/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
+  name: 'inImage', maxCount: 1
+}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
+  }
+  Watch.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/wallclock/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
+  name: 'inImage', maxCount: 1
+}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
+  }
+  Wallclock.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/slipperbottle/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
+  name: 'inImage', maxCount: 1
+}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.hImage){
+    imageData.h_image = req.files.hImage[0].originalname
+  }
+  if(req.files.inImage){
+    imageData.in_image = req.files.inImage[0].originalname
+  }
+  Slipperbottle.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+
+router.get('/sliders', product_controller.get_sliders)
 
 router.get('/keychains', product_controller.get_keychains)
 
@@ -86,7 +229,31 @@ router.get('/photoframes', product_controller.get_photoframes)
 
 router.put('/edit/keychain/:kid', product_controller.edit_keychain)
 
+router.put('/edit/mug/:kid', product_controller.edit_mug)
+
+router.put('/edit/popholder/:kid', product_controller.edit_popholder)
+
+router.put('/edit/watch/:kid', product_controller.edit_watch)
+
+router.put('/edit/wallclock/:kid', product_controller.edit_wallclock)
+
+router.put('/edit/photoframe/:kid', product_controller.edit_photoframe)
+
+router.put('/edit/slipperbottle/:kid', product_controller.edit_slipperbottle)
+
 router.delete('/delete/keychain', product_controller.delete_keychains)
+
+router.delete('/delete/mug', product_controller.delete_mugs)
+
+router.delete('/delete/popholder', product_controller.delete_popholders)
+
+router.delete('/delete/photoframe', product_controller.delete_photoframes)
+
+router.delete('/delete/watch', product_controller.delete_watches)
+
+router.delete('/delete/wallclock', product_controller.delete_wallclocks)
+
+router.delete('/delete/slipperbottle', product_controller.delete_slipperbottles)
 
 
 

@@ -7,7 +7,11 @@ const MainslideSchema = new Schema({
         type: String,
         required: true
     },
-    silde_name : {
+    product_display_name : {
+        type: String,
+        required: true
+    },
+    slider_image : {
         type: String,
         default: "noimage.png"
     }

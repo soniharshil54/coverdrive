@@ -13,12 +13,19 @@ const Mainslide = require("../models/mainslide")
 const ObjectId = mongoose.Types.ObjectId
 
 
+exports.get_sliders = function(req, res){
+    Mainslide.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.add_product_slide = function(req, res){
     console.log(req.body)
     const newMainslide = new Mainslide(
         {
             _id: new mongoose.Types.ObjectId(),
             product_name: req.body.productname,
+            product_display_name: req.body.productdisplayname,
             slide_name: "noimage.png"
         }
     )
@@ -78,6 +85,54 @@ exports.edit_keychain = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.edit_mug = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Mug.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_popholder = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Popholder.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_photoframe = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Photoframe.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_slipperbottle = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Slipperbottle.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_watch = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Watch.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_wallclock = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Wallclock.findOneAndUpdate({_id:req.params.kid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
 exports.delete_keychains = function(req, res){
     var idsArrayf = req.body.todeleteids;
     var usersDelete = [];
@@ -86,6 +141,78 @@ exports.delete_keychains = function(req, res){
 });
 
 Keychain.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_slipperbottles = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Slipperbottle.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_mugs = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Mug.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_popholders = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Popholder.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_photoframes = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Photoframe.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_watches = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Watch.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_wallclocks = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Wallclock.deleteMany({'_id':{'$in': usersDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
 }
