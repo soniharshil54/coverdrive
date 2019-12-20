@@ -33,15 +33,18 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
-// router.put('/keychain/addimage/:pid',upload.single('productimage'),(req,res,next) => {
-//   console.log(req.file)
-//   let imageData = {
-//     h_image : req.file?req.file.originalname:"uploads/noimage.png"
-//   }
-//   Keychain.findOneAndUpdate({_id:req.params.pid},imageData)
-//   .then(result=> res.json({"result":"keychain image updated","updatedkeychain":result}))
-//   .catch(err=>res.status(404).json(err))
-// })
+router.put('/addslider/:productname',upload.single('productslide'),(req,res,next) => {
+  console.log(req.file)
+  let imageData = {}
+  if(req.files.productslide){
+    imageData.silde_name = req.files.productslide[0].originalname
+  }
+  Mainslide.findOneAndUpdate({product_name:req.params.productname},imageData)
+  .then(result=> res.json({"result":"keychain image updated","updatedkeychain":result}))
+  .catch(err=>res.status(404).json(err))
+})
+
+
 
 router.put('/keychain/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
   name: 'inImage', maxCount: 1
@@ -91,9 +94,13 @@ router.post('/add/keychain', product_controller.add_keychain);
 
 router.post('/add/mug', product_controller.add_mug);
 
+router.post('/addproduct', product_controller.add_product_slide)
+
 //router.post('/add/popholder', product_controller.add_popholder);
 
 //router.post('/addmug', product_controller.add_mug);
+
+router.post('/addslide/:productname',product_controller.add_slider)
 
 router.post('/add/photoframe', product_controller.add_photoframe);
 

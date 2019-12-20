@@ -9,10 +9,37 @@ const Popholder = require("../models/popholder")
 const Slipperbottle = require("../models/slipperbottle")
 const Wallclock = require("../models/wallclock")
 const Watch = require("../models/watch")
+const Mainslide = require("../models/mainslide")
 const ObjectId = mongoose.Types.ObjectId
 
 
+exports.add_product_slide = function(req, res){
+    console.log(req.body)
+    const newMainslide = new Mainslide(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            product_name: req.body.productname,
+            slide_name: "noimage.png"
+        }
+    )
+    newMainslide.save()
+    .then((result => {
+        //console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})
+    }))
+    .catch(err => {
+        console.log(err)
+        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+    })
+}
 
+exports.add_slider = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Mainslide.findOneAndUpdate({product_name:req.params.productname},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
 
 // exports.add_keychain_image = function(){
 
@@ -25,8 +52,8 @@ exports.add_keychain = function(req, res){
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
             size: req.body.size,
-            h_image: "path/head.jpg",
-            in_image: "path/in.jpg",
+            h_image: "noimage.png",
+            in_image: "noimage.png",
             price: req.body.price,
             description: req.body.description
         }
