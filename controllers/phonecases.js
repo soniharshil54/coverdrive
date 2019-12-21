@@ -97,6 +97,29 @@ exports.add_phonecase = function(req, res){
     })
 }
 
+exports.add_phonecase = function(req, res){
+    console.log(req.body)
+    const newPhonecase = new Phonecase(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            model_name: req.body.name,
+            model_id: req.params.modelid,
+            company: req.body.company,
+            slider_image: "noimage.png",
+            inner_image: "noimage.png"
+        }
+    )
+    newPhonecase.save()
+    .then((result => {
+        //console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})
+    }))
+    .catch(err => {
+        console.log(err)
+        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+    })
+}
+
 exports.edit_phonecase = function(req, res){
     console.log(req.body)
     console.log(req.params)
