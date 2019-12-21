@@ -26,7 +26,7 @@ exports.add_product_slide = function(req, res){
             _id: new mongoose.Types.ObjectId(),
             product_name: req.body.productname,
             product_display_name: req.body.productdisplayname,
-            slide_name: "noimage.png"
+            slider_image: req.body.slidename
         }
     )
     newMainslide.save()
