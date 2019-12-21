@@ -62,15 +62,14 @@ exports.get_all_admins = function(req, res){
 exports.login_admin = function(req, res){
     console.log(req.body)
     console.log(req.body.email)
-    Admin.findOne({_id:req.params.cid})
-    .exec()
+    Admin.findOne({email:req.body.email})
     .then(admin => {
         console.log(admin)
-        if(admin.length < 1){
+        if(!admin){
             return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"admin with this mail doesnt exist", status:403})
         }
 
-        bcrypt.compare(req.body.password, admin[0].password, (err,result) => {
+        bcrypt.compare(req.body.password, admin.password, (err,result) => {
             if(err){
                 return res.status(401).header("Access-Control-Allow-Origin", "*").json({message:"wrong password", status: 403})
             }
@@ -78,9 +77,9 @@ exports.login_admin = function(req, res){
                 const token = jwt.sign(
 
                     {
-                        email: admin[0].email,
-                        name: admin[0].name,
-                        userId: admin[0]._id
+                        email: admin.email,
+                        name: admin.name,
+                        userId: admin._id
                     },
                     "soni3360",
                     {
