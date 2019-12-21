@@ -37,6 +37,31 @@ exports.get_phonecases = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_phonecases_by_company = function(req, res){
+    Phonecase.find({company: req.params.company})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_models_by_company = function(req, res){
+    Phonecase.find({company: req.params.company})
+    .select('name _id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_phonecase_by_id = async function(req, res){
+    let phonecase = await Phonecase.findOne({_id:req.params.id})
+    if(phonecase){
+        res.json(phonecase)
+        return
+    }
+    else{
+        res.json({"error":"phonecase not found"})
+        return
+    }
+}
+
 exports.add_phonecase = function(req, res){
     console.log(req.body)
     const newPhonecase = new Phonecase(
@@ -44,12 +69,21 @@ exports.add_phonecase = function(req, res){
             _id: new mongoose.Types.ObjectId(),
             name: req.body.name,
             company: req.body.company,
-            size: req.body.size,
-            image_2d: "noimage.jpg",
-            image_3d: "noimage.jpg",
-            image_4d: "noimage.jpg",
-            price: req.body.price,
-            description: req.body.description
+            size_2d: req.body.size_2d,
+            size_3d: req.body.size_3d,
+            size_4d: req.body.size_4d,
+            price_2d: req.body.price_2d,
+            price_3d: req.body.price_3d,
+            price_4d: req.body.price_4d,
+            description_2d: req.body.description_2d,
+            description_3d: req.body.description_3d,
+            description_4d: req.body.description_4d,
+            image_header_2d: "noimage.png",
+            image_header_3d: "noimage.png",
+            image_header_4d: "noimage.png",
+            image_inner_2d: "noimage.png",
+            image_inner_3d: "noimage.png",
+            image_inner_4d: "noimage.png"
         }
     )
     newPhonecase.save()

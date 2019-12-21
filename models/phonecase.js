@@ -12,27 +12,64 @@ const PhonecaseSchema = new Schema({
       type: String,
       required: true
   },
-  image_2d : {
+  image_header_2d : {
       type: String,
       required: true
   },
-  image_3d : {
+  image_header_3d : {
       type: String,
       required: true
   },
-  image_4d : {
+  image_header_4d : {
     type: String,
     required: true
 },
-  price : {
+image_inner_2d : {
+    type: String,
+    required: true
+},
+image_inner_3d : {
+    type: String,
+    required: true
+},
+image_inner_4d : {
+    type: String,
+    required: true
+},
+
+  price_2d : {
       type: Number,
       required: true
   },
-  description : {
+  price_3d : {
+    type: Number,
+    required: true
+},
+price_4d : {
+    type: Number,
+    required: true
+},
+  description_2d : {
       type : String,
       required : true
   },
-  size : {
+  description_3d : {
+    type : String,
+    required : true
+},
+description_4d : {
+    type : String,
+    required : true
+},
+  size_2d : {
+    type : String,
+    default: "36x63"
+},
+size_3d : {
+    type : String,
+    default: "36x63"
+},
+size_4d : {
     type : String,
     default: "36x63"
 },

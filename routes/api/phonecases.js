@@ -78,6 +78,12 @@ const upload = multer({
 
   router.get('/getphonecases', phonecase_controller.get_phonecases)
 
+  router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
+
+  router.get('/getphonecasesbycompany/:company', phonecase_controller.get_phonecases_by_company)
+
+  router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
+
   router.post('/addphonecase', phonecase_controller.add_phonecase);
 
   router.delete('/deletephonecase', phonecase_controller.delete_phonecases)
