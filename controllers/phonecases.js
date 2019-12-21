@@ -97,7 +97,7 @@ exports.add_phonecase = function(req, res){
     })
 }
 
-exports.add_phonecase = function(req, res){
+exports.add_4d_phonecase = function(req, res){
     console.log(req.body)
     const newPhonecase = new Phonecase(
         {

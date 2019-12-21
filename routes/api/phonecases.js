@@ -88,7 +88,7 @@ const upload = multer({
 
   router.post('/add4dphonecase/:modelid', phonecase_controller.add_4d_phonecase);
 
-  router.get('/get4dphonecases/:modelid', phonecase_controller.get_4d_phonecases);
+  //router.get('/get4dphonecases/:modelid', phonecase_controller.get_4d_phonecases);
 
   router.post('/addphonecase', phonecase_controller.add_phonecase);
 
