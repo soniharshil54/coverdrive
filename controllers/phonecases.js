@@ -74,7 +74,54 @@ exports.get_4dcovers_by_model = function(req, res){
 exports.get_phonecase_by_id = async function(req, res){
     let phonecase = await Phonecase.findOne({_id:req.params.id})
     if(phonecase){
-        res.json(phonecase)
+        console.log(phonecase)
+        let newphone = phonecase.toObject()
+        let data = []
+        let obj2d = {
+            size_2d: phonecase.size_2d,
+            price_2d: phonecase.price_2d,
+            description_2d: phonecase.description_2d,
+            image_header_2d: phonecase.image_header_2d,
+            image_inner_2d: phonecase.image_inner_2d
+        }
+        let obj3d = {
+            size_3d: phonecase.size_3d,
+            price_3d: phonecase.price_3d,
+            description_3d: phonecase.description_3d,
+            image_header_3d: phonecase.image_header_3d,
+            image_inner_3d: phonecase.image_inner_3d
+        }
+        let obj4d = {
+            size_4d: phonecase.size_4d,
+            price_4d: phonecase.price_4d,
+            description_4d: phonecase.description_4d,
+            image_header_4d: phonecase.image_header_4d,
+            image_inner_4d: phonecase.image_inner_4d
+        }
+      //  phonecase.data = data
+        //console.log(phonecase.data)
+        //console.log(phonecase)
+         data.push(obj2d,obj3d,obj4d)
+         var ndata = {data: data};
+         let nphonecase = {...newphone, ...ndata};
+         delete nphonecase.size_2d;
+         delete nphonecase.price_2d;
+         delete nphonecase.description_2d;
+         delete nphonecase.image_header_2d;
+         delete nphonecase.image_inner_2d;
+         delete nphonecase.size_3d;
+         delete nphonecase.price_3d;
+         delete nphonecase.description_3d;
+         delete nphonecase.image_header_3d;
+         delete nphonecase.image_inner_3d;
+         delete nphonecase.size_4d;
+         delete nphonecase.price_4d;
+         delete nphonecase.description_4d;
+         delete nphonecase.image_header_4d;
+         delete nphonecase.image_inner_4d;
+         console.log(nphonecase)
+       // let newp = JSON.stringify(nphonecase)
+        res.json(nphonecase)
         return
     }
     else{
