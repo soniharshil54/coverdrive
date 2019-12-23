@@ -27,4 +27,4 @@ const Phonecase4dSchema = new Schema({
   },
 })
 
-module.exports = Phonecase4dSchema = mongoose.model('phonecase4d',Phonecase4dSchema)
+module.exports = Phonecase4d = mongoose.model('phonecase4d',Phonecase4dSchema)

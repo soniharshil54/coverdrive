@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const Product = require("../models/product")
 const Phonecase = require("../models/phonecase")
+const Phonecase4d = require("../models/phonecase4d")
 const Phonecomp = require("../models/phonecomp")
 const ObjectId = mongoose.Types.ObjectId
 
@@ -25,6 +26,12 @@ exports.add_company = function(req, res){
     })
 }
 
+exports.delete_company = function(req, res){
+    Phonecomp.findOneAndRemove({_id:req.params.cid})
+    .then(result=> res.json({"result":"company deLeted","deleteduser":result}))
+    .catch(err=>res.status(500).json(err))
+}
+
 exports.get_companies = function(req, res){
     Phonecomp.find()
          .then(result=>res.json(result))
@@ -43,9 +50,23 @@ exports.get_phonecases_by_company = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_4dcovers_by_company = function(req, res){
+    Phonecase4d.find({company: req.params.company})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+
+
 exports.get_models_by_company = function(req, res){
     Phonecase.find({company: req.params.company})
     .select('name _id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_4dcovers_by_model = function(req, res){
+    Phonecase4d.find({model_id: req.params.model_id})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
@@ -83,7 +104,8 @@ exports.add_phonecase = function(req, res){
             image_header_4d: "noimage.png",
             image_inner_2d: "noimage.png",
             image_inner_3d: "noimage.png",
-            image_inner_4d: "noimage.png"
+            image_inner_4d: "noimage.png",
+            available_status: req.body.available_status
         }
     )
     newPhonecase.save()
@@ -99,17 +121,20 @@ exports.add_phonecase = function(req, res){
 
 exports.add_4d_phonecase = function(req, res){
     console.log(req.body)
-    const newPhonecase = new Phonecase(
+    let mid = req.params.modelid
+    console.log(mid)
+    let model_id = mongoose.Types.ObjectId(mid);
+    const newPhonecase4d = new Phonecase4d(
         {
             _id: new mongoose.Types.ObjectId(),
-            model_name: req.body.name,
-            model_id: req.params.modelid,
+            model_name: req.body.model_name,
+            model_id: model_id,
             company: req.body.company,
             slider_image: "noimage.png",
             inner_image: "noimage.png"
         }
     )
-    newPhonecase.save()
+    newPhonecase4d.save()
     .then((result => {
         //console.log(result)
         res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})

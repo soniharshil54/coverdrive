@@ -44,18 +44,23 @@ const upload = multer({
  // GET request to get all users. 
  //router.post('/addproduct', product_controller.add_product);
 
- router.put('/addimage/:pid',upload.fields([{name: 'image_2d', maxCount: 1}, {
-  name: 'image_3d', maxCount: 1}, {name: 'image_4d', maxCount: 1}]),(req,res,next) => {
+ router.put('/addimage/:pid',upload.fields([{name: 'image_2d_slider', maxCount: 1}, {name: 'image_2d_inner', maxCount: 1},{name: 'image_3d_slider', maxCount: 1}, {name: 'image_3d_inner', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
-  if(req.files.image_2d){
-    imageData.image_2d = req.files.image_2d[0].originalname
+  if(req.files.image_2d_slider){
+    imageData.image_header_2d = req.files.image_2d_slider[0].originalname
   }
-  if(req.files.image_3d){
-    imageData.image_3d = req.files.image_3d[0].originalname
+  if(req.files.image_2d_inner){
+    imageData.image_inner_2d = req.files.image_2d_inner[0].originalname
   }
-  if(req.files.image_4d){
-    imageData.image_4d = req.files.image_4d[0].originalname
+  if(req.files.image_3d_slider){
+    imageData.image_header_3d = req.files.image_3d_slider[0].originalname
+  }
+  if(req.files.image_3d_inner){
+    imageData.image_inner_3d = req.files.image_3d_inner[0].originalname
+  }
+  if(req.files.image_4d_slider){
+    imageData.image_header_4d = req.files.image_4d_slider[0].originalname
   }
   console.log("below data")
   console.log(imageData)
@@ -74,6 +79,8 @@ const upload = multer({
   // GET request to get all users. 
   router.post('/addcompany', phonecase_controller.add_company);
 
+  router.delete('/deletecompany/:cid', phonecase_controller.delete_company);
+
   router.get('/companies', phonecase_controller.get_companies)
 
   router.get('/getphonecases', phonecase_controller.get_phonecases)
@@ -81,6 +88,10 @@ const upload = multer({
   router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
 
   router.get('/getphonecasesbycompany/:company', phonecase_controller.get_phonecases_by_company)
+
+  router.get('/get4dcoversbymodel/:model_id', phonecase_controller.get_4dcovers_by_model)
+
+  router.get('/get4dcoversbycompany/:company', phonecase_controller.get_4dcovers_by_company)
 
   router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
 
