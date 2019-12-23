@@ -78,25 +78,25 @@ exports.get_phonecase_by_id = async function(req, res){
         let newphone = phonecase.toObject()
         let data = []
         let obj2d = {
-            size_2d: phonecase.size_2d,
-            price_2d: phonecase.price_2d,
-            description_2d: phonecase.description_2d,
-            image_header_2d: phonecase.image_header_2d,
-            image_inner_2d: phonecase.image_inner_2d
+            size: phonecase.size_2d,
+            price: phonecase.price_2d,
+            description: phonecase.description_2d,
+            image_header: phonecase.image_header_2d,
+            image_inner: phonecase.image_inner_2d
         }
         let obj3d = {
-            size_3d: phonecase.size_3d,
-            price_3d: phonecase.price_3d,
-            description_3d: phonecase.description_3d,
-            image_header_3d: phonecase.image_header_3d,
-            image_inner_3d: phonecase.image_inner_3d
+            size: phonecase.size_3d,
+            price: phonecase.price_3d,
+            description: phonecase.description_3d,
+            image_header: phonecase.image_header_3d,
+            image_inner: phonecase.image_inner_3d
         }
         let obj4d = {
-            size_4d: phonecase.size_4d,
-            price_4d: phonecase.price_4d,
-            description_4d: phonecase.description_4d,
-            image_header_4d: phonecase.image_header_4d,
-            image_inner_4d: phonecase.image_inner_4d
+            size: phonecase.size_4d,
+            price: phonecase.price_4d,
+            description: phonecase.description_4d,
+            image_header: phonecase.image_header_4d,
+            image_inner: phonecase.image_inner_4d
         }
       //  phonecase.data = data
         //console.log(phonecase.data)
