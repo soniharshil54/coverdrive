@@ -56,6 +56,14 @@ exports.get_4dcovers_by_company = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_4dcovers_by_company_2 = function(req, res){
+    Phonecase.find({company: req.params.company})
+    .populate('covers_4d')
+    .select('covers_id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 
 
 exports.get_models_by_company = function(req, res){
@@ -72,7 +80,9 @@ exports.get_4dcovers_by_model = function(req, res){
 }
 
 exports.get_phonecase_by_id = async function(req, res){
-    let phonecase = await Phonecase.findOne({_id:req.params.id})
+    let phonecase = await Phonecase.findOne({_id:req.params.id}).populate('covers_4d')
+    //let phonecase = await phonecaseo.populate('covers_4d')
+
     if(phonecase){
         console.log(phonecase)
         let newphone = phonecase.toObject()
@@ -166,31 +176,83 @@ exports.add_phonecase = function(req, res){
     })
 }
 
-exports.add_4d_phonecase = function(req, res){
+exports.add_4d_phonecase = async function(req, res){
     console.log(req.body)
     let mid = req.params.modelid
     console.log(mid)
-    let model_id = mongoose.Types.ObjectId(mid);
+    //let model_id = mongoose.Types.ObjectId(mid);
     const newPhonecase4d = new Phonecase4d(
         {
             _id: new mongoose.Types.ObjectId(),
             model_name: req.body.model_name,
-            model_id: model_id,
+            model_id: mid,
             company: req.body.company,
             slider_image: "noimage.png",
             inner_image: "noimage.png"
         }
     )
-    newPhonecase4d.save()
-    .then((result => {
-        //console.log(result)
-        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})
-    }))
-    .catch(err => {
-        console.log(err)
-        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
-    })
+    let cover_id = await newPhonecase4d.save()
+    console.log("cover_id")
+    console.log(cover_id._id)
+    let cover_id_mon = mongoose.Types.ObjectId(cover_id._id);
+    console.log("cover_id_mon")
+    console.log(cover_id_mon)
+    let phonemodel = await Phonecase.findOne({_id:req.params.modelid})
+    console.log(phonemodel)
+    let covers_4d = phonemodel.covers_4d
+    covers_4d.push(cover_id_mon)
+    let cover_data = {
+        covers_4d : covers_4d
+    }
+    let phonemodeladd = await Phonecase.findOneAndUpdate({_id:req.params.modelid},cover_data)
+
+    console.log(phonemodeladd)
+    res.json({"oper":"done"})
+    
 }
+
+// exports.add_4d_phonecase = function(req, res){
+//     console.log(req.body)
+//     let mid = req.params.modelid
+//     console.log(mid)
+//     let model_id = mongoose.Types.ObjectId(mid);
+//     const newPhonecase4d = new Phonecase4d(
+//         {
+//             _id: new mongoose.Types.ObjectId(),
+//             model_name: req.body.model_name,
+//             model_id: model_id,
+//             company: req.body.company,
+//             slider_image: "noimage.png",
+//             inner_image: "noimage.png"
+//         }
+//     )
+//     newPhonecase4d.save()
+//     .then((result => {
+//         Phonecase.findOne({_id:req.params.modelid})
+//         .then(resultn => {
+//             console.log(resultn)
+//             //return
+//             let models = resultn.covers_4d
+//             let model_id_n = mongoose.Types.ObjectId(result._id);
+//             models.push(model_id_n)
+//             let ncovers = {
+//                 covers_4d : models
+//             }
+//             Product.findOneAndUpdate({_id:req.params.modelid},{ncovers})
+//         })
+//         .catch(err => {
+//             console.log(err)
+//             res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+//         })
+//         //console.log(result)
+       
+//         //res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})
+//     }))
+//       .catch(err => {
+//         console.log(err)
+//         res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+//     })
+// }
 
 exports.edit_phonecase = function(req, res){
     console.log(req.body)

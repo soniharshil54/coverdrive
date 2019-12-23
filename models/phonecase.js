@@ -1,6 +1,7 @@
 const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
+const Phonecase4d = require('./phonecase4d')
 
 const PhonecaseSchema = new Schema({
   _id : mongoose.Schema.Types.ObjectId,
@@ -73,6 +74,10 @@ size_4d : {
     type : String,
     default: "36x63"
 },
+covers_4d: [{
+    type: mongoose.Schema.Types.ObjectId,
+    ref: 'phonecase4d'
+  }]  ,
   available_status : {
       type : Number,
       default : 1

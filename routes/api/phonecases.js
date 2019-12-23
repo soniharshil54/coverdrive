@@ -1,6 +1,7 @@
 const express = require("express")
 const router = express.Router()
 const multer = require("multer")
+const Phonecase4d = require("../../models/phonecase4d")
 
 var product_controller = require('../../controllers/products');
 var phonecase_controller = require('../../controllers/phonecases')
@@ -92,6 +93,8 @@ const upload = multer({
   router.get('/get4dcoversbymodel/:model_id', phonecase_controller.get_4dcovers_by_model)
 
   router.get('/get4dcoversbycompany/:company', phonecase_controller.get_4dcovers_by_company)
+
+  //router.get('/get4dcoversbycompany2/:company', phonecase_controller.get_4dcovers_by_company_2)
 
   router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
 

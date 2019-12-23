@@ -10,9 +10,7 @@ const Phonecase4dSchema = new Schema({
       required: true
   },
   model_id : {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: 'Phonecase',
-    required: true
+    type: String
   },
   company : {
       type: String,

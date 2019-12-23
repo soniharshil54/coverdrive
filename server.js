@@ -1,10 +1,14 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const db = require("./configs/config").mongoURI
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, ()=> console.log("connected to mongodb"))
+
 const cors = require("cors")
 const app = express()
 const bodyParser = require("body-parser")
 const fs = require("fs")
+let Phonecase4d = require('./models/phonecase4d');
+//require('./models/Comments');
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -23,7 +27,7 @@ const productRoutes = require("./routes/api/products")
 
 
 
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, ()=> console.log("connected to mongodb"))
+
 
 
 // app.use(function(req, res, next) {
