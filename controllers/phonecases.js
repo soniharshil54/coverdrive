@@ -64,6 +64,14 @@ exports.get_4dcovers_by_company_2 = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_4dcovers_by_model_2 = function(req, res){
+    Phonecase.findOne({_id: req.params.model_id})
+    .populate('covers_4d')
+    .select('covers_id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 
 
 exports.get_models_by_company = function(req, res){
