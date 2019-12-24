@@ -20,8 +20,7 @@ const OrderSchema = new Schema({
         default : 0
     },
     total_amount: {
-        type:Number,
-        required: true
+        type:Number
     },
     date_ordered: {
         type:String,
@@ -33,7 +32,7 @@ const OrderSchema = new Schema({
     },
     date_delivered: {
         type: String,
-        required: true
+        required: false
     }
 })
 

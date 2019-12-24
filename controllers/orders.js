@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const User = require("../models/user")
 const Cartproduct = require("../models/cartproduct")
+const ObjectId = mongoose.Types.ObjectId
 
 exports.place_order = function(req, res) {
     var idsproducts = req.body.products;
@@ -10,7 +11,7 @@ exports.place_order = function(req, res) {
     idsproducts.forEach(function(item){     
     productincart.push(new ObjectId(item));
     })
-    const newUser = new User(
+    const newOrder = new Order(
         {
             _id: new mongoose.Types.ObjectId(),
             products: productincart ,
@@ -19,10 +20,10 @@ exports.place_order = function(req, res) {
             payment_type: req.body.payment_type
         }
     )
-        newUser.save()
+        newOrder.save()
         .then((result => {
             console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"user created"})
+            res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"order placed"})
         }))
         .catch(err => {
             console.log(err)
