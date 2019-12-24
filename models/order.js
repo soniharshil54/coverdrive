@@ -3,48 +3,33 @@ const Schema = mongoose.Schema
 
 const OrderSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
-    user_name : {
-        type: String,
-        required: true
-    },
-    products: [String],
-    user_details: {
+    products: [{
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Admin'
+        ref: 'cartproduct'
+    }] ,
+    user_id: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'user'
     },
     payment_type: {
-        type: Number,
+        type: String,
         required:true
     },
-    paid_status: {
-        type: String
-        
-    }  ,
-    order_summary: {
-        type:[{
-            product: String,
-            amount: Number
-        }]
+    is_paid: {
+        type: Number,
+        default : 0
     },
     total_amount: {
         type:Number,
         required: true
     },
-    offer: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Offer'
-    },
-    discount: {
-        type:Number,
-        required: true
-    },
-    payable_amount: {
-        type:String,
-        required: true
-    },
     date_ordered: {
         type:String,
         required: false
+    },
+    is_delivered: {
+        type : Number,
+        default : 0
     },
     date_delivered: {
         type: String,

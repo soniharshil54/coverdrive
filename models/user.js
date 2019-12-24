@@ -7,20 +7,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
-    email: {
-        type: String,
-        match: /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/,
-        unique: true
-    },
     contact: {
         type: Number,
         required:true
     },
-    dob: {
-        type: String
-        
-    }  ,
-    address: {
+    address_type: {
         type:String,
         required: true
     },
@@ -32,10 +23,14 @@ const UserSchema = new Schema({
         type:String,
         required: true
     },
-    orders: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Order'
-      }]
+    pincode: {
+        type: String,
+        required: true
+    },
+    address: {
+        type: String,
+        required: true
+    }
 })
 
 module.exports = User = mongoose.model('user',UserSchema)

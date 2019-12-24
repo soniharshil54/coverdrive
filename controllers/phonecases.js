@@ -72,6 +72,15 @@ exports.get_4dcovers_by_model_2 = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_4dcovers_by_company_3 = function(req, res){
+    let models = Phonecase.find({company: req.params.company}).populate('covers_4d').select('name _id covers_4d')
+    res.json({"models":models})
+    // Phonecase.find({company: req.params.company})
+    // .populate('covers_4d')
+    // .select('covers_id')
+    // .then(result=>res.json(result))
+    // .catch(err=>res.json(err))
+}
 
 
 exports.get_models_by_company = function(req, res){

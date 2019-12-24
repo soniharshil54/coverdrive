@@ -3,16 +3,17 @@ const mongoose = require("mongoose")
 const User = require("../models/user")
 
 exports.register_user = function(req, res) {
+    let cuserid = mongoose.Types.ObjectId.createFromHexString(req.body.userid)
     const newUser = new User(
         {
-            _id: new mongoose.Types.ObjectId(),
+            _id: cuserid,
             name: req.body.name,
-            email: req.body.email,
-            dob: req.body.dob,
             contact: req.body.contact,
             address: req.body.address,
             state: req.body.state,
-            city: req.body.city
+            city: req.body.city,
+            address_type: req.body.address_type,
+            pincode: req.body.pincode
         }
     )
         newUser.save()

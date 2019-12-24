@@ -1,11 +1,21 @@
 {
     "name": "john doe",
-    "email": "john@yahoo.com",
-    "dob": "30-07-1998",
     "contact": "8686868686",
     "address": "vraj street",
     "state": "gujarat",
-    "city": "surat"
+    "city": "surat",
+    "pincode":"395006",
+    "address_type":"home"
+}
+{
+    "products": [] ,
+    "user_id": ,
+    "payment_type": "cod"
+    "is_paid": optional (default 0),
+    "total_amount": "450",
+    "date_ordered": "24/12/2019",
+    "is_delivered": optional (default 0),
+    "date_delivered": optional (default none)
 }
 
 {
