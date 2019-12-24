@@ -60,6 +60,8 @@ router.get('/getorderswithdata', order_controller.get_orders_with_data);
 
 router.get('/getorders', order_controller.get_orders);
 
+router.get('/getcartproductbyid/:cpid', order_controller.get_cartproduct_by_id)
+
 
 // GET request to get specific order details. 
 //  router.get('/order/:oid', order_controller.order_get_order);

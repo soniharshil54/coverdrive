@@ -42,6 +42,17 @@ exports.get_order_by_id = async function(req, res){
     }
 }
 
+exports.get_cartproduct_by_id = async function(req, res){
+    let cartproduct = await Cartproduct.findOne({_id:req.params.cpid})
+    if(cartproduct){
+        res.json(cartproduct)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
 
 exports.place_order = function(req, res) {
     var idsproducts = req.body.products;
