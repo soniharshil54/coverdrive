@@ -90,11 +90,15 @@ const upload = multer({
 
   router.get('/getphonecasesbycompany/:company', phonecase_controller.get_phonecases_by_company)
 
+  router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
+
   router.get('/get4dcoversbymodel/:model_id', phonecase_controller.get_4dcovers_by_model)
 
   router.get('/get4dcoversbymodel2/:model_id', phonecase_controller.get_4dcovers_by_model_2)
 
   router.get('/get4dcoversbycompany/:company', phonecase_controller.get_4dcovers_by_company)
+
+  
 
   router.get('/get4dcoversbycompany3/:company', phonecase_controller.get_4dcovers_by_company_3)
 

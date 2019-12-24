@@ -1,8 +1,47 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const User = require("../models/user")
+const Order = require("../models/order")
 const Cartproduct = require("../models/cartproduct")
 const ObjectId = mongoose.Types.ObjectId
+
+
+exports.get_orders_with_data = async function(req, res){
+    let orders = await Order.find().populate('products').populate("user_id")
+    if(orders){
+        res.json(orders)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
+exports.get_orders = async function(req, res){
+    let orders = await Order.find()
+    if(orders){
+        res.json(orders)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
+exports.get_order_by_id = async function(req, res){
+    let order = await Order.findOne({_id:req.params.orderid})
+    if(order){
+        res.json(order)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
 
 exports.place_order = function(req, res) {
     var idsproducts = req.body.products;
