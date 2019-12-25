@@ -50,8 +50,11 @@ const storage = multer.diskStorage({
 
 router.post('/addproducttocart', order_controller.add_product_to_cart)
 
+
 //GET request to get all users. 
 router.post('/placeorder', order_controller.place_order);
+
+router.delete('/deleteorder', order_controller.delete_orders)
 
 
 router.get('/getorderbyid/:orderid', order_controller.get_order_by_id)

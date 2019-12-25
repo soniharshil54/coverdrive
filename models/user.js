@@ -3,13 +3,20 @@ const Schema = mongoose.Schema
 mongoose.set('useCreateIndex', true)
 const UserSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
-    name : {
+    first_name : {
+        type: String,
+        required: true
+    },
+    last_name : {
         type: String,
         required: true
     },
     contact: {
         type: Number,
         required:true
+    },
+    email_id: {
+        type: String
     },
     address_type: {
         type:String,

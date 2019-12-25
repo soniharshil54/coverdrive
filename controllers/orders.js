@@ -81,7 +81,17 @@ exports.place_order = function(req, res) {
         })
 }
 
+exports.delete_orders = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var ordersDelete = [];
+    idsArrayf.forEach(function(item){     
+    ordersDelete.push(new ObjectId(item));
+});
 
+Order.deleteMany({'_id':{'$in': ordersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
 
 exports.add_product_to_cart = async function(req, res) {
     let cproid = mongoose.Types.ObjectId.createFromHexString(req.body.proid)
