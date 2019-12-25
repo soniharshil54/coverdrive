@@ -3,32 +3,33 @@ const Schema = mongoose.Schema
 
 const OfferSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
+    offer_name : {
+        type: String,
+        required: true
+    },
+    product_name : {
+        type: String,
+        required: true
+    },
     code : {
         type: String,
         required: true
     },
-    date: {
+    create_date: {
+        type: String
+    },
+
+    expiry_date: {
         type: String,
         required: true
     },
-    products: {
+    termsnconditions: {
         type: String,
-        required: true
-    },
-    valid_upto: {
-        type: String,
-        required: true
-    },
-    min_cost: {
-        type: Number,
         required: true
     }  ,
-    discount: {
-        discount_type: String,
-        digit: Number
-    },
-    description: {
-        type: String
+    h_image: {
+        type: String,
+        required: true
     }
 })
 

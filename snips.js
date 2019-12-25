@@ -19,6 +19,15 @@
 }
 
 {
+    offer_name: "Phone case - Buy one get one free",
+    product_name : "phonecase",
+    code: "BOGO",
+    expiry_date: "01-12-2019",
+    termsnconditions: "Add two phone cases to cart and enter the coupon code BOGO at the time of check out,
+            coupon is valid only for prepaid orders"
+}
+
+{
     "name": "jon doe",
     "email": "jon@yahoo.com",
     "contact": "8886868686",

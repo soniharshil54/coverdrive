@@ -19,8 +19,9 @@ const phonecaseRoutes = require("./routes/api/phonecases")
 const tshirtRoutes = require("./routes/api/tshirts")
 const orderRoutes = require("./routes/api/orders")
 const productRoutes = require("./routes/api/products")
+const offerRoutes = require("./routes/api/offers")
 // const pincodeRoutes = require("./routes/api/pincodes")
-// const offerRoutes = require("./routes/api/offers")
+
 
 
 
@@ -42,8 +43,9 @@ app.use("/api/order",orderRoutes)
 app.use("/api/product",productRoutes)
 app.use("/api/phonecase", phonecaseRoutes)
 app.use("/api/tshirt", tshirtRoutes)
+app.use("/api/offer",offerRoutes)
 // app.use("/api/pincode",pincodeRoutes)
-// app.use("/api/offer",offerRoutes)
+
  app.use('/admin/uploads', express.static('uploads'));
 
 
