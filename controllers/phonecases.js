@@ -279,6 +279,30 @@ exports.edit_phonecase = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.edit_company = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Phonecomp.findOneAndUpdate({_id:req.params.cid},req.body)
+    .then(result=> res.json({"result":"company updated","updatedcompany":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_company_name = async function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    let compdata = {
+        name : req.body.name
+    }
+    let oldcompany = req.body.oldname
+    let companydata = {
+        company: req.body.name
+    }
+    let updatecompname = await Phonecomp.findOneAndUpdate({_id:req.params.cid},compdata)
+    let phonecaseupdate = await Phonecase.updateMany({company: oldcompany }, companydata)
+    console.log(phonecaseupdate)
+   res.json({"result":"done"})
+}
+
 exports.delete_phonecases = function(req, res){
     var idsArrayf = req.body.todeleteids;
     var usersDelete = [];
@@ -287,6 +311,18 @@ exports.delete_phonecases = function(req, res){
 });
 
 Phonecase.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.delete_companies = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var companiesDelete = [];
+    idsArrayf.forEach(function(item){     
+    companiesDelete.push(new ObjectId(item));
+});
+
+Phonecomp.deleteMany({'_id':{'$in': companiesDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
 }

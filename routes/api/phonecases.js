@@ -116,7 +116,13 @@ const upload = multer({
 
   router.delete('/deletephonecase', phonecase_controller.delete_phonecases)
 
+  router.delete('/deletecompany', phonecase_controller.delete_companies)
+
   router.put('/editphonecase/:eid', phonecase_controller.edit_phonecase)
+
+  router.put('/editcompany/:cid', phonecase_controller.edit_company)
+
+  router.put('/editcompanyname/:cid', phonecase_controller.edit_company_name)
 
   // GET request to get all users. 
   //router.post('/addcategory', product_controller.add_category);

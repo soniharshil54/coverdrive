@@ -7,6 +7,11 @@ const PhonecompSchema = new Schema({
   name : {
     type: String,
     required: true
+  },
+  active_status : {
+    type : Number,
+    required:true,
+    default:1
   }
 })
 
