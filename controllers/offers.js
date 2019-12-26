@@ -3,30 +3,7 @@ const mongoose = require("mongoose")
 const User = require("../models/user")
 const Offer = require("../models/offer")
 
-exports.register_user = function(req, res) {
-    let cuserid = mongoose.Types.ObjectId.createFromHexString(req.body.userid)
-    const newUser = new User(
-        {
-            _id: cuserid,
-            name: req.body.name,
-            contact: req.body.contact,
-            address: req.body.address,
-            state: req.body.state,
-            city: req.body.city,
-            address_type: req.body.address_type,
-            pincode: req.body.pincode
-        }
-    )
-        newUser.save()
-        .then((result => {
-            console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"user created"})
-        }))
-        .catch(err => {
-            console.log(err)
-            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
-        })
-}
+
 
 
 exports.add_offer = function(req, res) {
@@ -53,16 +30,28 @@ exports.add_offer = function(req, res) {
 }
 
 
-exports.get_user = async function(req, res){
-    let user = await User.findOne({_id:req.params.uid})
-    if(user){
-        res.json(user)
+exports.get_offer = async function(req, res){
+    let offer = await Offer.findOne({_id:req.params.oid})
+    if(offer){
+        res.json(offer)
         return
     }
     else{
-        res.json({"error":"user not found"})
+        res.json({"error":"offer not found"})
         return
     }
+}
+
+exports.delete_offers = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var offersDelete = [];
+    idsArrayf.forEach(function(item){     
+    offersDelete.push(new ObjectId(item));
+});
+
+Offer.deleteMany({'_id':{'$in': offersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
 }
 
 exports.get_all_offers = function(req, res){
@@ -71,8 +60,8 @@ exports.get_all_offers = function(req, res){
              .catch(err=>res.json(err))
 }
 
-exports.count_users = function(req, res){
-    User.countDocuments()	
+exports.count_offers = function(req, res){
+    Offer.countDocuments()	
     .then(result=>res.json(result))
     .catch(err=>res.json(err))	
 }
@@ -83,8 +72,8 @@ exports.delete_user = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-exports.edit_user = function(req, res){
-    User.findOneAndUpdate({_id:req.params.eid},req.body)
-    .then(result=> res.json({"result":"user updated","updateduser":result}))
+exports.edit_offer = function(req, res){
+    Offer.findOneAndUpdate({_id:req.params.oid},req.body)
+    .then(result=> res.json({"result":"offer updated","updatedoffer":result}))
     .catch(err=>res.status(404).json(err))
 }

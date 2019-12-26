@@ -17,6 +17,10 @@ router.get('/getoffers', offer_controller.get_all_offers);
  // GET request to get all users. 
  router.post('/addoffer', offer_controller.add_offer);
 
+ router.put('/editoffer/:oid', offer_controller.edit_offer);
+
+ router.delete('/deleteoffer', offer_controller.delete_offers)
+
 // GET request for count of friends of a specific user. 
 //  router.get('/countusers', user_controller.count_users);
 

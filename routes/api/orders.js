@@ -1,5 +1,6 @@
 const express = require("express")
 const router = express.Router()
+const mongoose = require("mongoose")
 const multer = require("multer")
 const Cartproduct = require("../../models/cartproduct")
 
@@ -33,6 +34,25 @@ const storage = multer.diskStorage({
     },
     fileFilter: fileFilter
   });
+
+  router.post('/addproducttocart',upload.single('user_img'),async (req,res,next) => {
+    console.log(req.file)
+    let cproid = mongoose.Types.ObjectId.createFromHexString(req.body.proid)
+    const newCartproduct = new Cartproduct(
+        {
+            _id: cproid,
+            product_name: req.body.product_name,
+            cover_4d_id : req.body.cover_4d_id ? req.body.cover_4d_id : "na",
+            cover_type: req.body.cover_type ? req.body.cover_type : "na",
+            image: req.file ? req.file.originalname : "na",
+            print_name : req.body.print_name ? req.body.print_name : "na",
+            size: req.body.size ? req.body.size : "na",
+            quantity : req.body.quantity ? req.body.quantity : 1
+        }
+    )
+    let cartproduct = await newCartproduct.save()
+    res.json({"cartproduct": cartproduct})
+  })
   
   router.put('/addimagetoproduct/:cartproid',upload.single('product_img'),(req,res,next) => {
     console.log("below file")
@@ -48,7 +68,7 @@ const storage = multer.diskStorage({
   })
 
 
-router.post('/addproducttocart', order_controller.add_product_to_cart)
+router.post('/addproducttocartold', order_controller.add_product_to_cart)
 
 
 //GET request to get all users. 
