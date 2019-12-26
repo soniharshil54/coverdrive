@@ -26,7 +26,11 @@ const OfferSchema = new Schema({
     termsnconditions: {
         type: String,
         required: true
-    }  ,
+    },
+    active_status: {
+        type: String,
+        required: true
+    },
     h_image: {
         type: String,
         required: true
