@@ -30,6 +30,9 @@ const OrderSchema = new Schema({
         type : Number,
         default : 0
     },
+    order_status: {
+        type: String
+    },
     date_delivered: {
         type: String,
         required: false

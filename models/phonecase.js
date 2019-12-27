@@ -31,7 +31,8 @@ image_inner_2d : {
 },
 image_mask_2d : {
     type: String,
-    required: true
+    required: true,
+    default: "mask.png"
 },
 image_inner_3d : {
     type: String,
@@ -39,7 +40,8 @@ image_inner_3d : {
 },
 image_mask_3d : {
     type: String,
-    required: true
+    required: true,
+    default: "mask.png"
 },
 image_inner_4d : {
     type: String,

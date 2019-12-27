@@ -98,6 +98,7 @@ exports.get_4dcovers_by_model = function(req, res){
 
 exports.get_phonecase_by_id = async function(req, res){
     let phonecase = await Phonecase.findOne({_id:req.params.id}).populate('covers_4d')
+    // let phonecase = await Phonecase.findOne({_id:req.params.id}).populate('covers_4d')
     //let phonecase = await phonecaseo.populate('covers_4d')
 
     if(phonecase){
@@ -287,7 +288,7 @@ exports.edit_phonecase_status = function(req, res){
     console.log(req.body)
     console.log(req.params)
     Phonecase.findOneAndUpdate({_id:req.params.eid},req.body)
-    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .then(result=> res.json({"result":"phonecase updated","updatedkeychain":result}))
     .catch(err=>res.status(404).json(err))
 }
 

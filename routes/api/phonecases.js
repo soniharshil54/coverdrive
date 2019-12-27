@@ -29,7 +29,7 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 2024 * 2024 * 5
+    fileSize: 2024 * 2024 * 8
   },
   fileFilter: fileFilter
 });
@@ -45,11 +45,14 @@ const upload = multer({
  // GET request to get all users. 
  //router.post('/addproduct', product_controller.add_product);
 
- router.put('/addimage/:pid',upload.fields([{name: 'image_2d_slider', maxCount: 1}, {name: 'image_2d_inner', maxCount: 1},{name: 'image_3d_slider', maxCount: 1}, {name: 'image_3d_inner', maxCount: 1}]),(req,res,next) => {
+ router.put('/addimage/:pid',upload.fields([{name: 'image_2d_slider', maxCount: 1},{name: 'image_2d_mask', maxCount: 1}, {name: 'image_2d_inner', maxCount: 1},{name: 'image_3d_slider', maxCount: 1},{name: 'image_3d_mask', maxCount: 1}, {name: 'image_3d_inner', maxCount: 1}, {name: 'image_4d_slider', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
   if(req.files.image_2d_slider){
     imageData.image_header_2d = req.files.image_2d_slider[0].originalname
+  }
+  if(req.files.image_2d_mask){
+    imageData.image_mask_2d = req.files.image_2d_mask[0].originalname
   }
   if(req.files.image_2d_inner){
     imageData.image_inner_2d = req.files.image_2d_inner[0].originalname
@@ -59,6 +62,9 @@ const upload = multer({
   }
   if(req.files.image_3d_inner){
     imageData.image_inner_3d = req.files.image_3d_inner[0].originalname
+  }
+  if(req.files.image_3d_mask){
+    imageData.image_mask_3d = req.files.image_3d_mask[0].originalname
   }
   if(req.files.image_4d_slider){
     imageData.image_header_4d = req.files.image_4d_slider[0].originalname
