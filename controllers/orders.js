@@ -73,7 +73,7 @@ exports.place_order = function(req, res) {
         newOrder.save()
         .then((result => {
             console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"order placed"})
+            res.status(201).header("Access-Control-Allow-Origin", "*").json({order:result})
         }))
         .catch(err => {
             console.log(err)

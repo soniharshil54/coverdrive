@@ -3,11 +3,12 @@ const mongoose = require("mongoose")
 const User = require("../models/user")
 
 exports.register_user = function(req, res) {
-    let cuserid = mongoose.Types.ObjectId.createFromHexString(req.body.userid)
+    //let cuserid = mongoose.Types.ObjectId.createFromHexString(req.body.userid)
     const newUser = new User(
         {
-            _id: cuserid,
-            name: req.body.name,
+            _id: new mongoose.Types.ObjectId(),
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
             contact: req.body.contact,
             address: req.body.address,
             state: req.body.state,
@@ -19,7 +20,7 @@ exports.register_user = function(req, res) {
         newUser.save()
         .then((result => {
             console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"user created"})
+            res.status(201).header("Access-Control-Allow-Origin", "*").json({user:result})
         }))
         .catch(err => {
             console.log(err)

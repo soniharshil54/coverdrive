@@ -3,6 +3,7 @@ const router = express.Router()
 const mongoose = require("mongoose")
 const multer = require("multer")
 const Cartproduct = require("../../models/cartproduct")
+const ObjectId = mongoose.Types.ObjectId
 
 var order_controller = require('../../controllers/orders');
 
@@ -36,11 +37,15 @@ const storage = multer.diskStorage({
   });
 
   router.post('/addproducttocart',upload.single('user_img'),async (req,res,next) => {
-    console.log(req.file)
-    let cproid = mongoose.Types.ObjectId.createFromHexString(req.body.proid)
+    // console.log(req.file)
+    // console.log(req.body.proid)
+    // let testproid = req.body.proid
+    // let objstring = testproid.toString(testproid)
+    // let cproid = new ObjectId(objstring)
+    // let cproid = mongoose.Types.ObjectId.createFromHexString(req.body.proid)
     const newCartproduct = new Cartproduct(
         {
-            _id: cproid,
+            _id: new mongoose.Types.ObjectId(),
             product_name: req.body.product_name,
             cover_4d_id : req.body.cover_4d_id ? req.body.cover_4d_id : "na",
             cover_type: req.body.cover_type ? req.body.cover_type : "na",
