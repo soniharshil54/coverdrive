@@ -120,9 +120,13 @@ const upload = multer({
 
   router.put('/editphonecase/:eid', phonecase_controller.edit_phonecase)
 
+  router.put('/editphonecasestatus/:eid', phonecase_controller.edit_phonecase_status)
+
   router.put('/editcompany/:cid', phonecase_controller.edit_company)
 
   router.put('/editcompanyname/:cid', phonecase_controller.edit_company_name)
+
+  router.put('/editallphonecases', phonecase_controller.edit_all_phonecases)
 
   // GET request to get all users. 
   //router.post('/addcategory', product_controller.add_category);

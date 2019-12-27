@@ -29,7 +29,15 @@ image_inner_2d : {
     type: String,
     required: true
 },
+image_mask_2d : {
+    type: String,
+    required: true
+},
 image_inner_3d : {
+    type: String,
+    required: true
+},
+image_mask_3d : {
     type: String,
     required: true
 },

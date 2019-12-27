@@ -28,7 +28,7 @@ const OfferSchema = new Schema({
         required: true
     },
     active_status: {
-        type: String,
+        type: Number,
         required: true
     },
     h_image: {

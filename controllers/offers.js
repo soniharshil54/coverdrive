@@ -66,13 +66,19 @@ exports.count_offers = function(req, res){
     .catch(err=>res.json(err))	
 }
 
-exports.delete_user = function(req, res){
-    User.findOneAndRemove({_id:req.params.did})
-    .then(result=> res.json({"result":"user deteted","deleteduser":result}))
+// exports.delete_user = function(req, res){
+//     User.findOneAndRemove({_id:req.params.did})
+//     .then(result=> res.json({"result":"user deteted","deleteduser":result}))
+//     .catch(err=>res.status(404).json(err))
+// }
+
+exports.edit_offer = function(req, res){
+    Offer.findOneAndUpdate({_id:req.params.oid},req.body)
+    .then(result=> res.json({"result":"offer updated","updatedoffer":result}))
     .catch(err=>res.status(404).json(err))
 }
 
-exports.edit_offer = function(req, res){
+exports.edit_offer_status = function(req, res){
     Offer.findOneAndUpdate({_id:req.params.oid},req.body)
     .then(result=> res.json({"result":"offer updated","updatedoffer":result}))
     .catch(err=>res.status(404).json(err))

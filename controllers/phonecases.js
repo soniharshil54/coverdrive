@@ -109,14 +109,16 @@ exports.get_phonecase_by_id = async function(req, res){
             price: phonecase.price_2d,
             description: phonecase.description_2d,
             image_header: phonecase.image_header_2d,
-            image_inner: phonecase.image_inner_2d
+            image_cover: phonecase.image_inner_2d,
+            image_mask: phonecase.image_mask_2d
         }
         let obj3d = {
             size: phonecase.size_3d,
             price: phonecase.price_3d,
             description: phonecase.description_3d,
             image_header: phonecase.image_header_3d,
-            image_inner: phonecase.image_inner_3d
+            image_cover: phonecase.image_inner_3d,
+            image_mask: phonecase.image_mask_3d
         }
         let obj4d = {
             size: phonecase.size_4d,
@@ -136,11 +138,13 @@ exports.get_phonecase_by_id = async function(req, res){
          delete nphonecase.description_2d;
          delete nphonecase.image_header_2d;
          delete nphonecase.image_inner_2d;
+         delete nphonecase.image_mask_2d;
          delete nphonecase.size_3d;
          delete nphonecase.price_3d;
          delete nphonecase.description_3d;
          delete nphonecase.image_header_3d;
          delete nphonecase.image_inner_3d;
+         delete nphonecase.image_mask_3d;
          delete nphonecase.size_4d;
          delete nphonecase.price_4d;
          delete nphonecase.description_4d;
@@ -277,6 +281,27 @@ exports.edit_phonecase = function(req, res){
     Phonecase.findOneAndUpdate({_id:req.params.eid},req.body)
     .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
     .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_phonecase_status = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Phonecase.findOneAndUpdate({_id:req.params.eid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_all_phonecases = async function(req, res){
+    console.log(req.body)
+    let editbody = {
+        image_inner_2d : "cover.png",
+        image_mask_2d : "mask.png",
+        image_inner_3d : "cover.png",
+        image_mask_3d : "mask.png"
+    }
+    let phonecaseupdate = await Phonecase.updateMany({}, editbody)
+    console.log(phonecaseupdate)
+   res.json({"result":"done"})
 }
 
 exports.edit_company = function(req, res){
