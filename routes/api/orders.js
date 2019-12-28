@@ -58,7 +58,7 @@ const storage = multer.diskStorage({
         }
     )
     let cartproduct = await newCartproduct.save()
-    res.json({"cartproduct": cartproduct})
+    res.status(200).json({"cartproduct": cartproduct})
   })
   
   router.put('/addimagetoproduct/:cartproid',upload.single('product_img'),(req,res,next) => {

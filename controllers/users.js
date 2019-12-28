@@ -21,7 +21,7 @@ exports.register_user = function(req, res) {
         newUser.save()
         .then((result => {
             console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json({user:result})
+            res.status(200).header("Access-Control-Allow-Origin", "*").json({user:result})
         }))
         .catch(err => {
             console.log(err)
