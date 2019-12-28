@@ -9,6 +9,7 @@ exports.register_user = function(req, res) {
             _id: new mongoose.Types.ObjectId(),
             first_name: req.body.first_name,
             last_name: req.body.last_name,
+            email_id:req.body.email_id,
             contact: req.body.contact,
             address: req.body.address,
             state: req.body.state,

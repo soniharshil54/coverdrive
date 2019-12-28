@@ -5,6 +5,9 @@ const Admin = require("../models/admin")
 const jwt = require("jsonwebtoken")
 const Order = require("../models/order")
 const User = require("../models/user")
+const Phonecase = require("../models/phonecase")
+const Keychain = require("../models/keychain")
+const Mug = require("../models/mug")
 
 exports.register_admin = function(req, res) {
     Admin.find({email: req.body.email})
@@ -115,9 +118,14 @@ exports.count_admins = function(req, res){
 exports.count_summary = async function(req, res){
     let usercount = await User.countDocuments()	
     let ordercount = await Order.countDocuments()	
-    let salesamount = await Order.aggregate([{ $group: { _id: null, sum: { $sum: "$amount" } } }])
-    console.log(salesamount)
-    res.json({"user":usercount, "order":ordercount})
+    let salesamountref = await Order.aggregate([{ $group: { _id: null, sum: { $sum: "$amount" } } }])
+    let phonecasecount = await Phonecase.countDocuments()
+    let keychaincount = await Keychain.countDocuments()
+    let mugcount = await Mug.countDocuments()
+    let productscount = phonecasecount + keychaincount + mugcount
+    console.log(salesamountref[0].sum)
+    let salesamount = salesamountref[0].sum
+    res.json({"usercount":usercount, "ordercount":ordercount, "salesamount":salesamount, "productscount":productscount})
 }
 
 exports.delete_admin = function(req, res){
