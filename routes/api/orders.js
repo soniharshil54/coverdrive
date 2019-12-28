@@ -37,7 +37,8 @@ const storage = multer.diskStorage({
   });
 
   router.post('/addproducttocart',upload.single('user_img'),async (req,res,next) => {
-    // console.log(req.file)
+    console.log("product upload to cart")
+    console.log(req.file)
     // console.log(req.body.proid)
     // let testproid = req.body.proid
     // let objstring = testproid.toString(testproid)
