@@ -12,7 +12,7 @@ const UserSchema = new Schema({
         required: true
     },
     contact: {
-        type: Number,
+        type: String,
         required:true
     },
     email_id: {

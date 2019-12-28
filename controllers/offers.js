@@ -13,6 +13,7 @@ exports.add_offer = function(req, res) {
             offer_name: req.body.offer_name,
             product_name : req.body.product_name,
             code: req.body.code,
+            active_status: "1",
             expiry_date: req.body.expiry_date,
             termsnconditions: req.body.termsnconditions,
             h_image : "noimage.png"
