@@ -76,10 +76,10 @@ exports.place_order = function(req, res) {
     const newOrder = new Order(
         {
             _id: new mongoose.Types.ObjectId(),
-            order_id: generateorderid,
+            order_id: generateorderid(),
             products: productincart ,
             user_id: user_id,
-            total_amount: req.body_total_amount,
+            amount: req.body.amount,
             payment_type: req.body.payment_type
         }
     )
@@ -114,6 +114,8 @@ Order.deleteMany({'_id':{'$in': ordersDelete}},function(){
 }
 
 exports.change_order_status = function(req, res){
+    console.log(req.params.oid)
+    console.log(req.body)
     Order.findOneAndUpdate({_id:req.params.oid},req.body)
     .then(result=> res.json({"result":"order status updated","updatedorder":result}))
     .catch(err=>res.status(404).json(err))

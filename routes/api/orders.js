@@ -53,6 +53,7 @@ const storage = multer.diskStorage({
             image: req.file ? req.file.originalname : "na",
             print_name : req.body.print_name ? req.body.print_name : "na",
             size: req.body.size ? req.body.size : "na",
+            subtotal: req.body.subtotal,
             quantity : req.body.quantity ? req.body.quantity : 1
         }
     )

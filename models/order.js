@@ -46,7 +46,7 @@ const OrderSchema = new Schema({
     sub_total: {
         type: Number
     },
-    total_amount: {
+    amount: {
         type: Number
     }
 })

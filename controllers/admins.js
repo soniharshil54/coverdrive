@@ -3,6 +3,8 @@ const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const Admin = require("../models/admin")
 const jwt = require("jsonwebtoken")
+const Order = require("../models/order")
+const User = require("../models/user")
 
 exports.register_admin = function(req, res) {
     Admin.find({email: req.body.email})
@@ -108,6 +110,14 @@ exports.count_admins = function(req, res){
     Admin.countDocuments()	
     .then(result=>res.json(result))
     .catch(err=>res.json(err))	
+}
+
+exports.count_summary = async function(req, res){
+    let usercount = await User.countDocuments()	
+    let ordercount = await Order.countDocuments()	
+    let salesamount = await Order.aggregate([{ $group: { _id: null, sum: { $sum: "$amount" } } }])
+    console.log(salesamount)
+    res.json({"user":usercount, "order":ordercount})
 }
 
 exports.delete_admin = function(req, res){
