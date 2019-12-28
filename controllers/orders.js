@@ -80,6 +80,7 @@ exports.place_order = function(req, res) {
             products: productincart ,
             user_id: user_id,
             amount: req.body.amount,
+            order_status: "Pending",
             payment_type: req.body.payment_type
         }
     )
