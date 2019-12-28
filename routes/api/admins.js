@@ -22,6 +22,8 @@ router.get('/admins', admin_controller.get_all_admins);
 // GET request for count of friends of a specific user. 
  router.get('/countusers', admin_controller.count_admins);
 
+ //router.get('/countsummary', admin_controller.count_summary)
+
  // GET request for count of friends of a specific user. 
  router.delete('/deleteadmin/:did', admin_controller.delete_admin);
 

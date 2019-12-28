@@ -81,6 +81,7 @@ router.post('/placeorder', order_controller.place_order);
 
 router.delete('/deleteorder', order_controller.delete_orders)
 
+router.put('/changeorderstatus/:oid', order_controller.change_order_status)
 
 router.get('/getorderbyid/:orderid', order_controller.get_order_by_id)
 
@@ -89,6 +90,8 @@ router.get('/getorderswithdata', order_controller.get_orders_with_data);
 router.get('/getorders', order_controller.get_orders);
 
 router.get('/getcartproductbyid/:cpid', order_controller.get_cartproduct_by_id)
+
+router.get('/getallcartproducts', order_controller.get_all_cartproducts)
 
 
 // GET request to get specific order details. 

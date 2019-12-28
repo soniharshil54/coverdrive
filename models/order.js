@@ -3,6 +3,9 @@ const Schema = mongoose.Schema
 
 const OrderSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
+    order_id : {
+        type : String
+    },
     products: [{
         type: mongoose.Schema.Types.ObjectId,
         ref: 'cartproduct'
@@ -19,9 +22,6 @@ const OrderSchema = new Schema({
         type: Number,
         default : 0
     },
-    total_amount: {
-        type:Number
-    },
     date_ordered: {
         type:String,
         required: false
@@ -36,6 +36,18 @@ const OrderSchema = new Schema({
     date_delivered: {
         type: String,
         required: false
+    },
+    gst_tax: {
+        type: Number
+    },
+    shipping: {
+        type: Number
+    },
+    sub_total: {
+        type: Number
+    },
+    total_amount: {
+        type: Number
     }
 })
 

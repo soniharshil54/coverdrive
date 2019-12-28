@@ -31,7 +31,7 @@ exports.get_orders = async function(req, res){
 }
 
 exports.get_order_by_id = async function(req, res){
-    let order = await Order.findOne({_id:req.params.orderid})
+    let order = await Order.findOne({_id:req.params.orderid}).populate('products').populate("user_id")
     if(order){
         res.json(order)
         return
@@ -54,6 +54,18 @@ exports.get_cartproduct_by_id = async function(req, res){
     }
 }
 
+exports.get_all_cartproducts = async function(req, res){
+    let cartproduct = await Cartproduct.find()
+    if(cartproduct){
+        res.json(cartproduct)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
 exports.place_order = function(req, res) {
     var idsproducts = req.body.products;
     let user_id = mongoose.Types.ObjectId(req.body.user_id)
@@ -64,6 +76,7 @@ exports.place_order = function(req, res) {
     const newOrder = new Order(
         {
             _id: new mongoose.Types.ObjectId(),
+            order_id: generateorderid,
             products: productincart ,
             user_id: user_id,
             total_amount: req.body_total_amount,
@@ -81,6 +94,13 @@ exports.place_order = function(req, res) {
         })
 }
 
+function generateorderid(){
+    let orderid = Math.floor(1000 + Math.random() * 9000);
+    let norderid = "OR"+orderid.toString()
+    return norderid
+}
+
+
 exports.delete_orders = function(req, res){
     var idsArrayf = req.body.todeleteids;
     var ordersDelete = [];
@@ -91,6 +111,12 @@ exports.delete_orders = function(req, res){
 Order.deleteMany({'_id':{'$in': ordersDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
+}
+
+exports.change_order_status = function(req, res){
+    Order.findOneAndUpdate({_id:req.params.oid},req.body)
+    .then(result=> res.json({"result":"order status updated","updatedorder":result}))
+    .catch(err=>res.status(404).json(err))
 }
 
 exports.add_product_to_cart = async function(req, res) {
