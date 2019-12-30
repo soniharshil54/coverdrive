@@ -14,6 +14,10 @@ const MainslideSchema = new Schema({
     slider_image : {
         type: String,
         default: "noimage.png"
+    },
+    active_status : {
+        type: Number,
+        default: "1"
     }
 })
 

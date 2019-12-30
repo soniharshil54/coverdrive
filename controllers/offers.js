@@ -22,7 +22,7 @@ exports.add_offer = function(req, res) {
     newOffer.save()
         .then((result => {
             console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"offer created"})
+            res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
         }))
         .catch(err => {
             console.log(err)
@@ -76,6 +76,12 @@ exports.count_offers = function(req, res){
 exports.edit_offer = function(req, res){
     Offer.findOneAndUpdate({_id:req.params.oid},req.body)
     .then(result=> res.json({"result":"offer updated","updatedoffer":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_all_offers = function(req, res){
+    Offer.updateMany({},req.body)
+    .then(result=> res.json({"result":"offers updated","updatedoffers":result}))
     .catch(err=>res.status(404).json(err))
 }
 

@@ -95,6 +95,8 @@ router.put('/photoframe/addimage/:pid',upload.fields([{name: 'hImage', maxCount:
     )
 })
 
+router.put('/editsliderstatus/:sid', product_controller.edit_slider_status)
+
 router.put('/mug/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
   name: 'inImage', maxCount: 1
 }]),(req,res,next) => {

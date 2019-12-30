@@ -12,13 +12,14 @@ exports.add_company = function(req, res){
     const newPhonecomp = new Phonecomp(
         {
             _id: new mongoose.Types.ObjectId(),
-            name: company_name
+            name: company_name,
+
         }
     )
     newPhonecomp.save()
     .then((result => {
         console.log(result)
-        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"company added"})
+        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"company added",company:result})
     }))
     .catch(err => {
         console.log(err)

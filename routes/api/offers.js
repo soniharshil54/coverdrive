@@ -59,6 +59,8 @@ router.get('/getoffers', offer_controller.get_all_offers);
 
  router.put('/editoffer/:oid', offer_controller.edit_offer);
 
+ router.put('/editalloffers', offer_controller.edit_all_offers);
+
  router.put('/editofferstatus/:oid', offer_controller.edit_offer_status);
 
  router.delete('/deleteoffer', offer_controller.delete_offers)

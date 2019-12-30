@@ -48,6 +48,14 @@ exports.add_slider = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.edit_slider_status = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Mainslide.findOneAndUpdate({_id:req.params.sid},req.body)
+    .then(result=> res.json({"result":"slider status updated","updatedslider":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
 // exports.add_keychain_image = function(){
 
 // }  
