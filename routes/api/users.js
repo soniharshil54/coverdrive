@@ -22,6 +22,8 @@ router.get('/users', user_controller.get_all_users);
  // GET request for count of friends of a specific user. 
  router.delete('/deleteuser/:did', user_controller.delete_user);
 
+ router.delete('/deleteusers', user_controller.delete_users)
+
 // GET request for count of friends requests of a specific user. 
  router.put('/edituser/:eid', user_controller.edit_user);
 

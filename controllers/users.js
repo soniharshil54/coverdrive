@@ -61,6 +61,18 @@ exports.delete_user = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.delete_users = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+User.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
 exports.edit_user = function(req, res){
     User.findOneAndUpdate({_id:req.params.eid},req.body)
     .then(result=> res.json({"result":"user updated","updateduser":result}))
