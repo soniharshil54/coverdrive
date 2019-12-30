@@ -25,6 +25,7 @@ exports.add_product_slide = function(req, res){
         {
             _id: new mongoose.Types.ObjectId(),
             product_name: req.body.productname,
+            active_status: "1",
             product_display_name: req.body.productdisplayname,
             slider_image: req.body.slidename
         }
