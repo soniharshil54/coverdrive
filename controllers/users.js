@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const User = require("../models/user")
+const ObjectId = mongoose.Types.ObjectId
 
 exports.register_user = function(req, res) {
     //let cuserid = mongoose.Types.ObjectId.createFromHexString(req.body.userid)
