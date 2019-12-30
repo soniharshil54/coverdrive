@@ -79,6 +79,9 @@ exports.place_order = function(req, res) {
             order_id: generateorderid(),
             products: productincart ,
             user_id: user_id,
+            gst_tax: req.body.gst_tax,
+            shipping: req.body.shipping,
+            sub_total:req.body.subtotal,
             amount: req.body.amount,
             order_status: "Pending",
             payment_type: req.body.payment_type
