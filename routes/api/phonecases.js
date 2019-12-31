@@ -88,7 +88,7 @@ const upload = multer({
 
   router.delete('/deletecompany/:cid', phonecase_controller.delete_company);
 
-  router.get('/companies', phonecase_controller.get_companies)
+  router.get('/companies', phonecase_controller.get_active_companies)
 
   router.get('/activecompanies', phonecase_controller.get_active_companies)
 
