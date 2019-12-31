@@ -51,6 +51,7 @@ exports.get_all_companies = function(req, res){
          .catch(err=>res.json(err))
 }
 
+
 exports.get_phonecases = function(req, res){
     Phonecase.find()
     .then(result=>res.json(result))
