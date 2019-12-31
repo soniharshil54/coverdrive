@@ -55,6 +55,12 @@ Offer.deleteMany({'_id':{'$in': offersDelete}},function(){
 });
 }
 
+exports.get_offers = function(req, res){
+    Offer.find({active_status : 1})
+         .then(result=>res.json(result))
+         .catch(err=>res.json(err))
+}
+
 exports.get_all_offers = function(req, res){
         Offer.find()
              .then(result=>res.json(result))

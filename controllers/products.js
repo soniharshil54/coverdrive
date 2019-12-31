@@ -14,6 +14,12 @@ const ObjectId = mongoose.Types.ObjectId
 
 
 exports.get_sliders = function(req, res){
+    Mainslide.find({active_status: 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_all_sliders = function(req, res){
     Mainslide.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))

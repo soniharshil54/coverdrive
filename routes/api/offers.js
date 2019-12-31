@@ -52,7 +52,9 @@ router.put('/addimage/:pid',upload.single('offer_image'),(req,res,next) => {
 // router.get('/getoffer/:offerid', offer_controller.get_offer);
 
 // GET request to get specific user. 
-router.get('/getoffers', offer_controller.get_all_offers);  
+router.get('/getoffers', offer_controller.get_offers);  
+
+router.get('/getalloffers', offer_controller.get_all_offers)
 
  // GET request to get all users. 
  router.post('/addoffer', offer_controller.add_offer);

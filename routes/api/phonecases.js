@@ -90,7 +90,11 @@ const upload = multer({
 
   router.get('/companies', phonecase_controller.get_companies)
 
+  router.get('/allcompanies', phonecase_controller.get_all_companies)
+
   router.get('/getphonecases', phonecase_controller.get_phonecases)
+
+  router.get('/getallphonecases', phonecase_controller.get_all_phonecases)
 
   router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
 
