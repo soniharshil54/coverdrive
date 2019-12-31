@@ -34,6 +34,12 @@ exports.delete_company = function(req, res){
 }
 
 exports.get_companies = function(req, res){
+    Phonecomp.find()
+         .then(result=>res.json(result))
+         .catch(err=>res.json(err))
+}
+
+exports.get_active_companies = function(req, res){
     Phonecomp.find({active_status : 1})
          .then(result=>res.json(result))
          .catch(err=>res.json(err))
@@ -46,7 +52,13 @@ exports.get_all_companies = function(req, res){
 }
 
 exports.get_phonecases = function(req, res){
-    Phonecase.find({available_status : 1})
+    Phonecase.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_active_phonecases = function(req, res){
+    Phonecase.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }

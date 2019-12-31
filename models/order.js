@@ -23,8 +23,9 @@ const OrderSchema = new Schema({
         default : 0
     },
     date_ordered: {
-        type:String,
-        required: false
+        type:Date,
+        default: Date.now,
+        required: true
     },
     is_delivered: {
         type : Number,
