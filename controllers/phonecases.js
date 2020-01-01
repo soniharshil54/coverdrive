@@ -122,6 +122,12 @@ exports.get_4dcovers_by_model = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_phonecase_by_id_admin = function(req, res){
+    Phonecase.findOne({_id: req.params.pid})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_phonecase_by_id = async function(req, res){
     let phonecase = await Phonecase.findOne({_id:req.params.id}).populate('covers_4d')
     // let phonecase = await Phonecase.findOne({_id:req.params.id}).populate('covers_4d')

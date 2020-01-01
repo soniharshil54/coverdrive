@@ -100,6 +100,8 @@ const upload = multer({
 
   router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
 
+  router.get('/getphonecasebyidadmin/:pid',phonecase_controller.get_phonecase_by_id_admin)
+
   router.get('/getphonecasesbycompany/:company', phonecase_controller.get_phonecases_by_company)
 
   router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)

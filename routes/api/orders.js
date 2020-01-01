@@ -49,7 +49,7 @@ const storage = multer.diskStorage({
             _id: new mongoose.Types.ObjectId(),
             product_name: req.body.product_name,
             cover_4d_id : req.body.cover_4d_id ? req.body.cover_4d_id : "na",
-            cover_type:  "na",
+            cover_type:  req.body.cover_type ? req.body.cover_type : "na",
             image: req.file ? req.file.originalname : "na",
             print_name : req.body.print_name ? req.body.print_name : "na",
             size: req.body.size ? req.body.size : "na",
