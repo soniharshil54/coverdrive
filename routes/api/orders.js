@@ -81,6 +81,8 @@ router.post('/addproducttocartold', order_controller.add_product_to_cart)
 //GET request to get all users. 
 router.post('/placeorder', order_controller.place_order);
 
+router.post('/placemodelrequest', order_controller.place_model_request);
+
 router.delete('/deleteorder', order_controller.delete_orders)
 
 router.put('/changeorderstatus/:oid', order_controller.change_order_status)
@@ -90,6 +92,8 @@ router.get('/getorderbyid/:orderid', order_controller.get_order_by_id)
 router.get('/getordersbycontact/:contact', order_controller.get_orders_by_contact)
 
 router.get('/getorderswithdata', order_controller.get_orders_with_data);
+
+router.get('/getmodelrequests', order_controller.get_modelrequests)
 
 router.get('/getorders', order_controller.get_orders);
 

@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const User = require("../models/user")
 const Order = require("../models/order")
 const Cartproduct = require("../models/cartproduct")
+const Modelrequest = require("../models/modelrequest")
 const ObjectId = mongoose.Types.ObjectId
 
 
@@ -14,6 +15,18 @@ exports.get_orders_with_data = async function(req, res){
     }
     else{
         res.json({"error":"order not found"})
+        return
+    }
+}
+
+exports.get_modelrequests = async function(req, res){
+    let modelreqs = await Modelrequest.find().populate("user_id")
+    if(modelreqs){
+        res.json(modelreqs)
+        return
+    }
+    else{
+        res.json({"error":"model requests not found"})
         return
     }
 }
@@ -53,19 +66,10 @@ exports.get_orders_by_contact = async function(req, res){
     idsArrayf.forEach(function(item){     
     usersSelected.push(new ObjectId(item));
 });
-console.log(usersSelected)
+// console.log(usersSelected)
     let ordersbycon = await Order.find({'user_id':{'$in': usersSelected}})
-    console.log(ordersbycon)
+    // console.log(ordersbycon)
     res.json(ordersbycon)
-    // let order = await Order.findOne({_id:req.params.orderid}).populate('products').populate("user_id")
-    // if(order){
-    //     res.json(order)
-    //     return
-    // }
-    // else{
-    //     res.json({"error":"order not found"})
-    //     return
-    // }
 }
 
 async function getorderbycon(contact){
@@ -135,6 +139,28 @@ exports.place_order = function(req, res) {
             res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
         })
 }
+
+
+exports.place_model_request = function(req, res) {
+    let user_id = mongoose.Types.ObjectId(req.body.user_id)
+    const newModelrequest = new Modelrequest(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            user_id: user_id,
+            model_name: req.body.model_name
+        }
+    )
+    newModelrequest.save()
+        .then((result => {
+            console.log(result)
+            res.status(200).header("Access-Control-Allow-Origin", "*").json({modelrequest:result})
+        }))
+        .catch(err => {
+            console.log(err)
+            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+        })
+}
+
 
 function generateorderid(){
     let orderid = Math.floor(1000 + Math.random() * 9000);
