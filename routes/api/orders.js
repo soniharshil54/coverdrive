@@ -87,6 +87,8 @@ router.put('/changeorderstatus/:oid', order_controller.change_order_status)
 
 router.get('/getorderbyid/:orderid', order_controller.get_order_by_id)
 
+router.get('/getordersbycontact/:contact', order_controller.get_orders_by_contact)
+
 router.get('/getorderswithdata', order_controller.get_orders_with_data);
 
 router.get('/getorders', order_controller.get_orders);

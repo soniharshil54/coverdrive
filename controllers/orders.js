@@ -42,6 +42,44 @@ exports.get_order_by_id = async function(req, res){
     }
 }
 
+exports.get_orders_by_contact = async function(req, res){
+    let users = await User.find({contact: req.params.contact}).select("_id")
+    let useridarray = users.map(a => {
+        let onlyid = a._id
+        return onlyid
+    })
+    var idsArrayf = useridarray;
+    var usersSelected = [];
+    idsArrayf.forEach(function(item){     
+    usersSelected.push(new ObjectId(item));
+});
+console.log(usersSelected)
+    let ordersbycon = await Order.find({'user_id':{'$in': usersSelected}})
+    console.log(ordersbycon)
+    res.json(ordersbycon)
+    // let order = await Order.findOne({_id:req.params.orderid}).populate('products').populate("user_id")
+    // if(order){
+    //     res.json(order)
+    //     return
+    // }
+    // else{
+    //     res.json({"error":"order not found"})
+    //     return
+    // }
+}
+
+async function getorderbycon(contact){
+    console.log("it ran")
+    let users = await User.find({contact:contact})
+    
+    console.log(users)
+    return users
+}
+
+// getorderbycon("9789876578").then(result => console.log(result)).catch(e => console.log(e))
+
+
+
 exports.get_cartproduct_by_id = async function(req, res){
     let cartproduct = await Cartproduct.findOne({_id:req.params.cpid})
     if(cartproduct){
