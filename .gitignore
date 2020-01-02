@@ -2,8 +2,7 @@
 .htaccess
 =======
 # Site Data
-upload/*
-application/libraries/htmlpurifier/standalone/HTMLPurifier/DefinitionCache/*
+
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -381,7 +380,7 @@ application/config/environment
 application/cache
 
 #upload
-public/upload
+#public/upload
 
 # Email config
 application/config/email.php
