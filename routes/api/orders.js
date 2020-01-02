@@ -36,7 +36,28 @@ const storage = multer.diskStorage({
     fileFilter: fileFilter
   });
 
-  router.post('/addproducttocart',upload.single('user_img'),async (req,res,next) => {
+  router.post('/addproducttocart', upload.fields([{name: 'user_img_full', maxCount: 1},{name: 'user_img_cropped', maxCount: 1}]),async (req,res,next) => {
+    console.log("product upload to cart")
+    console.log(req.files)
+    const newCartproduct = new Cartproduct(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            product_name: req.body.product_name,
+            cover_4d_id : req.body.cover_4d_id ? req.body.cover_4d_id : "na",
+            cover_type:  req.body.cover_type ? req.body.cover_type : "na",
+            image: req.files.user_img_full ? req.files.user_img_full[0].originalname : "na",
+            cropped_image: req.files.user_img_cropped ? req.files.user_img_cropped[0].originalname : "na",
+            print_name : req.body.print_name ? req.body.print_name : "na",
+            size: req.body.size ? req.body.size : "na",
+            subtotal: req.body.subtotal,
+            quantity : req.body.quantity ? req.body.quantity : 1
+        }
+    )
+    let cartproduct = await newCartproduct.save()
+    res.status(200).json({"cartproduct": cartproduct})
+  })
+
+  router.post('/addproducttocartold',upload.single('user_img'),async (req,res,next) => {
     console.log("product upload to cart")
     console.log(req.file)
     // console.log(req.body.proid)
