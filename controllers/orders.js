@@ -142,14 +142,15 @@ exports.place_order = function(req, res) {
 
 
 exports.place_model_request = function(req, res) {
-    let user_id = mongoose.Types.ObjectId(req.body.user_id)
-    const newModelrequest = new Modelrequest(
-        {
-            _id: new mongoose.Types.ObjectId(),
-            user_id: user_id,
-            model_name: req.body.model_name
-        }
-    )
+    let modelbody = {
+        _id: new mongoose.Types.ObjectId(),
+        model_name: req.body.model_name
+    }
+    if(req.body.user_id !== ""){
+        let user_id = mongoose.Types.ObjectId(req.body.user_id)
+        modelbody.user_id = user_id
+    }
+    const newModelrequest = new Modelrequest(modelbody)
     newModelrequest.save()
         .then((result => {
             console.log(result)
