@@ -10,6 +10,7 @@ const Slipperbottle = require("../models/slipperbottle")
 const Wallclock = require("../models/wallclock")
 const Watch = require("../models/watch")
 const Mainslide = require("../models/mainslide")
+const Secondaryslide = require("../models/secondaryslide")
 const ObjectId = mongoose.Types.ObjectId
 
 
@@ -47,6 +48,29 @@ exports.add_product_slide = function(req, res){
     })
 }
 
+exports.add_secondary_slider = function(req, res){
+    console.log(req.body)
+    const newSecondaryslide = new Secondaryslide(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            slider_name: req.body.slider_name,
+            slider_display_name: req.body.sliderdisplayname,
+            product_name: req.body.product_name,
+            active_status: req.body.active_status,
+            slider_image: req.body.sliderimage
+        }
+    )
+    newSecondaryslide.save()
+    .then((result => {
+        //console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json({message:"product added",product:result})
+    }))
+    .catch(err => {
+        console.log(err)
+        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+    })
+}
+
 exports.add_slider = function(req, res){
     console.log(req.body)
     console.log(req.params)
@@ -54,6 +78,15 @@ exports.add_slider = function(req, res){
     .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
     .catch(err=>res.status(404).json(err))
 }
+
+// exports.add_secondary_slider = function(req, res){
+//     console.log(req.body)
+//     console.log(req.params)
+//     Secondaryslide.findOneAndUpdate({product_name:req.params.productname},req.body)
+//     .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+//     .catch(err=>res.status(404).json(err))
+// }
+
 
 exports.edit_slider_status = function(req, res){
     console.log(req.body)

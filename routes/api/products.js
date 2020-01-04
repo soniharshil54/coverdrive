@@ -215,6 +215,8 @@ router.put('/slipperbottle/addimage/:pid',upload.fields([{name: 'hImage', maxCou
 
 router.get('/sliders', product_controller.get_sliders)
 
+//router.get('/secondarysliders', product_controller.get_secondary_sliders)
+
 router.get('/allsliders', product_controller.get_all_sliders)
 
 router.get('/keychains', product_controller.get_keychains)
@@ -272,6 +274,8 @@ router.post('/addproduct', product_controller.add_product_slide)
 //router.post('/addmug', product_controller.add_mug);
 
 router.post('/addslide/:productname',product_controller.add_slider)
+
+router.post('/addsecondaryslide', product_controller.add_secondary_slider)
 
 router.post('/add/photoframe', product_controller.add_photoframe);
 

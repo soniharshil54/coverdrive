@@ -15,6 +15,8 @@ router.get('/getsmsdata', user_controller.get_sms_data)
 // GET request to get specific user. 
 router.get('/users', user_controller.get_all_users);  
 
+router.get('/getcontacts', user_controller.get_contacts);
+
  // GET request to get all users. 
  router.post('/register', user_controller.register_user);
 

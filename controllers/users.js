@@ -33,6 +33,12 @@ exports.register_user = function(req, res) {
         })
 }
 
+exports.get_contacts = function(req,res) {
+    User.find().select('contact')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.post_sms_data = function(req, res) {
     const newSmsdata = new Smsdata(
         {
