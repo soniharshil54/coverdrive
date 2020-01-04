@@ -51,7 +51,9 @@ router.put('/addsecondaryslider/:sid',upload.single('modal_s_slider_image'),(req
   console.log("below file")
   console.log(req.file)
   console.log(req.params.sid)
-  let imageData = {}
+  let imageData = {
+    product_name : req.body.product_slider
+  }
   if(req.file){
     imageData.slider_image = req.file.originalname
   }
