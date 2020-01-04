@@ -5,12 +5,12 @@ const ObjectId = mongoose.Types.ObjectId
 const Smsdata = require("../models/smsdata")
 
 exports.register_user = function(req, res) {
-    let cuserid = mongoose.Types.ObjectId(req.body.user_id)
+    //let cuserid = mongoose.Types.ObjectId(req.body.user_id)
     let contactstringref = req.body.contact
     let contactstring = contactstringref.toString()
     const newUser = new User(
         {
-            _id: cuserid,
+            _id: new mongoose.Types.ObjectId(),
             first_name: req.body.first_name,
             last_name: req.body.last_name,
             email_id:req.body.email_id,
