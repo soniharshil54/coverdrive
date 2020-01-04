@@ -20,6 +20,18 @@ exports.get_sliders = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_secondary_sliders = function(req, res){
+    Secondaryslide.find({active_status: 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_all_secondary_sliders = function(req, res){
+    Secondaryslide.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_all_sliders = function(req, res){
     Mainslide.find()
     .then(result=>res.json(result))
@@ -92,6 +104,14 @@ exports.edit_slider_status = function(req, res){
     console.log(req.body)
     console.log(req.params)
     Mainslide.findOneAndUpdate({_id:req.params.sid},req.body)
+    .then(result=> res.json({"result":"slider status updated","updatedslider":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_sec_slider_status = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Secondaryslide.findOneAndUpdate({_id:req.params.sid},req.body)
     .then(result=> res.json({"result":"slider status updated","updatedslider":result}))
     .catch(err=>res.status(404).json(err))
 }

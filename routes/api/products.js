@@ -47,6 +47,19 @@ router.put('/addslider/:pid',upload.single('modal_slider_image'),(req,res,next) 
   .catch(err=>res.status(404).json(err))
 })
 
+router.put('/addsecondaryslider/:sid',upload.single('modal_s_slider_image'),(req,res,next) => {
+  console.log("below file")
+  console.log(req.file)
+  console.log(req.params.sid)
+  let imageData = {}
+  if(req.file){
+    imageData.slider_image = req.file.originalname
+  }
+  Secondaryslide.findOneAndUpdate({_id:req.params.sid},imageData)
+  .then(result=> res.json({"result":"keychain image updated","updatedkeychain":result}))
+  .catch(err=>res.status(404).json(err))
+})
+
 
 
 router.put('/keychain/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
@@ -96,6 +109,8 @@ router.put('/photoframe/addimage/:pid',upload.fields([{name: 'hImage', maxCount:
 })
 
 router.put('/editsliderstatus/:sid', product_controller.edit_slider_status)
+
+router.put('/editsecsliderstatus/:sid', product_controller.edit_sec_slider_status)
 
 router.put('/mug/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
   name: 'inImage', maxCount: 1
@@ -215,7 +230,9 @@ router.put('/slipperbottle/addimage/:pid',upload.fields([{name: 'hImage', maxCou
 
 router.get('/sliders', product_controller.get_sliders)
 
-//router.get('/secondarysliders', product_controller.get_secondary_sliders)
+router.get('/secondarysliders', product_controller.get_secondary_sliders)
+
+router.get('/allsecondarysliders', product_controller.get_all_secondary_sliders)
 
 router.get('/allsliders', product_controller.get_all_sliders)
 
