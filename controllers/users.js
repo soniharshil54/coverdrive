@@ -86,6 +86,12 @@ exports.get_all_users = function(req, res){
              .catch(err=>res.json(err))
 }
 
+exports.get_active_users = function(req, res){
+    User.find({active : 1})
+         .then(result=>res.json(result))
+         .catch(err=>res.json(err))
+}
+
 exports.count_users = function(req, res){
     User.countDocuments()	
     .then(result=>res.json(result))
@@ -110,8 +116,35 @@ User.deleteMany({'_id':{'$in': usersDelete}},function(){
 });
 }
 
+exports.deactivate_users = function(req, res){
+   // console.log(req.body.todeactiveids)
+    var idsArrayf = req.body.todeactiveids;
+   // console.log(idsArrayf)
+    var usersDeactive = [];
+    idsArrayf.forEach(function(item){     
+    usersDeactive.push(new ObjectId(item));
+});
+
+let deactivebody = {
+    active : 0
+}
+
+User.updateMany({'_id':{'$in': usersDeactive}}, deactivebody,function(err, result){
+   // console.log(result)
+    res.json({"dodo":"yoyo"});
+});
+}
+
+
+
 exports.edit_user = function(req, res){
     User.findOneAndUpdate({_id:req.params.eid},req.body)
+    .then(result=> res.json({"result":"user updated","updateduser":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_all_users = function(req, res){
+    User.updateMany({},{active : 1})
     .then(result=> res.json({"result":"user updated","updateduser":result}))
     .catch(err=>res.status(404).json(err))
 }

@@ -125,7 +125,7 @@ exports.place_order = function(req, res) {
             shipping: req.body.shipping,
             sub_total:req.body.subtotal,
             amount: req.body.amount,
-            order_status: "Pending",
+            order_status: "Processing",
             payment_type: req.body.payment_type
         }
     )

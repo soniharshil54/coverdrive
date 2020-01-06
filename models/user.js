@@ -37,6 +37,10 @@ const UserSchema = new Schema({
     address: {
         type: String,
         required: true
+    },
+    active: {
+        type: Number,
+        default: 1
     }
 })
 
