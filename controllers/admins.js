@@ -68,7 +68,7 @@ exports.post_charges = function(req, res) {
         })
 }
 
-exports.edit_delivery_charges = function(req, res){
+exports.edit_delivery_charges = async function(req, res){
     let editcharges = await Adminside.findOneAndUpdate({ _id: '5e1322a0eb48a053cdfb0677'},req.body,{new: true})
     //return newoid.sequence
     res.json(editcharges)
