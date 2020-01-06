@@ -96,9 +96,11 @@ const storage = multer.diskStorage({
   })
 
 
+//router.get('/neworderid', order_controller.get_next_order_id)
+
 router.post('/addproducttocartold', order_controller.add_product_to_cart)
 
-
+router.post('/addordercounter', order_controller.add_order_counter)
 //GET request to get all users. 
 router.post('/placeorder', order_controller.place_order);
 

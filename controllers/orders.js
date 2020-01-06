@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const User = require("../models/user")
 const Order = require("../models/order")
 const Cartproduct = require("../models/cartproduct")
+const Ordercounter = require("../models/ordercounter")
 const Modelrequest = require("../models/modelrequest")
 const ObjectId = mongoose.Types.ObjectId
 
@@ -108,17 +109,26 @@ exports.get_all_cartproducts = async function(req, res){
     }
 }
 
-exports.place_order = function(req, res) {
+async function get_next_order_id(){
+    let newoid = await Ordercounter.findOneAndUpdate({ _id: 'orderid'},{ $inc: { sequence: 1 } },{new: true})
+    return newoid.sequence
+    res.json({"noid":newoid.sequence})
+}
+
+exports.place_order = async function(req, res) {
     var idsproducts = req.body.products;
     let user_id = mongoose.Types.ObjectId(req.body.user_id)
     var productincart = [];
+    let ordercounter = await get_next_order_id()
+    let stroid = ordercounter.toString().padStart(4, "0")
+    let order_id = `OR${stroid}`
     idsproducts.forEach(function(item){     
     productincart.push(new ObjectId(item));
     })
     const newOrder = new Order(
         {
             _id: new mongoose.Types.ObjectId(),
-            order_id: generateorderid(),
+            order_id: order_id,
             products: productincart ,
             user_id: user_id,
             gst_tax: req.body.gst_tax,
@@ -129,15 +139,8 @@ exports.place_order = function(req, res) {
             payment_type: req.body.payment_type
         }
     )
-        newOrder.save()
-        .then((result => {
-            console.log(result)
-            res.status(200).header("Access-Control-Allow-Origin", "*").json({order:result})
-        }))
-        .catch(err => {
-            console.log(err)
-            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
-        })
+    let newOrderRef  =  await  newOrder.save()
+    res.json({order:newOrderRef})
 }
 
 
@@ -207,6 +210,22 @@ exports.add_product_to_cart = async function(req, res) {
     let cartproduct = await newCartproduct.save()
     res.json({"cartproduct": cartproduct})
 }
+
+exports.add_order_counter = async function(req, res) {
+   // let cproid = mongoose.Types.ObjectId.createFromHexString(req.body.proid)
+    const newOrdercounter = new Ordercounter(
+        {
+            _id: 'orderid',
+            sequence: 0
+        }
+    )
+    let cartproduct = await newOrdercounter.save()
+    res.json({"cartproduct": cartproduct})
+}
+
+
+
+
 
 exports.get_user = async function(req, res){
     let user = await User.findOne({_id:req.params.uid})
