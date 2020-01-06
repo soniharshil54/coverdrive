@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const bcrypt = require("bcrypt")
 const Admin = require("../models/admin")
+const Adminside = require("../models/adminside")
 const jwt = require("jsonwebtoken")
 const Order = require("../models/order")
 const User = require("../models/user")
@@ -46,6 +47,37 @@ exports.register_admin = function(req, res) {
                 })
             }
         })
+}
+
+exports.post_charges = function(req, res) {
+    const newAdminside = new Adminside(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            cod_charges: req.body.cod_charges,
+            shipping_charges : req.body.shipping_charges
+        }
+    )
+    newAdminside.save()
+        .then((result => {
+            console.log(result)
+            res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+        }))
+        .catch(err => {
+            console.log(err)
+            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+        })
+}
+
+exports.edit_delivery_charges = function(req, res){
+    let editcharges = await Adminside.findOneAndUpdate({ _id: '5e1322a0eb48a053cdfb0677'},req.body,{new: true})
+    //return newoid.sequence
+    res.json(editcharges)
+}
+
+exports.get_charges = function(req, res){
+    Adminside.findOne({_id:req.params.aid})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
 }
 
 exports.get_admin = function(req, res){
