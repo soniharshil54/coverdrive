@@ -185,6 +185,18 @@ Order.deleteMany({'_id':{'$in': ordersDelete}},function(){
 });
 }
 
+exports.delete_model_requests = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var reqDelete = [];
+    idsArrayf.forEach(function(item){     
+    reqDelete.push(new ObjectId(item));
+});
+
+Modelrequest.deleteMany({'_id':{'$in': reqDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
 exports.change_order_status = function(req, res){
     console.log(req.params.oid)
     console.log(req.body)

@@ -118,6 +118,8 @@ router.get('/getorderswithdata', order_controller.get_orders_with_data);
 
 router.get('/getmodelrequests', order_controller.get_modelrequests)
 
+router.delete('/deletemodelrequests', order_controller.delete_model_requests)
+
 router.get('/getorders', order_controller.get_orders);
 
 router.get('/getcartproductbyid/:cpid', order_controller.get_cartproduct_by_id)
