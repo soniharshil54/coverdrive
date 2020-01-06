@@ -11,6 +11,11 @@ const ModelrequestSchema = new Schema({
     model_name: {
         type: String,
         required: true
+    },
+    date: {
+        type:Date,
+        default: Date.now,
+        required: true
     }
 })
 
