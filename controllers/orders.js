@@ -135,7 +135,7 @@ exports.place_order = async function(req, res) {
             shipping: req.body.shipping,
             sub_total:req.body.subtotal,
             amount: req.body.amount,
-            order_status: "Processing",
+            order_status: req.body.order_status ? req.body.order_status: "Processing",
             payment_type: req.body.payment_type
         }
     )
