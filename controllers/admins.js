@@ -69,13 +69,13 @@ exports.post_charges = function(req, res) {
 }
 
 exports.edit_delivery_charges = async function(req, res){
-    let editcharges = await Adminside.findOneAndUpdate({ _id: '5e1322a0eb48a053cdfb0677'},req.body,{new: true})
+    let editcharges = await Adminside.findOneAndUpdate({ _id: '5e1328d8fac4234dcc29d6e8'},req.body,{new: true})
     //return newoid.sequence
     res.json(editcharges)
 }
 
 exports.get_charges = function(req, res){
-    Adminside.findOne({_id:req.params.aid})
+    Adminside.findOne({_id:'5e1328d8fac4234dcc29d6e8'})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
