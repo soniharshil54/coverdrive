@@ -138,6 +138,7 @@ exports.get_phonecase_by_id = async function(req, res){
         let newphone = phonecase.toObject()
         let data = []
         let obj2d = {
+            title: "2D phonecase",
             size: phonecase.size_2d,
             available: phonecase.available_2d ? phonecase.available_2d : 1,
             price: phonecase.price_2d,
@@ -147,6 +148,7 @@ exports.get_phonecase_by_id = async function(req, res){
             image_mask: phonecase.image_mask_2d
         }
         let obj3d = {
+            title: "3D phonecase",
             size: phonecase.size_3d,
             available: phonecase.available_3d ? phonecase.available_3d : 1,
             price: phonecase.price_3d,
@@ -156,6 +158,7 @@ exports.get_phonecase_by_id = async function(req, res){
             image_mask: phonecase.image_mask_3d
         }
         let obj4d = {
+            title: "4D phonecase",
             size: phonecase.size_4d,
             available: phonecase.available_4d ? phonecase.available_4d : 1,
             price: phonecase.price_4d,
