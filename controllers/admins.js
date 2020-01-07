@@ -160,6 +160,12 @@ exports.count_summary = async function(req, res){
     res.json({"usercount":usercount, "ordercount":ordercount, "salesamount":salesamount, "productscount":productscount})
 }
 
+exports.generate_report = async function(req, res){
+    let allorders = await Order.find().select('_id gst_tax shipping sub_total amount date_ordered order_status products')
+    
+    res.json(allorders)
+}
+
 exports.delete_admin = function(req, res){
     Admin.findOneAndRemove({_id:req.params.did})
     .then(result=> res.json({"result":"admin deteted","deletedadmin":result}))
