@@ -2,19 +2,19 @@ const express = require('express')
 const mongoose = require('mongoose')
 const db = require("./configs/config").mongoURI
 mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, ()=> console.log("connected to mongodb"))
-var backup = require('mongodb-backup');
-backup({
-        uri: db,
-        root: __dirname,
-        // write files into this dir
-        callback: function(err) {
-            if (err) {
-                console.error(err);
-            } else {
-                console.log('finish');
-            }
-        }
-    });
+// var backup = require('mongodb-backup');
+// backup({
+//         uri: db,
+//         root: __dirname,
+//         // write files into this dir
+//         callback: function(err) {
+//             if (err) {
+//                 console.error(err);
+//             } else {
+//                 console.log('finish');
+//             }
+//         }
+//     });
 const cors = require("cors")
 const app = express()
 const bodyParser = require("body-parser")
