@@ -84,6 +84,18 @@ size_4d : {
     type : String,
     default: "36x63"
 },
+available_2d : {
+    type : Number,
+    default : 1
+},
+available_3d : {
+    type : Number,
+    default : 1
+},
+available_4d : {
+    type : Number,
+    default : 1
+},
 covers_4d: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'phonecase4d'
