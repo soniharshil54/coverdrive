@@ -6,7 +6,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 
 
-exports.add_offer = function(req, res) {
+exports.add_offer_old = function(req, res) {
     const newOffer = new Offer(
         {
             _id: new mongoose.Types.ObjectId(),
@@ -16,6 +16,38 @@ exports.add_offer = function(req, res) {
             active_status: "1",
             expiry_date: req.body.expiry_date,
             termsnconditions: req.body.termsnconditions,
+            h_image : "noimage.png"
+        }
+    )
+    newOffer.save()
+        .then((result => {
+            console.log(result)
+            res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+        }))
+        .catch(err => {
+            console.log(err)
+            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+        })
+}
+
+exports.add_offer = function(req, res) {
+    const newOffer = new Offer(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            offer_name: req.body.offer_name,
+            offer_type: req.body.offer_type,
+            categories : req.body.categories,
+            code: req.body.code,
+            flat_discount: req.body.flat_discount,
+            freeshipping: req.body.freeshipping , 
+            firsttime_dis: req.body.firsttime_dis,
+            buy_product: req.body.buy_product,
+            get_product: req.body.get_product,
+            min_spend: req.body.min_spend,
+            max_spend: req.body.max_spend,
+            expiry_date: req.body.expiry_date,
+            termsnconditions: req.body.termsnconditions,
+            free_shipping_allow : req.body.free_shipping_allow,
             h_image : "noimage.png"
         }
     )
