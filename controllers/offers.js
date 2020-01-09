@@ -46,6 +46,7 @@ exports.add_offer = function(req, res) {
             min_spend: req.body.min_spend,
             max_spend: req.body.max_spend,
             expiry_date: req.body.expiry_date,
+            usage_limit: req.body.usage_limit,
             termsnconditions: req.body.termsnconditions,
             free_shipping_allow : req.body.free_shipping_allow,
             h_image : "noimage.png"
