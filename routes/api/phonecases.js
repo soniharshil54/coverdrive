@@ -142,6 +142,8 @@ const upload = multer({
 
   router.put('/editallphonecases', phonecase_controller.edit_all_phonecases)
 
+  router.put('/editall4dphonecases', phonecase_controller.edit_all_4d_phonecases)
+
   // GET request to get all users. 
   //router.post('/addcategory', product_controller.add_category);
  

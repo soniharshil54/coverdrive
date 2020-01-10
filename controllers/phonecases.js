@@ -346,6 +346,17 @@ exports.edit_all_phonecases = async function(req, res){
    res.json({"result":"done"})
 }
 
+exports.edit_all_4d_phonecases = async function(req, res){
+    console.log(req.body)
+    let editbody = {
+        slider_image : "cover4dn.jpg",
+        inner_image : "mask.png",
+    }
+    let phonecaseupdate = await Phonecase4d.updateMany({}, editbody)
+    console.log(phonecaseupdate)
+   res.json({"result":"done"})
+}
+
 exports.edit_company = function(req, res){
     console.log(req.body)
     console.log(req.params)
