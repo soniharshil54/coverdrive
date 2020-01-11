@@ -47,6 +47,12 @@ const OrderSchema = new Schema({
     sub_total: {
         type: Number
     },
+    coupon_amount: {
+        type: Number
+    },
+    coupon_used: {
+        type: String
+    },
     amount: {
         type: Number
     }

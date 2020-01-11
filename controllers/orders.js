@@ -136,7 +136,9 @@ exports.place_order = async function(req, res) {
             sub_total:req.body.subtotal,
             amount: req.body.amount,
             order_status: req.body.order_status ? req.body.order_status: "Processing",
-            payment_type: req.body.payment_type
+            payment_type: req.body.payment_type,
+            coupon_amount: req.body.coupon_amount,
+            coupon_used: req.body.coupon_used
         }
     )
     let newOrderRef  =  await  newOrder.save()

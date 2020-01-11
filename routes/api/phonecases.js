@@ -83,6 +83,59 @@ const upload = multer({
     )
 })
 
+
+router.put('/edit4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxCount: 1},{name: 'image_4d_cover', maxCount: 1}, {name: 'image_4d_mask', maxCount: 1}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.image_4d_slider){
+    imageData.image_header_2d = req.files.image_4d_slider[0].originalname
+  }
+  if(req.files.image_4d_cover){
+    imageData.image_mask_2d = req.files.image_4d_cover[0].originalname
+  }
+  if(req.files.image_4d_mask){
+    imageData.image_inner_2d = req.files.image_4d_mask[0].originalname
+  }
+  console.log("below data")
+  console.log(imageData)
+  Phonecase.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/add4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxCount: 1},{name: 'image_4d_cover', maxCount: 1}, {name: 'image_4d_mask', maxCount: 1}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.image_4d_slider){
+    imageData.image_header_2d = req.files.image_4d_slider[0].originalname
+  }
+  if(req.files.image_4d_cover){
+    imageData.image_mask_2d = req.files.image_4d_cover[0].originalname
+  }
+  if(req.files.image_4d_mask){
+    imageData.image_inner_2d = req.files.image_4d_mask[0].originalname
+  }
+  console.log("below data")
+  console.log(imageData)
+  Phonecase.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
   // GET request to get all users. 
   router.post('/addcompany', phonecase_controller.add_company);
 
