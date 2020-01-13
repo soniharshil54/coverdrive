@@ -3,9 +3,12 @@ const mongoose = require("mongoose")
 const User = require("../models/user")
 const Order = require("../models/order")
 const Cartproduct = require("../models/cartproduct")
+const Pincode = require("../models/pincode")
 const Ordercounter = require("../models/ordercounter")
 const Modelrequest = require("../models/modelrequest")
 const ObjectId = mongoose.Types.ObjectId
+
+
 
 
 exports.get_orders_with_data = async function(req, res){
@@ -143,6 +146,34 @@ exports.place_order = async function(req, res) {
     )
     let newOrderRef  =  await  newOrder.save()
     res.json({order:newOrderRef})
+}
+
+
+exports.post_pincodes = async function(req, res) {
+    const newPincode = new Pincode(
+        {
+            _id : new mongoose.Types.ObjectId(),
+            cod_available : req.body.pincodes
+        }
+    )
+    let newPincodeRef  =  await  newPincode.save()
+    res.json({pincode : newPincodeRef})
+}
+
+
+exports.get_pincodes = function(req, res){
+    Pincode.find()
+         .then(result=>res.json(result))
+         .catch(err=>res.json(err))
+}
+
+
+exports.update_pincodes = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Pincode.findOneAndUpdate({_id:"5e1c071ee806eb1970b3ce61"},req.body)
+    .then(result=> res.json({"result":"pincodes updated","updatedpincode":result}))
+    .catch(err=>res.status(404).json(err))
 }
 
 

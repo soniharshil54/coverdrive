@@ -64,6 +64,9 @@ const OfferSchema = new Schema({
         type: String,
         default: "100"
     },
+    usage_count : {
+        type: Number
+    },
     h_image: {
         type: String,
         required: true
