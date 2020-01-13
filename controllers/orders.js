@@ -171,7 +171,7 @@ exports.get_pincodes = function(req, res){
 exports.update_pincodes = function(req, res){
     console.log(req.body)
     console.log(req.params)
-    Pincode.findOneAndUpdate({_id:"5e1c071ee806eb1970b3ce61"},req.body)
+    Pincode.findOneAndUpdate({_id:"5e1c136af8a20910954994c7"},req.body)
     .then(result=> res.json({"result":"pincodes updated","updatedpincode":result}))
     .catch(err=>res.status(404).json(err))
 }
