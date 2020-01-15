@@ -38,6 +38,11 @@ const UserSchema = new Schema({
         type: String,
         required: true
     },
+    datestamp: {
+        type:Date,
+        default: Date.now,
+        required: true
+    },
     active: {
         type: Number,
         default: 1
