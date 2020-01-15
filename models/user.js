@@ -46,6 +46,10 @@ const UserSchema = new Schema({
     active: {
         type: Number,
         default: 1
+    },
+    firstordermade : {
+        type: Number,
+        default: 1
     }
 })
 

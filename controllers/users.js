@@ -144,7 +144,7 @@ exports.edit_user = function(req, res){
 }
 
 exports.edit_all_users = function(req, res){
-    User.updateMany({},{datestamp : Date.now()})
+    User.updateMany({},{firstordermade : 0})
     .then(result=> res.json({"result":"user updated","updateduser":result}))
     .catch(err=>res.status(404).json(err))
 }

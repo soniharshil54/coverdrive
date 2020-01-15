@@ -1,96 +1,59 @@
 {
-    "name": "john doe",
-    "contact": "8686868686",
-    "address": "vraj street",
-    "state": "gujarat",
-    "city": "surat",
-    "pincode":"395006",
-    "address_type":"home"
-}
-{
-    "products": [] ,
-    "user_id": ,
-    "payment_type": "cod"
-    "is_paid": optional (default 0),
-    "total_amount": "450",
-    "date_ordered": "24/12/2019",
-    "is_delivered": optional (default 0),
-    "date_delivered": optional (default none)
+    "cartproduct": {
+        "_id": "5e1ef2e3e24c9d102b60cb86",
+        "product_name": "wooden keychain",
+        "cover_type": "2d",
+        "image": "na",
+        "cropped_image": "na",
+        "print_name": "na",
+        "size": "na",
+        "subtotal": "300",
+        "quantity": "1",
+        "__v": 0
+    }
 }
 
 {
-    offer_name: "Phone case - Buy one get one free",
-    product_name : "phonecase",
-    code: "BOGO",
-    expiry_date: "01-12-2019",
-    termsnconditions: "Add two phone cases to cart and enter the coupon code BOGO at the time of check out,
-            coupon is valid only for prepaid orders"
+    "cartproduct": {
+        "_id": "5e1ef30de24c9d102b60cb87",
+        "product_name": "wooden keychain 2",
+        "cover_type": "2d",
+        "image": "na",
+        "cropped_image": "na",
+        "print_name": "na",
+        "size": "na",
+        "subtotal": "200",
+        "quantity": "1",
+        "__v": 0
+    }
 }
 
 {
-    "name": "jon doe",
-    "email": "jon@yahoo.com",
-    "contact": "8886868686",
-    "password": "soka3360"
+    "cartproduct": {
+        "_id": "5e1ef342e24c9d102b60cb88",
+        "product_name": "phonecover 2",
+        "cover_type": "2d",
+        "image": "na",
+        "cropped_image": "na",
+        "print_name": "na",
+        "size": "na",
+        "subtotal": "200",
+        "quantity": "1",
+        "__v": 0
+    }
 }
 
 {
-    "name":"phonecover",
-    "category": [
-        {
-            "model":"samsung",
-            "subcategory": ["m30", "m50", "j7", "j2"],
-            "price":120,
-            "availability_status": 1
-        },
-        {
-            "model":"oppo",
-            "subcategory": ["a5", "a7"],
-            "price":120,
-            "availability_status": 1
-        },
-        {
-            "model":"xiomi",
-            "subcategory": ["redmi8", "redmi note7", "note6", "redmi6a"],
-            "price":120,
-            "availability_status": 1
-        },
-        {
-            "model":"vivo",
-            "subcategory": ["v5", "v7", "v11"],
-            "price":120,
-            "availability_status": 1
-        }
-    ]
-}
-
-{
-    _id: new mongoose.Types.ObjectId(),
-    name:"phonecover",
-    category: [
-        {
-            model:"samsung",
-            subcategory: ["m30", "m50", "j7", "j2"],
-            price:120,
-            availability_status: 1
-        },
-        {
-            model:"oppo",
-            subcategory: ["a5", "a7"],
-            price:120,
-            availability_status: 1
-        },
-        {
-            model:xiomi,
-            subcategory: ["redmi8", "redmi note7", "note6", "redmi6a"],
-            price:120,
-            availability_status: 1
-        },
-        {
-            model:"vivo",
-            subcategory: ["v5", "v7", "v11"],
-            price:120,
-            availability_status: 1
-        }
-    ]
+    "cartproduct": {
+        "_id": "5e1ef3f9e24c9d102b60cb89",
+        "product_name": "keychain 3",
+        "cover_type": "2d",
+        "image": "na",
+        "cropped_image": "na",
+        "print_name": "na",
+        "size": "na",
+        "subtotal": "250",
+        "quantity": "1",
+        "__v": 0
+    }
 }

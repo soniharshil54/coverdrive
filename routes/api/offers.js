@@ -58,6 +58,8 @@ router.get('/getofferbyid/:oid', offer_controller.get_offer)
 
 router.get('/getalloffers', offer_controller.get_all_offers)
 
+router.post('/applycoupon', offer_controller.apply_coupon)
+
  // GET request to get all users. 
  router.post('/addoffer', offer_controller.add_offer);
 

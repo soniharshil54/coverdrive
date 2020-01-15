@@ -10,6 +10,9 @@ const CartproductSchema = new Schema({
     product_id : {
         type: String
     },
+    category : {
+        type: String
+    },
     company_id : String,
     model_id : String,
     cover_type : String,

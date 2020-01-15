@@ -50,6 +50,7 @@ const storage = multer.diskStorage({
             print_name : req.body.print_name ? req.body.print_name : "na",
             size: req.body.size ? req.body.size : "na",
             subtotal: req.body.subtotal,
+            category: req.body.category,
             quantity : req.body.quantity ? req.body.quantity : 1
         }
     )
@@ -75,6 +76,7 @@ const storage = multer.diskStorage({
             print_name : req.body.print_name ? req.body.print_name : "na",
             size: req.body.size ? req.body.size : "na",
             subtotal: req.body.subtotal,
+            category: req.body.category,
             quantity : req.body.quantity ? req.body.quantity : 1
         }
     )
@@ -99,6 +101,7 @@ const storage = multer.diskStorage({
 //router.get('/neworderid', order_controller.get_next_order_id)
 
 router.post('/addproducttocartold', order_controller.add_product_to_cart)
+
 
 router.post('/addordercounter', order_controller.add_order_counter)
 //GET request to get all users. 
