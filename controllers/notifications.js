@@ -7,7 +7,7 @@ let fetch = require('node-fetch');
 exports.post_sms_data = function(req, res) {
     let mobilenumber = "9426823617"
     let smscontent = "hello"
-    fetch(`http://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=TESTIN&route=4`, { mode: 'no-cors'})
+    fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=9426823617&country=91&message=Hello&sender=TESTIN&route=4`, { mode: 'no-cors'})
       .then(response => {       
         console.log(response)
         res.status(200).json({user:response})
