@@ -64,4 +64,6 @@ app.use("/api/notification",notificationRoutes)
 
 
 const port = process.env.PORT || 5600;
-app.listen(port,()=>console.log(`server connected on localhost:${port}`));
+var server = app.listen(port,"95.216.71.108",()=>{
+    console.log(server.address().address)
+    console.log(`server connected on localhost:${port}`)});
