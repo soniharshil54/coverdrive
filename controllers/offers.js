@@ -104,7 +104,7 @@ exports.apply_coupon = async function(req, res){
         let totalAmount = subamount + gst + shipping + codcharges
         let discount = 0
         if(freeshippingallow){
-             discount = offer.flat_discount + shipping
+             discount = parseInt(offer.flat_discount) + parseInt(shipping)
         }
         else{
               discount = offer.flat_discount
@@ -122,7 +122,7 @@ exports.apply_coupon = async function(req, res){
         let discount = 0
         if(!isusedbyuser){
             if(freeshippingallow){
-                discount = offer.firsttime_dis + shipping
+                discount = parseInt(offer.firsttime_dis) + parseInt(shipping)
            }
            else{
             discount = offer.firsttime_dis
