@@ -83,6 +83,8 @@ exports.apply_coupon = async function(req, res){
     let user = await User.findOne({_id:userid})
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
     let totalAmount = subamount + gst + shipping + codcharges
+    let maxSpend = offer.max_spend
+    let minSpend = offer.min_spend
     if(totalAmount >= maxSpend || totalAmount <= minSpend){
         console.log("cart amount not sufficient for the offer")
         res.json({"message":"cart amount not sufficient for the offer"})
