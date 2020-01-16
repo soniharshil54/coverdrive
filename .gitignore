@@ -293,6 +293,7 @@ ClientBin/
 *.publishsettings
 node_modules/
 coverdrive/
+uploads/
 orleans.codegen.cs
 
 # RIA/Silverlight projects

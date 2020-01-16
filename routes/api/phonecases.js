@@ -110,17 +110,23 @@ router.put('/edit4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxC
     )
 })
 
-router.put('/add4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxCount: 1},{name: 'image_4d_cover', maxCount: 1}, {name: 'image_4d_mask', maxCount: 1}]),(req,res,next) => {
+router.put('/add4dphonecase/:mid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
-  if(req.files.image_4d_slider){
-    imageData.image_header_2d = req.files.image_4d_slider[0].originalname
+  if(req.files.slider_image){
+    imageData.slider_image = req.files.slider_image[0].originalname
   }
-  if(req.files.image_4d_cover){
-    imageData.image_mask_2d = req.files.image_4d_cover[0].originalname
+  if(req.files.header_image){
+    imageData.header_image = req.files.header_image[0].originalname
   }
-  if(req.files.image_4d_mask){
-    imageData.image_inner_2d = req.files.image_4d_mask[0].originalname
+  if(req.files.png_image){
+    imageData.png_image = req.files.png_image[0].originalname
+  }
+  if(req.files.inner_image){
+    imageData.inner_image = req.files.inner_image[0].originalname
+  }
+  if(req.files.mask_image){
+    imageData.mask_image = req.files.mask_image[0].originalname
   }
   console.log("below data")
   console.log(imageData)
@@ -128,6 +134,38 @@ router.put('/add4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxCo
   .then(result=> {
     //console.log(result)
     res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
+router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
+  console.log(req.files)
+  let imageData = {}
+  if(req.files.slider_image){
+    imageData.slider_image = req.files.slider_image[0].originalname
+  }
+  if(req.files.header_image){
+    imageData.header_image = req.files.header_image[0].originalname
+  }
+  if(req.files.png_image){
+    imageData.png_image = req.files.png_image[0].originalname
+  }
+  if(req.files.inner_image){
+    imageData.inner_image = req.files.inner_image[0].originalname
+  }
+  if(req.files.mask_image){
+    imageData.mask_image = req.files.mask_image[0].originalname
+  }
+  console.log("below data")
+  console.log(imageData)
+  Phonecase4d.updateMany({},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"4d phonecase updated","updated4dcover":result})
   })
   .catch(err=>{
     console.log(err)

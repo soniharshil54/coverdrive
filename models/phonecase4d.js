@@ -20,10 +20,22 @@ const Phonecase4dSchema = new Schema({
     type: String,
     required: true
   },
-  inner_image : {
+  header_image : {
     type: String,
     required: true
   },
+  png_image : {
+    type: String,
+    require: true
+  },
+  inner_image : {
+    type: String,
+    require: true
+  },
+  mask_image : {
+    type: String,
+    required: true
+  }
 })
 
 module.exports = Phonecase4d = mongoose.model('phonecase4d',Phonecase4dSchema)
