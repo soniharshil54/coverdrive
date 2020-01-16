@@ -168,6 +168,9 @@ exports.apply_coupon = async function(req, res){
         let todiscountcartpros = []
         console.log("qualcatsarray")
         console.log(qualcatsarray)
+        if(Array.isArray(qualcatsarray) && qualcatsarray.length){
+            res.status(201).json({"message":"offer doesnt match the quantity"})
+        }
         for(i=0; i < qualcatsarray.length; i++){
             let refcartproject = cartProducts.filter(cartpro => cartpro.category === qualcatsarray[i])
             let returncartproduct = refcartproject.reduce(function(prev, curr) {
@@ -176,7 +179,7 @@ exports.apply_coupon = async function(req, res){
             todiscountcartpros.push(returncartproduct)
         }
         let discountamount = todiscountcartpros.map(pro => pro.subtotal).reduce((a, b) => parseInt(a) + parseInt(b), 0)
-        if(freeshippingallow){
+        if(freeshippingallow && discountamount){
             discount = parseInt(discountamount) + parseInt(shipping)
        }
        else{
