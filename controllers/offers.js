@@ -84,6 +84,7 @@ exports.apply_coupon = async function(req, res){
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
     let totalAmount = subamount + gst + shipping + codcharges
     let maxSpend = offer.max_spend
+    let only_online = offer.only_online
     let minSpend = offer.min_spend
     if(totalAmount >= maxSpend || totalAmount <= minSpend){
         console.log("cart amount not sufficient for the offer")
@@ -182,7 +183,8 @@ exports.apply_coupon = async function(req, res){
         discount = discountamount
        }
         let responseBody = {
-            discount: discount
+            discount: discount,
+            only_online: only_online
         }
         res.status(200).json({result:responseBody})
     }
