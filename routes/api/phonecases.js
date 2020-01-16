@@ -145,24 +145,24 @@ router.put('/add4dphonecase/:mid',upload.fields([{name: 'slider_image', maxCount
 router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
-  if(req.files.slider_image){
-    imageData.slider_image = req.files.slider_image[0].originalname
-  }
-  if(req.files.header_image){
-    imageData.header_image = req.files.header_image[0].originalname
-  }
-  if(req.files.png_image){
-    imageData.png_image = req.files.png_image[0].originalname
-  }
-  if(req.files.inner_image){
-    imageData.inner_image = req.files.inner_image[0].originalname
-  }
-  if(req.files.mask_image){
-    imageData.mask_image = req.files.mask_image[0].originalname
-  }
+  // if(req.files.slider_image){
+  //   imageData.slider_image = req.files.slider_image[0].originalname
+  // }
+  // if(req.files.header_image){
+  //   imageData.header_image = req.files.header_image[0].originalname
+  // }
+  // if(req.files.png_image){
+  //   imageData.png_image = req.files.png_image[0].originalname
+  // }
+  // if(req.files.inner_image){
+  //   imageData.inner_image = req.files.inner_image[0].originalname
+  // }
+  // if(req.files.mask_image){
+  //   imageData.mask_image = req.files.mask_image[0].originalname
+  // }
   console.log("below data")
   console.log(imageData)
-  Phonecase4d.updateMany({},imageData)
+  Phonecase4d.updateMany({},req.body)
   .then(result=> {
     //console.log(result)
     res.json({"result":"4d phonecase updated","updated4dcover":result})
