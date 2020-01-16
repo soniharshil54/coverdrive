@@ -49,7 +49,7 @@ const UserSchema = new Schema({
     },
     firstordermade : {
         type: Number,
-        default: 1
+        default: 0
     }
 })
 

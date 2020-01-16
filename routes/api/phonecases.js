@@ -110,9 +110,12 @@ router.put('/edit4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxC
     )
 })
 
-router.put('/add4dphonecase/:mid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
+router.put('/add4dphonecase/:mid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),async function(req,res,next){
   console.log(req.files)
-  let imageData = {}
+  let imageData = {
+    model_name : req.body.model_name,
+    company : req.body.company
+  }
   if(req.files.slider_image){
     imageData.slider_image = req.files.slider_image[0].originalname
   }
@@ -128,18 +131,9 @@ router.put('/add4dphonecase/:mid',upload.fields([{name: 'slider_image', maxCount
   if(req.files.mask_image){
     imageData.mask_image = req.files.mask_image[0].originalname
   }
+  const newPhonecase4d = new Phonecase4d(imageData)
   console.log("below data")
   console.log(imageData)
-  Phonecase.findOneAndUpdate({_id:req.params.pid},imageData)
-  .then(result=> {
-    //console.log(result)
-    res.json({"result":"keychain image updated","updatedkeychain":result})
-  })
-  .catch(err=>{
-    console.log(err)
-    res.status(404).json(err)
-  }
-    )
 })
 
 router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {

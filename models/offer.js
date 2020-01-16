@@ -70,6 +70,10 @@ const OfferSchema = new Schema({
     h_image: {
         type: String,
         required: true
+    },
+    only_online: {
+        type: Number,
+        default: 0
     }
 })
 
