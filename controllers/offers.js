@@ -176,7 +176,7 @@ exports.apply_coupon = async function(req, res){
         }
         let discountamount = todiscountcartpros.map(pro => pro.subtotal).reduce((a, b) => parseInt(a) + parseInt(b), 0)
         if(freeshippingallow){
-            discount = discountamount + shipping
+            discount = parseInt(discountamount) + parseInt(shipping)
        }
        else{
         discount = discountamount
