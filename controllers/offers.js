@@ -65,6 +65,7 @@ exports.add_offer = function(req, res) {
 
 
 exports.apply_coupon = async function(req, res){
+    console.log("apply coupon called")
     var idsArrayf = req.body.cartproducts;
     var userid = req.body.userid
     var subamount = req.body.subamount
