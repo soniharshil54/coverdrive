@@ -50,6 +50,7 @@ const storage = multer.diskStorage({
             print_name : req.body.print_name ? req.body.print_name : "na",
             size: req.body.size ? req.body.size : "na",
             subtotal: req.body.subtotal,
+            total: req.body.total,
             category: req.body.category,
             quantity : req.body.quantity ? req.body.quantity : 1
         }
