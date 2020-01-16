@@ -333,6 +333,14 @@ exports.edit_phonecase_status = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.edit_4d_phonecase_status = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Phonecase4d.findOneAndUpdate({_id:req.params.eid},req.body)
+    .then(result=> res.json({"result":"4d phonecase updated","updated4dphonecase":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
 exports.edit_all_phonecases = async function(req, res){
     console.log(req.body)
     let editbody = {

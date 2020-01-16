@@ -227,6 +227,8 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.put('/editphonecasestatus/:eid', phonecase_controller.edit_phonecase_status)
 
+  router.put('/edit4dphonecasestatus/:eid', phonecase_controller.edit_4d_phonecase_status)
+
   router.put('/editcompany/:cid', phonecase_controller.edit_company)
 
   router.put('/editcompanyname/:cid', phonecase_controller.edit_company_name)
