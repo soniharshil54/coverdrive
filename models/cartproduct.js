@@ -27,7 +27,8 @@ const CartproductSchema = new Schema({
     print_name : String,
     size: String,
     quantity : String,
-    subtotal : String
+    subtotal : String,
+    total: String
 })
 
 module.exports = Cartproduct = mongoose.model('cartproduct',CartproductSchema)

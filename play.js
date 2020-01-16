@@ -31,3 +31,8 @@ function getqualifiedcart(occurancep, totalbuygetp){
 console.log(qualifiedcart)  
 console.log(occurance)  
 console.log(filteredcart)
+
+const names = ['John', 'Paul', 'George', 'Ringo', 'John'];
+
+let unique = [...new Set(names)];
+console.log(unique);

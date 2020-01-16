@@ -81,6 +81,12 @@ exports.apply_coupon = async function(req, res){
     let freeshippingallow = offer.free_shipping_allow === 1 ? true : false
     let user = await User.findOne({_id:userid})
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
+    let totalAmount = subamount + gst + shipping + codcharges
+    if(totalAmount >= maxSpend || totalAmount <= minSpend){
+        console.log("cart amount not sufficient for the offer")
+        res.json({"message":"cart amount not sufficient for the offer"})
+    }
+    else {
     if(offerType === "freeshipping"){
         console.log("free shipping")
         let responseBody = {
@@ -88,25 +94,23 @@ exports.apply_coupon = async function(req, res){
             discount : shipping,
             shipping : 0
         }
+        res.status(200).json({result:responseBody})
     }
     else if(offerType === "flatdis"){
         console.log("in flatdis")
         let totalAmount = subamount + gst + shipping + codcharges
         let discount = 0
-        if( totalAmount <= maxSpend && totalAmount >= minSpend ){
-            if(freeshippingallow){
-                discount = offer.flat_discount + shipping
-            }
-            else{
-                discount = offer.flat_discount
-            }
-            let responseBody = {
-                subamount, gst, codcharges,shipping,
-                discount
-            }
+        if(freeshippingallow){
+             discount = offer.flat_discount + shipping
         }
-        
-
+        else{
+              discount = offer.flat_discount
+        }
+        let responseBody = {
+            subamount, gst, codcharges,shipping,
+            discount
+        }
+        res.status(200).json({result:responseBody})
     }
     else if(offerType === "firsttime"){
         console.log("in firsttim")
@@ -114,37 +118,52 @@ exports.apply_coupon = async function(req, res){
         let isusedbyuser = user.firstordermade ? true : false
         let discount = 0
         if(!isusedbyuser){
-            if( totalAmount <= maxSpend && totalAmount >= minSpend ){
-                discount = offer.freeshipping
-            }
-            else{
-                console.log("minspend, maxspend failed")
-            }
+            if(freeshippingallow){
+                discount = offer.firsttime_dis + shipping
+           }
+           else{
+            discount = offer.firsttime_dis
+           }
+            discount = offer.firsttime_dis
             let responseBody = {
                 subamount, gst, codcharges,shipping,
                 discount
             }
+            res.status(200).json({result:responseBody})
         }
         else{
             console.log("not a first order")
+            res.status(201).json({"message":"not a first order"})
         }
     }
     else if(offerType === "bogo"){
         console.log("in bogo")
-        let buyref = offer.buy_product
-        console.log("buyref", buyref)
-        let getref = offer.get_product
-        console.log("getref", buyref) 
-        let totalbuyget = parseInt(buyref) + parseInt(getref)
-        console.log("totalbuyget", buyref)
+        let discount = 0
+      //  let buyref = offer.buy_product
+     //   console.log("buyref", buyref)
+     //   let getref = offer.get_product
+     //   console.log("getref", getref) 
+       // let totalbuyget = parseInt(buyref) + parseInt(getref)
+       let totalbuyget = 2
+        console.log("totalbuyget", totalbuyget)
         let uniquecartProducts = new Set(cartProducts)
+        let withquantitiesmult = cartProducts.filter(product => {
+            console.log(product.quantity)
+            return parseInt(product.quantity) > 1
+            
+        }).map(productcat => productcat.category)
+        console.log(withquantitiesmult)
         let categoriesenabled = offer.categories
         let categoriesincart = cartProducts.map(cartproduct => cartproduct.category)
         let filteredcart = categoriesincart.filter(f => categoriesenabled.includes(f));
         var occurance = getOccurance(filteredcart)
         let qualifiedcats = getqualifiedcart(occurance, totalbuyget)
-        let qualcatsarray = Object.keys(qualifiedcats)
+        let qualcatsarrayref = Object.keys(qualifiedcats)
+        let qualcatsarrayref2 = qualcatsarrayref.concat(withquantitiesmult);
+        let qualcatsarray = [...new Set(qualcatsarrayref2)]
         let todiscountcartpros = []
+        console.log("qualcatsarray")
+        console.log(qualcatsarray)
         for(i=0; i < qualcatsarray.length; i++){
             let refcartproject = cartProducts.filter(cartpro => cartpro.category === qualcatsarray[i])
             let returncartproduct = refcartproject.reduce(function(prev, curr) {
@@ -153,28 +172,22 @@ exports.apply_coupon = async function(req, res){
             todiscountcartpros.push(returncartproduct)
         }
         let discountamount = todiscountcartpros.map(pro => pro.subtotal).reduce((a, b) => parseInt(a) + parseInt(b), 0)
+        if(freeshippingallow){
+            discount = discountamount + shipping
+       }
+       else{
+        discount = discountamount
+       }
         let responseBody = {
-            discount: discountamount
+            discount: discount
         }
-        console.log("cartProducts")
-        console.log(cartProducts)
-        console.log("categoriesenabled")
-        console.log(categoriesenabled)
-        console.log("categoriesincart")
-        console.log(categoriesincart)
-        console.log("filteredcart")
-        console.log(filteredcart)
-        console.log("occurance")
-        console.log(occurance)
-        console.log("qualifiedcats")
-        console.log(qualifiedcats)
-        console.log("todiscountcartpros")  
-        console.log(todiscountcartpros)  
-        res.json({result:responseBody})
+        res.status(200).json({result:responseBody})
     }
     else{
         console.log("no offers matched")
+        res.status(201).json({"message":"no offers matched"})
     }
+}
    // console.log(cartProducts)
 }
 
