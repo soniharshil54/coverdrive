@@ -170,6 +170,7 @@ exports.apply_coupon = async function(req, res){
         console.log(qualcatsarray)
         if(Array.isArray(qualcatsarray) && qualcatsarray.length){
             res.status(201).json({"message":"offer doesnt match the quantity"})
+            return
         }
         for(i=0; i < qualcatsarray.length; i++){
             let refcartproject = cartProducts.filter(cartpro => cartpro.category === qualcatsarray[i])
