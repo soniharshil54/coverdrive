@@ -37,7 +37,7 @@ const Phonecase4dSchema = new Schema({
     required: true
   },
   active_status : {
-    type: String,
+    type: Number,
     default: 1
   }
 })
