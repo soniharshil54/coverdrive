@@ -35,6 +35,10 @@ const Phonecase4dSchema = new Schema({
   mask_image : {
     type: String,
     required: true
+  },
+  active_status : {
+    type: String,
+    default: 1
   }
 })
 
