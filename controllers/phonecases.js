@@ -416,6 +416,18 @@ Phonecase.deleteMany({'_id':{'$in': usersDelete}},function(){
 });
 }
 
+exports.delete_4d_phonecases = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Phonecase4d.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
 exports.delete_companies = function(req, res){
     var idsArrayf = req.body.todeleteids;
     var companiesDelete = [];

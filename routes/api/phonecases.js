@@ -228,6 +228,8 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.delete('/deletephonecase', phonecase_controller.delete_phonecases)
 
+  router.delete('/delete4dphonecase', phonecase_controller.delete_4d_phonecases)
+
   router.delete('/deletecompany', phonecase_controller.delete_companies)
 
   router.put('/editphonecase/:eid', phonecase_controller.edit_phonecase)
