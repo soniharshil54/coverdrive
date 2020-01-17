@@ -110,7 +110,7 @@ router.put('/edit4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxC
     )
 })
 
-router.put('/add4dphonecase/:mid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
+router.put('/add4dphonecaseimages/:pid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
   if(req.files.slider_image){
@@ -214,6 +214,8 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
   // router.get('/getmodelsbycompany3/:company', phonecase_controller.get_models_by_company_3)
 
   router.post('/addphonecase', phonecase_controller.add_phonecase);
+
+  //router.post('/addphonecase', phonecase_controller.add_phonecase);
 
   router.post('/add4dphonecase/:modelid', phonecase_controller.add_4d_phonecase);
 

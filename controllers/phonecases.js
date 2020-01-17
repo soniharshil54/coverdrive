@@ -254,10 +254,7 @@ exports.add_4d_phonecase = async function(req, res){
         {
             _id: new mongoose.Types.ObjectId(),
             model_name: req.body.model_name,
-            model_id: mid,
-            company: req.body.company,
-            slider_image: "noimage.png",
-            inner_image: "noimage.png"
+            company: req.body.company
         }
     )
     let cover_id = await newPhonecase4d.save()
@@ -276,7 +273,7 @@ exports.add_4d_phonecase = async function(req, res){
     let phonemodeladd = await Phonecase.findOneAndUpdate({_id:req.params.modelid},cover_data)
 
     console.log(phonemodeladd)
-    res.json({"oper":"done"})
+    res.json({result:cover_id})
     
 }
 
