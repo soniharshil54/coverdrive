@@ -130,7 +130,7 @@ exports.apply_coupon = async function(req, res){
     else if(offerType === "firsttime"){
         console.log("in firsttim")
         let totalAmount = subamount + gst + shipping + codcharges
-        let isusedbyuser = user.firstordermade ? true : false
+        let isusedbyuser = user.firstordermade === 1 ? true : false
         let discount = 0
         if(!isusedbyuser){
             if(freeshippingallow){
