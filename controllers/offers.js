@@ -183,7 +183,7 @@ exports.apply_coupon = async function(req, res){
         let todiscountcartpros = []
         console.log("qualcatsarray")
         console.log(qualcatsarray)
-        if(Array.isArray(qualcatsarray) && qualcatsarray.length){
+        if(Array.isArray(qualcatsarray) && qualcatsarray.length === 0){
             let resultRes = {
                 "status":0,
                 "message":"offer doesnt match the quantity"
