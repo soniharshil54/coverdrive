@@ -73,6 +73,7 @@ exports.apply_coupon = async function(req, res){
     var shipping = req.body.shipping
     var codcharges = req.body.codcharges
     var couponCode = req.body.code
+    var codeMessage = `Coupon ${couponCode} successfully applied.`
     var productsCart = [];
     idsArrayf.forEach(function(item){     
     productsCart.push(new ObjectId(item));
@@ -99,6 +100,7 @@ exports.apply_coupon = async function(req, res){
         console.log("free shipping")
         let responseBody = {
             status : 1,
+            message: codeMessage,
             discount : shipping,
             shipping : 0
         }
@@ -118,6 +120,7 @@ exports.apply_coupon = async function(req, res){
         }
         let responseBody = {
             status : 1,
+            message: codeMessage,
             shipping,
             discount
         }
@@ -139,6 +142,7 @@ exports.apply_coupon = async function(req, res){
            }
             let responseBody = {
                 status : 1,
+                message: codeMessage,
                 shipping,
                 discount
             }
@@ -208,6 +212,7 @@ exports.apply_coupon = async function(req, res){
        }
         let responseBody = {
             status : 1,
+            message: codeMessage,
             discount: discount,
             only_online: only_online,
             shipping: shipping
