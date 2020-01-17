@@ -268,7 +268,11 @@ exports.add_order_counter = async function(req, res) {
     res.json({"cartproduct": cartproduct})
 }
 
-
+exports.edit_all_orders = function(req, res){
+    Order.updateMany({},{coupon_amount : 0})
+    .then(result=> res.json({"result":"user updated","updateduser":result}))
+    .catch(err=>res.status(404).json(err))
+}
 
 
 

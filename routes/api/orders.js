@@ -105,6 +105,7 @@ const storage = multer.diskStorage({
 router.post('/addproducttocartold', order_controller.add_product_to_cart)
 
 
+
 router.post('/addordercounter', order_controller.add_order_counter)
 //GET request to get all users. 
 router.post('/placeorder', order_controller.place_order);
@@ -114,6 +115,8 @@ router.post('/postpincodes', order_controller.post_pincodes);
 router.get('/getpincodes', order_controller.get_pincodes);
 
 router.put('/updatepincodes', order_controller.update_pincodes);
+
+router.put('/updateallorders', order_controller.edit_all_orders);
 
 router.post('/placemodelrequest', order_controller.place_model_request);
 
