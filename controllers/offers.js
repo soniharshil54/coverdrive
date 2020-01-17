@@ -88,7 +88,11 @@ exports.apply_coupon = async function(req, res){
     let minSpend = offer.min_spend
     if(totalAmount >= maxSpend || totalAmount <= minSpend){
         console.log("cart amount not sufficient for the offer")
-        res.json({"message":"cart amount not sufficient for the offer"})
+        let resultRes = {
+            "status":"0",
+            "message":"Cart amount is not sufficient for this coupon"
+        }
+        res.status(201).json({result:resultRes})
     }
     else {
     if(offerType === "freeshipping"){
@@ -137,7 +141,11 @@ exports.apply_coupon = async function(req, res){
         }
         else{
             console.log("not a first order")
-            res.status(201).json({"message":"not a first order"})
+            let resultRes = {
+                "status":"0",
+                "message":"Coupon only valid for the first order"
+            }
+            res.status(201).json({result:resultRes})
         }
     }
     else if(offerType === "bogo"){
@@ -198,7 +206,11 @@ exports.apply_coupon = async function(req, res){
     }
     else{
         console.log("no offers matched")
-        res.status(201).json({"message":"no offers matched"})
+        let resultRes = {
+            "status":"0",
+            "message":"Coupon is not valid"
+        }
+        res.status(201).json({result:resultRes})
     }
 }
    // console.log(cartProducts)
