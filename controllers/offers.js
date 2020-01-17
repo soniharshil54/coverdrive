@@ -147,7 +147,7 @@ exports.apply_coupon = async function(req, res){
                 discount
             }
             await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
-            await User.findOneAndUpdate({_id:req.body.userid},{firstordermade : 1})
+            
             res.status(200).json({result:responseBody})
         }
         else{
