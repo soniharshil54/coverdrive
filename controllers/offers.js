@@ -89,7 +89,7 @@ exports.apply_coupon = async function(req, res){
     if(totalAmount >= maxSpend || totalAmount <= minSpend){
         console.log("cart amount not sufficient for the offer")
         let resultRes = {
-            "status":"0",
+            "status":0,
             "message":"Cart amount is not sufficient for this coupon"
         }
         res.status(201).json({result:resultRes})
@@ -142,13 +142,14 @@ exports.apply_coupon = async function(req, res){
                 shipping,
                 discount
             }
-            User.findOneAndUpdate({_id:req.body.userid},{firstordermade : 1})
+            await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
+            await User.findOneAndUpdate({_id:req.body.userid},{firstordermade : 1})
             res.status(200).json({result:responseBody})
         }
         else{
             console.log("not a first order")
             let resultRes = {
-                "status":"0",
+                "status":0,
                 "message":"Coupon only valid for the first order"
             }
             res.status(201).json({result:resultRes})
@@ -184,7 +185,7 @@ exports.apply_coupon = async function(req, res){
         console.log(qualcatsarray)
         if(Array.isArray(qualcatsarray) && qualcatsarray.length){
             let resultRes = {
-                "status":"0",
+                "status":0,
                 "message":"offer doesnt match the quantity"
             }
             res.status(201).json({result:resultRes})
@@ -211,12 +212,13 @@ exports.apply_coupon = async function(req, res){
             only_online: only_online,
             shipping: shipping
         }
+        await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
         res.status(200).json({result:responseBody})
     }
     else{
         console.log("no offers matched")
         let resultRes = {
-            "status":"0",
+            "status":0,
             "message":"Coupon is not valid"
         }
         res.status(201).json({result:resultRes})
