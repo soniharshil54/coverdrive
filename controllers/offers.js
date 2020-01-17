@@ -98,7 +98,7 @@ exports.apply_coupon = async function(req, res){
     if(offerType === "freeshipping"){
         console.log("free shipping")
         let responseBody = {
-            subamount, gst,codcharges,
+            status : 1,
             discount : shipping,
             shipping : 0
         }
@@ -106,16 +106,18 @@ exports.apply_coupon = async function(req, res){
     }
     else if(offerType === "flatdis"){
         console.log("in flatdis")
-        let totalAmount = subamount + gst + shipping + codcharges
+       // let totalAmount = subamount + gst + shipping + codcharges
         let discount = 0
         if(freeshippingallow){
-             discount = parseInt(offer.flat_discount) + parseInt(shipping)
+             discount = parseInt(offer.flat_discount) + parseInt(shipping),
+             shipping = 0
         }
         else{
               discount = offer.flat_discount
         }
         let responseBody = {
-            subamount, gst, codcharges,shipping,
+            status : 1,
+            shipping,
             discount
         }
         res.status(200).json({result:responseBody})
@@ -128,13 +130,15 @@ exports.apply_coupon = async function(req, res){
         if(!isusedbyuser){
             if(freeshippingallow){
                 discount = parseInt(offer.firsttime_dis) + parseInt(shipping)
+                shipping = 0
            }
            else{
             discount = offer.firsttime_dis
            }
             discount = offer.firsttime_dis
             let responseBody = {
-                subamount, gst, codcharges,shipping,
+                status : 1,
+                shipping,
                 discount
             }
             res.status(200).json({result:responseBody})
@@ -194,13 +198,15 @@ exports.apply_coupon = async function(req, res){
         let discountamount = todiscountcartpros.map(pro => pro.subtotal).reduce((a, b) => parseInt(a) + parseInt(b), 0)
         if(freeshippingallow && discountamount){
             discount = parseInt(discountamount) + parseInt(shipping)
+            shipping = 0
        }
        else{
         discount = discountamount
        }
         let responseBody = {
             discount: discount,
-            only_online: only_online
+            only_online: only_online,
+            shipping: shipping
         }
         res.status(200).json({result:responseBody})
     }
