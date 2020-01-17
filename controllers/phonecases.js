@@ -260,7 +260,12 @@ exports.add_4d_phonecase = async function(req, res){
         {
             _id: new mongoose.Types.ObjectId(),
             model_name: req.body.model_name,
-            company: req.body.company
+            company: req.body.company,
+            slider_image: "noimage.png",
+            inner_image: "noimage.png",
+            mask_image: "noimage.png",
+            png_image: "noimage.png",
+            header_image: "noimage.png"
         }
     )
     let cover_id = await newPhonecase4d.save()
