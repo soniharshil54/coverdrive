@@ -111,7 +111,8 @@ router.put('/edit4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxC
 })
 
 router.put('/add4dphonecaseimages/:pid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
-  console.log(req.files)
+  console.log("upload images 4d called")
+  //console.log(req.files)
   let imageData = {}
   if(req.files.slider_image){
     imageData.slider_image = req.files.slider_image[0].originalname

@@ -275,7 +275,7 @@ exports.add_4d_phonecase = async function(req, res){
     console.log("cover_id_mon")
     console.log(cover_id_mon)
     let phonemodel = await Phonecase.findOne({_id:req.params.modelid})
-    console.log(phonemodel)
+   // console.log(phonemodel)
     let covers_4d = phonemodel.covers_4d
     covers_4d.push(cover_id_mon)
     let cover_data = {
