@@ -82,7 +82,7 @@ exports.apply_coupon = async function(req, res){
     let freeshippingallow = offer.free_shipping_allow === 1 ? true : false
     let user = await User.findOne({_id:userid})
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
-    let totalAmount = subamount + gst + shipping + codcharges
+    let totalAmount = parseInt(subamount) + parseInt(gst) + parseInt(shipping) + parseInt(codcharges)
     let maxSpend = offer.max_spend
     let only_online = offer.only_online
     let minSpend = offer.min_spend
