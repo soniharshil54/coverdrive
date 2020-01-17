@@ -161,7 +161,7 @@ exports.count_summary = async function(req, res){
 }
 
 exports.generate_report = async function(req, res){
-    let allorders = await Order.find().select('_id gst_tax shipping sub_total amount date_ordered order_status products')
+    let allorders = await Order.find().select('_id gst_tax shipping sub_total amount date_ordered order_status products coupon_amount')
     
     res.json(allorders)
 }
