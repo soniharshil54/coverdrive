@@ -70,6 +70,12 @@ exports.get_all_phonecases = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_4d_phonecases = function(req, res){
+    Phonecase4d.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_phonecases_by_company = function(req, res){
     Phonecase.find({company: req.params.company})
     .then(result=>res.json(result))

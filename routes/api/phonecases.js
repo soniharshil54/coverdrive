@@ -189,6 +189,8 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.get('/getallphonecases', phonecase_controller.get_all_phonecases)
 
+  router.get('/getall4dphonecases', phonecase_controller.get_all_4d_phonecases)
+
   router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
 
   router.get('/get4dphonecasebyid/:id',phonecase_controller.get_4d_phonecase_by_id)
