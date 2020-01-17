@@ -102,6 +102,7 @@ exports.apply_coupon = async function(req, res){
             discount : shipping,
             shipping : 0
         }
+        await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
         res.status(200).json({result:responseBody})
     }
     else if(offerType === "flatdis"){
@@ -120,6 +121,7 @@ exports.apply_coupon = async function(req, res){
             shipping,
             discount
         }
+        await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
         res.status(200).json({result:responseBody})
     }
     else if(offerType === "firsttime"){
@@ -133,14 +135,14 @@ exports.apply_coupon = async function(req, res){
                 shipping = 0
            }
            else{
-            discount = offer.firsttime_dis
+            discount = parseInt(offer.firsttime_dis)
            }
-            discount = offer.firsttime_dis
             let responseBody = {
                 status : 1,
                 shipping,
                 discount
             }
+            User.findOneAndUpdate({_id:req.body.userid},{firstordermade : 1})
             res.status(200).json({result:responseBody})
         }
         else{
@@ -204,6 +206,7 @@ exports.apply_coupon = async function(req, res){
         discount = discountamount
        }
         let responseBody = {
+            status : 1,
             discount: discount,
             only_online: only_online,
             shipping: shipping
