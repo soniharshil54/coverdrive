@@ -146,7 +146,7 @@ exports.place_order = async function(req, res) {
     )
     let newOrderRef  =  await  newOrder.save()
     let userupdate = await User.findOneAndUpdate({_id:req.body.user_id},{firstordermade : 1})
-    console.log(userupdate)
+    //console.log(userupdate)
     res.json({order:newOrderRef})
 }
 
