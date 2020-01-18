@@ -4,7 +4,33 @@ const User = require("../models/user")
 const ObjectId = mongoose.Types.ObjectId
 const Smsdata = require("../models/smsdata")
 
-exports.register_user = function(req, res) {
+exports.register_user = async function(req, res) {
+    //let cuserid = mongoose.Types.ObjectId(req.body.user_id)
+    let contactstringref = req.body.contact
+    let contactstring = contactstringref.toString()
+    let isuser = await User.findOne({contact:contactstring})
+    // if(isuser){
+    //     res.json({status:0;message:"user already exists with this contact"})
+    // }
+    const newUser = new User(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            first_name: req.body.first_name,
+            last_name: req.body.last_name,
+            email_id:req.body.email_id,
+            contact: contactstring,
+            address: req.body.address,
+            state: req.body.state,
+            city: req.body.city,
+            address_type: req.body.address_type,
+            pincode: req.body.pincode
+        }
+    )
+     let user = await newUser.save()
+     res.status(200).header("Access-Control-Allow-Origin", "*").json({user:user})
+}
+
+exports.register_user_old = function(req, res) {
     //let cuserid = mongoose.Types.ObjectId(req.body.user_id)
     let contactstringref = req.body.contact
     let contactstring = contactstringref.toString()
