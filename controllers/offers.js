@@ -134,6 +134,7 @@ exports.apply_coupon = async function(req, res){
             shipping,
             discount
         }
+        await User.findOneAndUpdate({ _id: userid },{ $push: { code_used: offer._id } });
         await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
         res.status(200).json({result:responseBody})
     }
@@ -227,6 +228,7 @@ exports.apply_coupon = async function(req, res){
             only_online: only_online,
             shipping: shipping
         }
+        await User.findOneAndUpdate({ _id: userid },{ $push: { code_used: offer._id } });
         await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
         res.status(200).json({result:responseBody})
     }
