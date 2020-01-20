@@ -83,7 +83,7 @@ exports.apply_coupon = async function(req, res){
     let offerType = offer.offer_type
     let freeshippingallow = offer.free_shipping_allow === 1 ? true : false
     let user = await User.findOne({_id:userid})
-    let isofferusedbyuser = await User.findOne({_id:userid ,code_used:couponCode})
+    let isofferusedbyuser = await User.findOne({_id:userid ,code_used:offer._id})
     if(isofferusedbyuser){
         let resultRes = {
             "status":0,
