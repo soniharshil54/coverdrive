@@ -50,7 +50,8 @@ const UserSchema = new Schema({
     firstordermade : {
         type: Number,
         default: 0
-    }
+    },
+    code_used : [String]
 })
 
 module.exports = User = mongoose.model('user',UserSchema)

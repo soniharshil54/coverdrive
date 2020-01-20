@@ -30,7 +30,15 @@ exports.add_offer_old = function(req, res) {
         })
 }
 
-exports.add_offer = function(req, res) {
+exports.add_offer = async function(req, res) {
+    let codeused = await Offer.findOne({code: req.body.code})
+    if(codeused){
+        let result = {
+            status : 0,
+            message : "Coupon Code is already used"
+        }
+        res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+    }
     const newOffer = new Offer(
         {
             _id: new mongoose.Types.ObjectId(),
@@ -52,15 +60,8 @@ exports.add_offer = function(req, res) {
             h_image : "noimage.png"
         }
     )
-    newOffer.save()
-        .then((result => {
-            console.log(result)
-            res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
-        }))
-        .catch(err => {
-            console.log(err)
-            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
-        })
+    let offer = await newOffer.save()
+    res.status(201).header("Access-Control-Allow-Origin", "*").json(offer)
 }
 
 
@@ -104,6 +105,7 @@ exports.apply_coupon = async function(req, res){
             discount : shipping,
             shipping : 0
         }
+        await User.findOneAndUpdate({ _id: userid },{ $push: { code_used: offer._id } });
         await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
         res.status(200).json({result:responseBody})
     }
