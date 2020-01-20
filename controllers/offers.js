@@ -83,6 +83,14 @@ exports.apply_coupon = async function(req, res){
     let offerType = offer.offer_type
     let freeshippingallow = offer.free_shipping_allow === 1 ? true : false
     let user = await User.findOne({_id:userid})
+    let isofferusedbyuser = await User.findOne({_id:userid ,code_used:couponCode})
+    if(isofferusedbyuser){
+        let resultRes = {
+            "status":0,
+            "message":"You have already used this coupon"
+        }
+        res.status(201).json({result:resultRes})
+    }
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
     let totalAmount = parseInt(subamount) + parseInt(gst) + parseInt(shipping) + parseInt(codcharges)
     let maxSpend = offer.max_spend
