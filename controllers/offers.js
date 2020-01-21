@@ -80,6 +80,13 @@ exports.apply_coupon = async function(req, res){
     productsCart.push(new ObjectId(item));
     });
     let offer = await Offer.findOne({code: couponCode})
+    if(!offer){
+        let resultRes = {
+            "status":0,
+            "message":"Coupon doesn't exist"
+        }
+        res.status(201).json({result:resultRes})
+    }
     let offerType = offer.offer_type
     let freeshippingallow = offer.free_shipping_allow === 1 ? true : false
     let user = await User.findOne({_id:userid})
