@@ -297,18 +297,16 @@ Offer.deleteMany({'_id':{'$in': offersDelete}},function(){
 });
 }
 
-exports.get_offers = function(req, res){
-    edit_offer_status_again()
-    Offer.find({active_status : 1})
-         .then(result=>res.json(result))
-         .catch(err=>res.json(err))
+exports.get_offers = async function(req, res){
+    await edit_offer_status_again()
+    let result = await Offer.find({active_status : 1})
+    res.json(result)
 }
 
-exports.get_all_offers = function(req, res){
-    edit_offer_status_again()
-        Offer.find()
-             .then(result=>res.json(result))
-             .catch(err=>res.json(err))
+exports.get_all_offers = async function(req, res){
+     await edit_offer_status_again()
+       let result = await Offer.find()
+       res.json(result)
 }
 
 exports.count_offers = function(req, res){
@@ -335,7 +333,7 @@ exports.edit_all_offers = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-function edit_offer_status_again(){
+async function edit_offer_status_again(){
     let datenow = new Date(Date.now())
     let offerdeactive = {
         active_status : 0
@@ -343,9 +341,8 @@ function edit_offer_status_again(){
     // Offer.findOne({expiry_date : {$lte: datenow}})
     // .then(result=> console.log(result))
     // .catch(err=> console.log(err))
-    Offer.updateMany({expiry_date : {$lte: datenow}},offerdeactive)
-    .then(result=> console.log("offers deactivated on exp date"))
-    .catch(err=> console.log(err))
+    await Offer.updateMany({expiry_date : {$lte: datenow}},offerdeactive)
+    return
 }
 
 
