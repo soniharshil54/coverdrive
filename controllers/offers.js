@@ -343,7 +343,7 @@ function edit_offer_status_again(){
     // Offer.findOne({expiry_date : {$lte: datenow}})
     // .then(result=> console.log(result))
     // .catch(err=> console.log(err))
-    Offer.findOneAndUpdate({expiry_date : {$lte: datenow}},offerdeactive)
+    Offer.updateMany({expiry_date : {$lte: datenow}},offerdeactive)
     .then(result=> console.log(result))
     .catch(err=> console.log(err))
 }
