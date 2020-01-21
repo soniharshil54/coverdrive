@@ -333,7 +333,7 @@ exports.edit_all_offers = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-exports.edit_offer_status = function(req, res){
+exports.edit_offer_status = function(){
     let datenow = new Date(Date.now())
     let offerdeactive = {
         active_status : 0
