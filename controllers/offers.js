@@ -298,12 +298,14 @@ Offer.deleteMany({'_id':{'$in': offersDelete}},function(){
 }
 
 exports.get_offers = function(req, res){
+    edit_offer_status_again()
     Offer.find({active_status : 1})
          .then(result=>res.json(result))
          .catch(err=>res.json(err))
 }
 
 exports.get_all_offers = function(req, res){
+    edit_offer_status_again()
         Offer.find()
              .then(result=>res.json(result))
              .catch(err=>res.json(err))
@@ -346,7 +348,7 @@ function edit_offer_status_again(){
     .catch(err=> console.log(err))
 }
 
-edit_offer_status_again()
+
 
 exports.edit_offer_status = function(req, res){
     Offer.findOneAndUpdate({_id:req.params.oid},req.body)
