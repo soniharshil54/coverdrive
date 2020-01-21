@@ -19,8 +19,23 @@ const cors = require("cors")
 const app = express()
 const bodyParser = require("body-parser")
 const fs = require("fs")
-let Phonecase4d = require('./models/phonecase4d');
+let Offer = require('./models/offer');
 //require('./models/Comments');
+
+function edit_offer_status_again(){
+    let datenow = new Date(Date.now())
+    let offerdeactive = {
+        active_status : 0
+    }
+    // Offer.findOne({expiry_date : {$lte: datenow}})
+    // .then(result=> console.log(result))
+    // .catch(err=> console.log(err))
+    Offer.findOneAndUpdate({expiry_date : {$lte: datenow}},offerdeactive)
+    .then(result=> console.log(result))
+    .catch(err=> console.log(err))
+}
+
+edit_offer_status_again()
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
