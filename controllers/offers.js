@@ -338,12 +338,12 @@ function edit_offer_status_again(){
     let offerdeactive = {
         active_status : 0
     }
-    Offer.findOne({expiry_date : {$lte: datenow}})
-    .then(result=> console.log(result))
-    .catch(err=> console.log(err))
-    // Offer.findOneAndUpdate({expiry_date : datenow},offerdeactive)
+    // Offer.findOne({expiry_date : {$lte: datenow}})
     // .then(result=> console.log(result))
     // .catch(err=> console.log(err))
+    Offer.findOneAndUpdate({expiry_date : {$lte: datenow}},offerdeactive)
+    .then(result=> console.log(result))
+    .catch(err=> console.log(err))
 }
 
 edit_offer_status_again()
