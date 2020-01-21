@@ -344,7 +344,7 @@ function edit_offer_status_again(){
     // .then(result=> console.log(result))
     // .catch(err=> console.log(err))
     Offer.updateMany({expiry_date : {$lte: datenow}},offerdeactive)
-    .then(result=> console.log(result))
+    .then(result=> console.log("offers deactivated on exp date"))
     .catch(err=> console.log(err))
 }
 
