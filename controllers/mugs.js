@@ -57,6 +57,18 @@ exports.get_mug_by_id_admin = async function(req, res){
     }
 }
 
+exports.get_mug_by_id = async function(req, res){
+    let mug = await Mug.findOne({_id:req.params.mid})
+    if(mug){
+        res.json(mug)
+        return
+    }
+    else{
+        res.json({"error":"mug not found"})
+        return
+    }
+}
+
 exports.add_mug = function(req, res){
     const newMug = new Mug(
         {

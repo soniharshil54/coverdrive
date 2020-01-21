@@ -66,6 +66,8 @@ router.get('/mugs', mug_controller.get_active_mugs)
 
 router.get('/getmugbyidadmin/:mid', mug_controller.get_mug_by_id_admin)
 
+router.get('/getmugbyid/:mid', mug_controller.get_mug_by_id)
+
 router.get('/getallmugs', mug_controller.get_all_mugs)
 
 router.put('/editmug/:mid', mug_controller.edit_mug)
