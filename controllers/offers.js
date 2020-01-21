@@ -4,7 +4,7 @@ const User = require("../models/user")
 const Offer = require("../models/offer")
 const ObjectId = mongoose.Types.ObjectId
 
-
+expo
 
 exports.add_offer_old = function(req, res) {
     const newOffer = new Offer(
@@ -332,6 +332,18 @@ exports.edit_all_offers = function(req, res){
     .then(result=> res.json({"result":"offers updated","updatedoffers":result}))
     .catch(err=>res.status(404).json(err))
 }
+
+exports.edit_offer_status = function(req, res){
+    let datenow = new Date(Date.now())
+    let offerdeactive = {
+        active_status : 0
+    }
+    Offer.findOneAndUpdate({expiry_date : datenow},offerdeactive)
+    .then(result=> res.json({"result":"offer updated","updatedoffer":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+edit_offer_status()
 
 exports.edit_offer_status = function(req, res){
     Offer.findOneAndUpdate({_id:req.params.oid},req.body)
