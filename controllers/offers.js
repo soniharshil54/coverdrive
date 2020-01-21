@@ -343,7 +343,7 @@ exports.edit_offer_status = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-edit_offer_status()
+//edit_offer_status()
 
 exports.edit_offer_status = function(req, res){
     Offer.findOneAndUpdate({_id:req.params.oid},req.body)
