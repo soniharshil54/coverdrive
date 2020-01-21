@@ -22,20 +22,6 @@ const fs = require("fs")
 //let Offer = require('./models/offer');
 //require('./models/Comments');
 
-// function edit_offer_status_again(){
-//     let datenow = new Date(Date.now())
-//     let offerdeactive = {
-//         active_status : 0
-//     }
-//     // Offer.findOne({expiry_date : {$lte: datenow}})
-//     // .then(result=> console.log(result))
-//     // .catch(err=> console.log(err))
-//     Offer.findOneAndUpdate({expiry_date : {$lte: datenow}},offerdeactive)
-//     .then(result=> console.log(result))
-//     .catch(err=> console.log(err))
-// }
-
-//edit_offer_status_again()
 
 //app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -43,6 +29,7 @@ app.use(cors());
 const userRoutes = require("./routes/api/users")
 const adminRoutes = require("./routes/api/admins")
 const phonecaseRoutes = require("./routes/api/phonecases")
+const mugRoutes = require("./routes/api/mugs")
 const tshirtRoutes = require("./routes/api/tshirts")
 const orderRoutes = require("./routes/api/orders")
 const productRoutes = require("./routes/api/products")
@@ -70,6 +57,7 @@ app.use("/api/admin",adminRoutes)
 app.use("/api/order",orderRoutes)
 app.use("/api/product",productRoutes)
 app.use("/api/phonecase", phonecaseRoutes)
+app.use("/api/mug", mugRoutes)
 app.use("/api/tshirt", tshirtRoutes)
 app.use("/api/offer",offerRoutes)
 app.use("/api/notification",notificationRoutes)
@@ -80,10 +68,10 @@ app.use("/api/notification",notificationRoutes)
 
 const port = process.env.PORT || 5600;
 
-// var server = app.listen(port,()=>{
-//     console.log(server.address().address)
-//     console.log(`server connected on localhost:${port}`)});
-
-var server = app.listen(port,"95.216.71.108",()=>{
+var server = app.listen(port,()=>{
     console.log(server.address().address)
     console.log(`server connected on localhost:${port}`)});
+
+// var server = app.listen(port,"95.216.71.108",()=>{
+//     console.log(server.address().address)
+//     console.log(`server connected on localhost:${port}`)});

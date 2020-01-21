@@ -8,7 +8,11 @@ const MugSchema = new Schema({
         type: String,
         required: true
     },
-    size : {
+    volume : {
+        type: String,
+        required: true
+    },
+    pick_image_size : {
         type: String,
         required: true
     },
@@ -17,6 +21,10 @@ const MugSchema = new Schema({
         required: true
     },
     in_image : {
+        type: String,
+        required: true
+    },
+    mask_image : {
         type: String,
         required: true
     },
@@ -31,6 +39,11 @@ const MugSchema = new Schema({
     available_status : {
         type : Number,
         default : 1
+    },
+    create_date: {
+        type:Date,
+        default: Date.now,
+        required: true
     }
 })
 
