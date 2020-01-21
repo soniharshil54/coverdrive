@@ -339,8 +339,8 @@ function edit_offer_status_again(){
         active_status : 0
     }
     Offer.findOneAndUpdate({expiry_date : datenow},offerdeactive)
-    .then(result=> res.json({"result":"offer updated","updatedoffer":result}))
-    .catch(err=>res.status(404).json(err))
+    .then(result=> console.log(result))
+    .catch(err=> console.log(err)
 }
 
 edit_offer_status_again()
