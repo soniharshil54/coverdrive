@@ -4,7 +4,7 @@ const User = require("../models/user")
 const Offer = require("../models/offer")
 const ObjectId = mongoose.Types.ObjectId
 
-expo
+//expo
 
 exports.add_offer_old = function(req, res) {
     const newOffer = new Offer(
