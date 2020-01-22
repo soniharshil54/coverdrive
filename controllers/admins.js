@@ -155,8 +155,8 @@ exports.count_summary = async function(req, res){
     let phonecasecount = await Phonecase.countDocuments()
     let keychaincount = await Keychain.countDocuments()
     let mugcount = await Mug.countDocuments()
-    let mugcount = await Popholder.countDocuments()
-    let productscount = phonecasecount + keychaincount + mugcount
+    let popholdercount = await Popholder.countDocuments()
+    let productscount = phonecasecount + keychaincount + mugcount + popholdercount
     console.log(salesamountref[0].sum)
     let salesamount = salesamountref[0].sum
     res.json({"usercount":usercount, "ordercount":ordercount, "salesamount":salesamount, "productscount":productscount})
