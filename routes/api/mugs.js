@@ -75,6 +75,8 @@ router.get('/getallmugs', mug_controller.get_all_mugs)
 
 router.put('/editmug/:mid', mug_controller.edit_mug)
 
+router.put('/editallmugs', mug_controller.edit_all_mugs)
+
 router.put('/editmugstatus/:mid', mug_controller.edit_mug_status)
 
 router.delete('/deletemug', mug_controller.delete_mugs)

@@ -12,6 +12,14 @@ exports.edit_mug = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.edit_all_mugs = function(req, res){
+    //console.log(req.body)
+    //console.log(req.params)
+    Mug.updateMany({},req.body)
+    .then(result=> res.json({"result":"mug updated","updatedmugs":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
 exports.edit_mug_status = function(req, res){
     Mug.findOneAndUpdate({_id:req.params.mid},req.body)
     .then(result=> res.json({"result":"mug updated","updatedmug":result}))
