@@ -37,7 +37,7 @@ const upload = multer({
 
 
 router.put('/addimage/:mid',upload.fields([{name: 'hImage', maxCount: 1}, {
-  name: 'inImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
+  name: 'inImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}
   if(req.files.hImage){
@@ -45,6 +45,9 @@ router.put('/addimage/:mid',upload.fields([{name: 'hImage', maxCount: 1}, {
   }
   if(req.files.inImage){
     imageData.in_image = req.files.inImage[0].originalname
+  }
+  if(req.files.overlayImage){
+    imageData.overlay_image = req.files.overlayImage[0].originalname
   }
   if(req.files.maskImage){
     imageData.mask_image = req.files.maskImage[0].originalname

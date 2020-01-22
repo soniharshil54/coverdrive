@@ -24,6 +24,10 @@ const MugSchema = new Schema({
         type: String,
         required: true
     },
+    overlay_image : {
+        type: String,
+        required: true
+    },
     mask_image : {
         type: String,
         required: true

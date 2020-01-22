@@ -78,6 +78,7 @@ exports.add_mug = function(req, res){
             h_image: "noimage.png",
             in_image: "noimage.png",
             mask_image: "noimage.png",
+            overlay_image: "noimage.png",
             price: req.body.price,
             description: req.body.description,
             pick_image_size: req.body.pick_image_size
