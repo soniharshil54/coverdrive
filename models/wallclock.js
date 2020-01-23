@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const PopholderSchema = new Schema({
+const WallclockSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -51,4 +51,4 @@ const PopholderSchema = new Schema({
     }
 })
 
-module.exports = Popholder = mongoose.model('popholder',PopholderSchema)
+module.exports = Wallclock = mongoose.model('wallclock',WallclockSchema)
