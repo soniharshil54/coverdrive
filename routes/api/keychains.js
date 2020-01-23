@@ -87,6 +87,8 @@ router.put('/ktaddimage/:ktid',upload.fields([{name: 'sliderImage', maxCount: 1}
 
   router.get('/getallkeychaintypes', keychain_controller.get_all_keychain_types)
 
+  router.get('/getkeychaintypes', keychain_controller.get_active_keychain_types)
+
 router.get('/getktbyidadmin/:ktid', keychain_controller.get_kt_by_id_admin)
 
 router.put('/editkeychaintype/:ktid', keychain_controller.edit_keychain_type)

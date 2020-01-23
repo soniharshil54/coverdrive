@@ -30,6 +30,13 @@ exports.get_all_keychain_types = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_active_keychain_types = function(req, res){
+    console.log("gt kt called")
+    Keychaintype.find({active_status : 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.edit_keychain_type = function(req, res){
     console.log(req.body)
     console.log(req.params)
