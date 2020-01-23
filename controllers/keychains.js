@@ -133,13 +133,13 @@ exports.get_keychains_by_type = async function(req, res){
     let ktid = req.params.ktid
     let keychain
     if(ktid == "5e28474558d8b85a2ba32f64"){
-        keychains = await Keychain.find({type:"RegularKeychain"})
+        keychains = await Keychain.find({type:"RegularKeychain", available_status : 1})
     }
     else if(ktid == "5e28476b58d8b85a2ba32f65"){
-        keychains = await Keychain.find({type:"EngravedKeychain"})
+        keychains = await Keychain.find({type:"EngravedKeychain", available_status : 1})
     }
     else if(ktid == "5e28477f58d8b85a2ba32f66"){
-        keychains = await Keychain.find({type:"LetterKeychain"})
+        keychains = await Keychain.find({type:"LetterKeychain", available_status : 1})
     }
     else{
         res.json({"error":"invalid request"})
