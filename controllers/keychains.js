@@ -129,6 +129,32 @@ exports.get_keychain_by_id = async function(req, res){
     }
 }
 
+exports.get_keychains_by_type = async function(req, res){
+    let ktid = req.params.ktid
+    let keychain
+    if(ktid == "5e28474558d8b85a2ba32f64"){
+        keychains = await Keychain.find({type:"RegularKeychain"})
+    }
+    else if(ktid == "5e28476b58d8b85a2ba32f65"){
+        keychains = await Keychain.find({type:"EngravedKeychain"})
+    }
+    else if(ktid == "5e28477f58d8b85a2ba32f66"){
+        keychains = await Keychain.find({type:"LetterKeychain"})
+    }
+    else{
+        res.json({"error":"invalid request"})
+    }
+   // let keychain = await Keychain.findOne({_id:req.params.mid})
+    if(keychains){
+        res.json(keychains)
+        return
+    }
+    else{
+        res.json({"error":"keychain not found"})
+        return
+    }
+}
+
 exports.add_keychain = function(req, res){
     const newKeychain = new Keychain(
         {

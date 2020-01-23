@@ -99,7 +99,7 @@ router.get('/getkeychainbyidadmin/:mid', keychain_controller.get_keychain_by_id_
 
 router.get('/getkeychainbyid/:mid', keychain_controller.get_keychain_by_id)
 
-//router.get('/getkeychainsbytype/:ktid', keychain_controller.get_keychains_by_type)
+router.get('/getkeychainsbytype/:ktid', keychain_controller.get_keychains_by_type)
 
 router.get('/getallkeychains', keychain_controller.get_all_keychains)
 
