@@ -93,6 +93,8 @@ router.get('/getktbyidadmin/:ktid', keychain_controller.get_kt_by_id_admin)
 
 router.put('/editkeychaintype/:ktid', keychain_controller.edit_keychain_type)
 
+router.put('/editktypestatus/:ktid', keychain_controller.edit_ktype_status)
+
 // router.get('/getmugbyid/:mid', mug_controller.get_mug_by_id)
 
 // router.get('/getallmugs', mug_controller.get_all_mugs)

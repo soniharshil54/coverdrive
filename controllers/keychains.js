@@ -69,9 +69,9 @@ exports.edit_all_mugs = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-exports.edit_mug_status = function(req, res){
-    Mug.findOneAndUpdate({_id:req.params.mid},req.body)
-    .then(result=> res.json({"result":"mug updated","updatedmug":result}))
+exports.edit_ktype_status = function(req, res){
+    Keychaintype.findOneAndUpdate({_id:req.params.ktid},req.body)
+    .then(result=> res.json({"result":"ktype updated","updatedktype":result}))
     .catch(err=>res.status(404).json(err))
 }
 
