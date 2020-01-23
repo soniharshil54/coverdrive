@@ -36,34 +36,6 @@ const upload = multer({
 });
 
 
-// router.put('/addimage/:mid',upload.fields([{name: 'hImage', maxCount: 1}, {
-//   name: 'inImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
-//   console.log(req.files)
-//   let imageData = {}
-//   if(req.files.hImage){
-//     imageData.h_image = req.files.hImage[0].originalname
-//   }
-//   if(req.files.inImage){
-//     imageData.in_image = req.files.inImage[0].originalname
-//   }
-//   if(req.files.overlayImage){
-//     imageData.overlay_image = req.files.overlayImage[0].originalname
-//   }
-//   if(req.files.maskImage){
-//     imageData.mask_image = req.files.maskImage[0].originalname
-//   }
-//   Mug.findOneAndUpdate({_id:req.params.mid},imageData)
-//   .then(result=> {
-//     //console.log(result)
-//     res.json({"result":"keychain image updated","updatedkeychain":result})
-//   })
-//   .catch(err=>{
-//     console.log(err)
-//     res.status(404).json(err)
-//   }
-//     )
-// })
-
 router.put('/ktaddimage/:ktid',upload.fields([{name: 'sliderImage', maxCount: 1}]),(req,res,next) => {
     console.log(req.files)
     console.log("kt images")
@@ -87,25 +59,31 @@ router.put('/ktaddimage/:ktid',upload.fields([{name: 'sliderImage', maxCount: 1}
 
   router.get('/getallkeychaintypes', keychain_controller.get_all_keychain_types)
 
-// router.get('/mugs', mug_controller.get_active_mugs)
-
 router.get('/getktbyidadmin/:ktid', keychain_controller.get_kt_by_id_admin)
 
 router.put('/editkeychaintype/:ktid', keychain_controller.edit_keychain_type)
 
 router.put('/editktypestatus/:ktid', keychain_controller.edit_ktype_status)
 
-// router.get('/getmugbyid/:mid', mug_controller.get_mug_by_id)
+// router.get('/keychains', keychain_controller.get_active_keychains)
 
-// router.get('/getallmugs', mug_controller.get_all_mugs)
+// router.get('/getkeychainbyidadmin/:mid', keychain_controller.get_keychain_by_id_admin)
 
-// router.put('/editmug/:mid', mug_controller.edit_mug)
+// router.get('/getkeychainbyid/:mid', keychain_controller.get_keychain_by_id)
 
-// router.put('/editallmugs', mug_controller.edit_all_mugs)
+// router.get('/getallkeychains', keychain_controller.get_all_keychains)
 
-// router.put('/editmugstatus/:mid', mug_controller.edit_mug_status)
+// router.put('/editkeychain/:mid', keychain_controller.edit_keychain)
 
-// router.delete('/deletemug', mug_controller.delete_mugs)
+// router.put('/editallkeychains', keychain_controller.edit_all_keychains)
+
+// router.put('/editkeychainstatus/:mid', keychain_controller.edit_keychain_status)
+
+// router.delete('/deletekeychain', keychain_controller.delete_keychains)
+
+// router.post('/addkeychain', keychain_controller.add_keychain);
+
+
 
 
  

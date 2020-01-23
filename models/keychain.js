@@ -16,7 +16,15 @@ const KeychainSchema = new Schema({
         type: String,
         required: true
     },
-    in_image : {
+    shadow_image : {
+        type: String,
+        required: true
+    },
+    overlay_image : {
+        type: String,
+        required: true
+    },
+    mask_image : {
         type: String,
         required: true
     },
@@ -31,6 +39,11 @@ const KeychainSchema = new Schema({
     available_status : {
         type : Number,
         default : 1
+    },
+    create_date: {
+        type:Date,
+        default: Date.now,
+        required: true
     } 
 })
 

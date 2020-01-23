@@ -1,6 +1,5 @@
 const express = require("express")
 const mongoose = require("mongoose")
-const Mug = require("../models/mug")
 const Keychain = require("../models/keychain")
 const Keychaintype = require("../models/keychaintype")
 const ObjectId = mongoose.Types.ObjectId
@@ -31,16 +30,6 @@ exports.get_all_keychain_types = function(req, res){
     .catch(err=>res.json(err))
 }
 
-
-
-exports.edit_mug = function(req, res){
-    console.log(req.body)
-    console.log(req.params)
-    Mug.findOneAndUpdate({_id:req.params.mid},req.body)
-    .then(result=> res.json({"result":"mug updated","updatedmug":result}))
-    .catch(err=>res.status(404).json(err))
-}
-
 exports.edit_keychain_type = function(req, res){
     console.log(req.body)
     console.log(req.params)
@@ -61,70 +50,112 @@ exports.get_kt_by_id_admin = async function(req, res){
     }
 }
 
-exports.edit_all_mugs = function(req, res){
-    //console.log(req.body)
-    //console.log(req.params)
-    Mug.updateMany({},req.body)
-    .then(result=> res.json({"result":"mug updated","updatedmugs":result}))
-    .catch(err=>res.status(404).json(err))
-}
-
 exports.edit_ktype_status = function(req, res){
     Keychaintype.findOneAndUpdate({_id:req.params.ktid},req.body)
     .then(result=> res.json({"result":"ktype updated","updatedktype":result}))
     .catch(err=>res.status(404).json(err))
 }
 
-exports.delete_mugs = function(req, res){
+exports.edit_keychain = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Keychain.findOneAndUpdate({_id:req.params.mid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_all_keychains = function(req, res){
+    //console.log(req.body)
+    //console.log(req.params)
+    Keychain.updateMany({},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychains":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_keychain_status = function(req, res){
+    Keychain.findOneAndUpdate({_id:req.params.mid},req.body)
+    .then(result=> res.json({"result":"keychain updated","updatedkeychain":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.delete_keychains = function(req, res){
     var idsArrayf = req.body.todeleteids;
-    var mugsDelete = [];
+    var keychainsDelete = [];
     idsArrayf.forEach(function(item){     
-    mugsDelete.push(new ObjectId(item));
+    keychainsDelete.push(new ObjectId(item));
 });
 
-Mug.deleteMany({'_id':{'$in': mugsDelete}},function(){
+Keychain.deleteMany({'_id':{'$in': keychainsDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
 }
 
 
-exports.get_active_mugs = function(req, res){
-    console.log("gt mugs called")
-    Mug.find({available_status : 1})
+exports.get_active_keychains = function(req, res){
+    console.log("gt keychains called")
+    Keychain.find({available_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
-exports.get_all_mugs = function(req, res){
-    console.log("gt mugs called")
-    Mug.find()
+exports.get_all_keychains = function(req, res){
+    console.log("gt keychains called")
+    Keychain.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
-exports.get_mug_by_id_admin = async function(req, res){
-    let mug = await Mug.findOne({_id:req.params.mid})
-    if(mug){
-        res.json(mug)
+exports.get_keychain_by_id_admin = async function(req, res){
+    let keychain = await Keychain.findOne({_id:req.params.mid})
+    if(keychain){
+        res.json(keychain)
         return
     }
     else{
-        res.json({"error":"mug not found"})
+        res.json({"error":"keychain not found"})
         return
     }
 }
 
-exports.get_mug_by_id = async function(req, res){
-    let mug = await Mug.findOne({_id:req.params.mid})
-    if(mug){
-        res.json(mug)
+exports.get_keychain_by_id = async function(req, res){
+    let keychain = await Keychain.findOne({_id:req.params.mid})
+    if(keychain){
+        res.json(keychain)
         return
     }
     else{
-        res.json({"error":"mug not found"})
+        res.json({"error":"keychain not found"})
         return
     }
 }
+
+exports.add_keychain = function(req, res){
+    const newKeychain = new Keychain(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.keychain_name,
+            volume: req.body.keychain_volume,
+            h_image: "noimage.png",
+            in_image: "noimage.png",
+            mask_image: "noimage.png",
+            overlay_image: "noimage.png",
+            price: req.body.price,
+            description: req.body.description,
+            pick_image_size: req.body.pick_image_size
+        }
+    )
+    newKeychain.save()
+    .then((result => {
+        console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+    }))
+    .catch(err => {
+        console.log(err)
+        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+    })
+}
+
+
 
 
 

@@ -157,7 +157,8 @@ exports.get_phonecase_by_id = async function(req, res){
             description: phonecase.description_2d,
             image_header: phonecase.image_header_2d,
             image_cover: phonecase.image_inner_2d,
-            image_mask: phonecase.image_mask_2d
+            image_mask: phonecase.image_mask_2d,
+            pick_image_size: "312x633"
         }
         let obj3d = {
             title: "3D phonecase",
@@ -167,7 +168,8 @@ exports.get_phonecase_by_id = async function(req, res){
             description: phonecase.description_3d,
             image_header: phonecase.image_header_3d,
             image_cover: phonecase.image_inner_3d,
-            image_mask: phonecase.image_mask_3d
+            image_mask: phonecase.image_mask_3d,
+            pick_image_size: "312x633"
         }
         let obj4d = {
             title: "4D phonecase",
@@ -176,7 +178,8 @@ exports.get_phonecase_by_id = async function(req, res){
             price: phonecase.price_4d,
             description: phonecase.description_4d,
             image_header: phonecase.image_header_4d,
-            image_inner: phonecase.image_inner_4d
+            image_inner: phonecase.image_inner_4d,
+            pick_image_size: "312x633"
         }
       //  phonecase.data = data
         //console.log(phonecase.data)
