@@ -134,9 +134,9 @@ exports.add_keychain = function(req, res){
         {
             _id: new mongoose.Types.ObjectId(),
             name: req.body.keychain_name,
-            volume: req.body.keychain_volume,
+            type : req.body.keychain_type,
             h_image: "noimage.png",
-            in_image: "noimage.png",
+            shadow_image: "noimage.png",
             mask_image: "noimage.png",
             overlay_image: "noimage.png",
             price: req.body.price,

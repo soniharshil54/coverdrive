@@ -55,6 +55,34 @@ router.put('/ktaddimage/:ktid',upload.fields([{name: 'sliderImage', maxCount: 1}
       )
   })
 
+  router.put('/addimage/:kid',upload.fields([{name: 'hImage', maxCount: 1}, {
+    name: 'inImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
+    console.log(req.files)
+    let imageData = {}
+    if(req.files.hImage){
+      imageData.h_image = req.files.hImage[0].originalname
+    }
+    if(req.files.inImage){
+      imageData.shadow_image = req.files.inImage[0].originalname
+    }
+    if(req.files.overlayImage){
+      imageData.overlay_image = req.files.overlayImage[0].originalname
+    }
+    if(req.files.maskImage){
+      imageData.mask_image = req.files.maskImage[0].originalname
+    }
+    Keychain.findOneAndUpdate({_id:req.params.kid},imageData)
+    .then(result=> {
+      //console.log(result)
+      res.json({"result":"keychain image updated","updatedkeychain":result})
+    })
+    .catch(err=>{
+      console.log(err)
+      res.status(404).json(err)
+    }
+      )
+  })
+
   router.post('/addtype', keychain_controller.add_keychain_type);
 
   router.get('/getallkeychaintypes', keychain_controller.get_all_keychain_types)
@@ -65,23 +93,25 @@ router.put('/editkeychaintype/:ktid', keychain_controller.edit_keychain_type)
 
 router.put('/editktypestatus/:ktid', keychain_controller.edit_ktype_status)
 
-// router.get('/keychains', keychain_controller.get_active_keychains)
+router.get('/keychains', keychain_controller.get_active_keychains)
 
-// router.get('/getkeychainbyidadmin/:mid', keychain_controller.get_keychain_by_id_admin)
+router.get('/getkeychainbyidadmin/:mid', keychain_controller.get_keychain_by_id_admin)
 
-// router.get('/getkeychainbyid/:mid', keychain_controller.get_keychain_by_id)
+router.get('/getkeychainbyid/:mid', keychain_controller.get_keychain_by_id)
 
-// router.get('/getallkeychains', keychain_controller.get_all_keychains)
+router.get('/getkeychainsbytype/:ktid', keychain_controller.get_keychains_by_type)
 
-// router.put('/editkeychain/:mid', keychain_controller.edit_keychain)
+router.get('/getallkeychains', keychain_controller.get_all_keychains)
 
-// router.put('/editallkeychains', keychain_controller.edit_all_keychains)
+router.put('/editkeychain/:mid', keychain_controller.edit_keychain)
 
-// router.put('/editkeychainstatus/:mid', keychain_controller.edit_keychain_status)
+router.put('/editallkeychains', keychain_controller.edit_all_keychains)
 
-// router.delete('/deletekeychain', keychain_controller.delete_keychains)
+router.put('/editkeychainstatus/:mid', keychain_controller.edit_keychain_status)
 
-// router.post('/addkeychain', keychain_controller.add_keychain);
+router.delete('/deletekeychain', keychain_controller.delete_keychains)
+
+router.post('/addkeychain', keychain_controller.add_keychain);
 
 
 

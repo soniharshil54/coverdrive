@@ -8,7 +8,7 @@ const KeychainSchema = new Schema({
         type: String,
         required: true
     },
-    size : {
+    type : {
         type: String,
         required: true
     },
@@ -30,6 +30,10 @@ const KeychainSchema = new Schema({
     },
     price : {
         type: Number,
+        required: true
+    },
+    pick_image_size : {
+        type: String,
         required: true
     },
     description : {
