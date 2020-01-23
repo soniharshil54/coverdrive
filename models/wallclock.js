@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const WallclockSchema = new Schema({
+const PopholderSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
     name : {
         type: String,
@@ -12,11 +12,23 @@ const WallclockSchema = new Schema({
         type: String,
         required: true
     },
+    pick_image_size : {
+        type: String,
+        required: true
+    },
     h_image : {
         type: String,
         required: true
     },
-    in_image : {
+    shadow_image : {
+        type: String,
+        required: true
+    },
+    overlay_image : {
+        type: String,
+        required: true
+    },
+    mask_image : {
         type: String,
         required: true
     },
@@ -31,7 +43,12 @@ const WallclockSchema = new Schema({
     available_status : {
         type : Number,
         default : 1
+    },
+    create_date: {
+        type:Date,
+        default: Date.now,
+        required: true
     }
 })
 
-module.exports = Wallclock = mongoose.model('wallclock',WallclockSchema)
+module.exports = Popholder = mongoose.model('popholder',PopholderSchema)
