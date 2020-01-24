@@ -117,6 +117,7 @@ exports.apply_coupon = async function(req, res){
         let responseBody = {
             status : 1,
             message: codeMessage,
+            only_online: only_online,
             discount : shipping,
             shipping : 0
         }
@@ -138,6 +139,7 @@ exports.apply_coupon = async function(req, res){
         let responseBody = {
             status : 1,
             message: codeMessage,
+            only_online: only_online,
             shipping,
             discount
         }
@@ -161,6 +163,7 @@ exports.apply_coupon = async function(req, res){
             let responseBody = {
                 status : 1,
                 message: codeMessage,
+                only_online: only_online,
                 shipping,
                 discount
             }
