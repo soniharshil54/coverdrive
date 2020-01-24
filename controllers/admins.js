@@ -10,6 +10,8 @@ const Phonecase = require("../models/phonecase")
 const Keychain = require("../models/keychain")
 const Mug = require("../models/mug")
 const Popholder = require("../models/popholder")
+const Sipperbottle = require("../models/sipperbottle")
+const Wallclock = require("../models/wallclock")
 
 exports.register_admin = function(req, res) {
     Admin.find({email: req.body.email})
@@ -156,7 +158,9 @@ exports.count_summary = async function(req, res){
     let keychaincount = await Keychain.countDocuments()
     let mugcount = await Mug.countDocuments()
     let popholdercount = await Popholder.countDocuments()
-    let productscount = phonecasecount + keychaincount + mugcount + popholdercount
+    let sipperbottlecount = await Sipperbottle.countDocuments()
+    let wallclockcount = await Wallclock.countDocuments()
+    let productscount = phonecasecount + keychaincount + mugcount + popholdercount + sipperbottlecount + wallclockcount
     console.log(salesamountref[0].sum)
     let salesamount = salesamountref[0].sum
     res.json({"usercount":usercount, "ordercount":ordercount, "salesamount":salesamount, "productscount":productscount})
