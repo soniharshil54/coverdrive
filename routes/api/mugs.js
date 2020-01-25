@@ -35,6 +35,24 @@ const upload = multer({
   fileFilter: fileFilter
 });
 
+router.put('/mtaddimage/:mtid',upload.fields([{name: 'sliderImage', maxCount: 1}]),(req,res,next) => {
+  console.log(req.files)
+  console.log("mt images")
+  let imageData = {}
+  if(req.files.sliderImage){
+    imageData.slider_image = req.files.sliderImage[0].originalname
+  }
+  Mugtype.findOneAndUpdate({_id:req.params.mtid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"mug type image updated","updatedmugtype":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
 
 router.put('/addimage/:mid',upload.fields([{name: 'hImage', maxCount: 1}, {
   name: 'inImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
@@ -64,6 +82,17 @@ router.put('/addimage/:mid',upload.fields([{name: 'hImage', maxCount: 1}, {
     )
 })
 
+router.post('/addtype', mug_controller.add_mug_type);
+
+router.get('/getallmugtypes', mug_controller.get_all_mug_types)
+
+router.get('/getmugtypes', mug_controller.get_active_mug_types)
+
+router.get('/getmtbyidadmin/:mtid', mug_controller.get_mt_by_id_admin)
+
+router.put('/editmugtype/:mtid', mug_controller.edit_mug_type)
+
+router.put('/editmtypestatus/:mtid', mug_controller.edit_mtype_status)
 
 router.get('/mugs', mug_controller.get_active_mugs)
 

@@ -64,6 +64,17 @@ router.put('/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
     )
 })
 
+router.post('/addtype', popholder_controller.add_popholder_type);
+
+router.get('/getallpopholdertypes', popholder_controller.get_all_popholder_types)
+
+router.get('/getpopholdertypes', popholder_controller.get_active_popholder_types)
+
+router.get('/getptbyidadmin/:ptid', popholder_controller.get_pt_by_id_admin)
+
+router.put('/editpopholdertype/:ptid', popholder_controller.edit_popholder_type)
+
+router.put('/editptypestatus/:ptid', popholder_controller.edit_ptype_status)
 
 router.get('/popholders', popholder_controller.get_active_popholders)
 

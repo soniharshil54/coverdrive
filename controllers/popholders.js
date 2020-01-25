@@ -4,6 +4,65 @@ const Popholder = require("../models/popholder")
 const ObjectId = mongoose.Types.ObjectId
 
 
+exports.add_mug_type = function(req, res){
+    const newMugtype = new Mugtype(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.pt_name,
+            slider_image: "noimage.png"
+        }
+    )
+    newMugtype.save()
+    .then((result => {
+        console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+    }))
+    .catch(err => {
+        console.log(err)
+        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+    })
+}
+
+exports.get_all_mug_types = function(req, res){
+    console.log("gt pt called")
+    Mugtype.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_active_mug_types = function(req, res){
+    console.log("gt pt called")
+    Mugtype.find({active_status : 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.edit_mug_type = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Mugtype.findOneAndUpdate({_id:req.params.ptid},req.body)
+    .then(result=> res.json({"result":"pt updated","updatedpt":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.get_pt_by_id_admin = async function(req, res){
+    let ptype = await Mugtype.findOne({_id:req.params.ptid})
+    if(ptype){
+        res.json(ptype)
+        return
+    }
+    else{
+        res.json({"error":"ptype not found"})
+        return
+    }
+}
+
+exports.edit_ptype_status = function(req, res){
+    Mugtype.findOneAndUpdate({_id:req.params.ptid},req.body)
+    .then(result=> res.json({"result":"ptype updated","updatedptype":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
 exports.edit_popholder = function(req, res){
     console.log(req.body)
     console.log(req.params)
@@ -82,6 +141,7 @@ exports.add_popholder = function(req, res){
         {
             _id: new mongoose.Types.ObjectId(),
             name: req.body.popholder_name,
+            popholder_type : req.body.popholder_type,
             size: req.body.popholder_size,
             h_image: "noimage.png",
             shadow_image: "noimage.png",

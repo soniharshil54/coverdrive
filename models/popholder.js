@@ -8,6 +8,9 @@ const PopholderSchema = new Schema({
         type: String,
         required: true
     },
+    popholder_type : {
+        type:String
+    },
     size : {
         type: String,
         required: true

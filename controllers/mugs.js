@@ -1,8 +1,69 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const Mug = require("../models/mug")
+const Mugtype = require("../models/mugtype")
 const ObjectId = mongoose.Types.ObjectId
 
+
+
+exports.add_mug_type = function(req, res){
+    const newMugtype = new Mugtype(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            name: req.body.mt_name,
+            slider_image: "noimage.png"
+        }
+    )
+    newMugtype.save()
+    .then((result => {
+        console.log(result)
+        res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+    }))
+    .catch(err => {
+        console.log(err)
+        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+    })
+}
+
+exports.get_all_mug_types = function(req, res){
+    console.log("gt mt called")
+    Mugtype.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_active_mug_types = function(req, res){
+    console.log("gt mt called")
+    Mugtype.find({active_status : 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.edit_mug_type = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Mugtype.findOneAndUpdate({_id:req.params.mtid},req.body)
+    .then(result=> res.json({"result":"mt updated","updatedmt":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
+exports.get_mt_by_id_admin = async function(req, res){
+    let mtype = await Mugtype.findOne({_id:req.params.mtid})
+    if(mtype){
+        res.json(mtype)
+        return
+    }
+    else{
+        res.json({"error":"mtype not found"})
+        return
+    }
+}
+
+exports.edit_mtype_status = function(req, res){
+    Mugtype.findOneAndUpdate({_id:req.params.mtid},req.body)
+    .then(result=> res.json({"result":"mtype updated","updatedmtype":result}))
+    .catch(err=>res.status(404).json(err))
+}
 
 exports.edit_mug = function(req, res){
     console.log(req.body)
