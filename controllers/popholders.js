@@ -4,15 +4,15 @@ const Popholder = require("../models/popholder")
 const ObjectId = mongoose.Types.ObjectId
 
 
-exports.add_mug_type = function(req, res){
-    const newMugtype = new Mugtype(
+exports.add_popholder_type = function(req, res){
+    const newPopholdertype = new Popholdertype(
         {
             _id: new mongoose.Types.ObjectId(),
             name: req.body.pt_name,
             slider_image: "noimage.png"
         }
     )
-    newMugtype.save()
+    newPopholdertype.save()
     .then((result => {
         console.log(result)
         res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
@@ -23,30 +23,30 @@ exports.add_mug_type = function(req, res){
     })
 }
 
-exports.get_all_mug_types = function(req, res){
+exports.get_all_popholder_types = function(req, res){
     console.log("gt pt called")
-    Mugtype.find()
+    Popholdertype.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
-exports.get_active_mug_types = function(req, res){
+exports.get_active_popholder_types = function(req, res){
     console.log("gt pt called")
-    Mugtype.find({active_status : 1})
+    Popholdertype.find({active_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
-exports.edit_mug_type = function(req, res){
+exports.edit_popholder_type = function(req, res){
     console.log(req.body)
     console.log(req.params)
-    Mugtype.findOneAndUpdate({_id:req.params.ptid},req.body)
+    Popholdertype.findOneAndUpdate({_id:req.params.ptid},req.body)
     .then(result=> res.json({"result":"pt updated","updatedpt":result}))
     .catch(err=>res.status(404).json(err))
 }
 
 exports.get_pt_by_id_admin = async function(req, res){
-    let ptype = await Mugtype.findOne({_id:req.params.ptid})
+    let ptype = await Popholdertype.findOne({_id:req.params.ptid})
     if(ptype){
         res.json(ptype)
         return
@@ -58,7 +58,7 @@ exports.get_pt_by_id_admin = async function(req, res){
 }
 
 exports.edit_ptype_status = function(req, res){
-    Mugtype.findOneAndUpdate({_id:req.params.ptid},req.body)
+    Popholdertype.findOneAndUpdate({_id:req.params.ptid},req.body)
     .then(result=> res.json({"result":"ptype updated","updatedptype":result}))
     .catch(err=>res.status(404).json(err))
 }
