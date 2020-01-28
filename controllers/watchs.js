@@ -45,9 +45,10 @@ exports.add_watch_type = async function(req, res){
 }
 
 exports.add_watch_sub_type = function(req, res){
+    let tyid = mongoose.Types.ObjectId(req.body.tyid)
     const newWatchsubtype = new Watchsubtype(
         {
-            _id: new mongoose.Types.ObjectId(),
+            _id: tyid,
             name: req.body.wt_name
         }
     )
