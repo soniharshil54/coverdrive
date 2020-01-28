@@ -68,6 +68,8 @@ router.post('/addtype', popholder_controller.add_popholder_type);
 
 router.get('/getallpopholdertypes', popholder_controller.get_all_popholder_types)
 
+router.get('/getpopholdersbytypeid/:typeid', popholder_controller.get_popholders_by_typeid)
+
 router.get('/getpopholdertypes', popholder_controller.get_active_popholder_types)
 
 router.get('/getptbyidadmin/:ptid', popholder_controller.get_pt_by_id_admin)

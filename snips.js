@@ -31,3 +31,22 @@ mugs type live
     "create_date": "2020-01-28T10:37:08.643Z",
     "__v": 0
 }
+
+popholder types live
+{
+    "active_status": 1,
+    "_id": "5e301af4fda53f3126a601c1",
+    "name": "Custom Popholder",
+    "slider_image": "noimage.png",
+    "create_date": "2020-01-28T11:28:52.087Z",
+    "__v": 0
+}
+
+{
+    "active_status": 1,
+    "_id": "5e301b1afda53f3126a601c2",
+    "name": "Regular Popholder",
+    "slider_image": "noimage.png",
+    "create_date": "2020-01-28T11:29:30.802Z",
+    "__v": 0
+}

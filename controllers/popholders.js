@@ -38,6 +38,24 @@ exports.get_active_popholder_types = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_popholders_by_typeid = async function(req, res){
+    console.log("gt mt called")
+    let typeid = req.params.typeid
+    let mugs
+    if(typeid === "5e301af4fda53f3126a601c1"){
+        mugs = await Mug.find({type:"Custom Popholder"})
+        res.json(mugs)
+    }
+    else if(typeid === "5e300ed4d28880257bd805ae"){
+        mugs = await Mug.find({type:"Regular Popholder"})
+        res.json(mugs)
+    }
+    else{
+        res.json({"message":"Bad Request"})
+    }
+    
+}
+
 exports.edit_popholder_type = function(req, res){
     console.log(req.body)
     console.log(req.params)
