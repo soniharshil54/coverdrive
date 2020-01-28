@@ -143,6 +143,7 @@ exports.add_mug = function(req, res){
         {
             _id: new mongoose.Types.ObjectId(),
             name: req.body.mug_name,
+            type: req.body.mug_type,
             volume: req.body.mug_volume,
             h_image: "noimage.png",
             in_image: "noimage.png",
