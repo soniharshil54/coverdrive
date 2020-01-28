@@ -154,6 +154,8 @@ router.put('/editwatchstatus/:mid', watch_controller.edit_watch_status)
 
 router.delete('/deletewatch', watch_controller.delete_watchs)
 
+router.delete('/deletewatchtypes', watch_controller.delete_watch_types)
+
 router.post('/addwatch', watch_controller.add_watch);
 
 

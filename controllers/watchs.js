@@ -184,6 +184,17 @@ Watch.deleteMany({'_id':{'$in': watchsDelete}},function(){
 });
 }
 
+exports.delete_watch_types = async function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var watchsDelete = [];
+    idsArrayf.forEach(function(item){     
+    watchsDelete.push(new ObjectId(item));
+});
+
+let deletewatchtypes = await Watchtype.deleteMany({'_id':{'$in': watchsDelete}})
+let deletewatches = await Watch.deleteMany({'type_id':{'$in': watchsDelete}})
+res.json({"yoyo":"dodo"})
+}
 
 exports.get_active_watchs = function(req, res){
     console.log("gt watchs called")
