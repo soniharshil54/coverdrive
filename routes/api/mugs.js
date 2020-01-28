@@ -102,6 +102,8 @@ router.get('/getmugbyid/:mid', mug_controller.get_mug_by_id)
 
 router.get('/getallmugs', mug_controller.get_all_mugs)
 
+router.get('/getmugsbytypeid/:typeid', mug_controller.get_mugs_by_typeid)
+
 router.put('/editmug/:mid', mug_controller.edit_mug)
 
 router.put('/editallmugs', mug_controller.edit_all_mugs)

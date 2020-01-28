@@ -32,6 +32,24 @@ exports.get_all_mug_types = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_mugs_by_typeid = async function(req, res){
+    console.log("gt mt called")
+    let typeid = req.params.typeid
+    let mugs
+    if(typeid === "5e300e62d28880257bd805ad"){
+        mugs = await Mug.find({type:"Custom Mug"})
+        res.json(mugs)
+    }
+    else if(typeid === "5e300ed4d28880257bd805ae"){
+        mugs = await Mug.find({type:"Regular Mug"})
+        res.json(mugs)
+    }
+    else{
+        res.json("message":"Bad Request")
+    }
+    
+}
+
 exports.get_active_mug_types = function(req, res){
     console.log("gt mt called")
     Mugtype.find({active_status : 1})
