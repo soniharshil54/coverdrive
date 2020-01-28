@@ -125,6 +125,8 @@ router.get('/getallwatchmaintypes', watch_controller.get_all_watch_main_types)
 
 router.get('/getwatchmaintypesbytypeid/:typeid', watch_controller.get_all_watch_main_types_by_typeid)
 
+router.get('/getwatchesbymaintypeid/:mtypeid', watch_controller.get_watches_by_main_typeid)
+
 //router.get('/getwatchtypes', watch_controller.get_active_watch_types)
 
 //router.get('/getwtbyidadmin/:wtid', watch_controller.get_wt_by_id_admin)
