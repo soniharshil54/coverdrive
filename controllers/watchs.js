@@ -41,7 +41,7 @@ exports.add_watch_type = async function(req, res){
     )
     let watchmaintype1 = await newWatchmaintype.save()
     let watchmaintype2 = await newWatchmaintype2.save()
-    res.json({result:watchtype})
+    res.json(watchtype)
 }
 
 exports.add_watch_sub_type = function(req, res){
@@ -91,6 +91,14 @@ exports.edit_watch_type = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
+exports.edit_watch_maintype = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Watchmaintype.findOneAndUpdate({_id:req.params.wmtid},req.body)
+    .then(result=> res.json({"result":"wmt updated","updatedwmt":result}))
+    .catch(err=>res.status(404).json(err))
+}
+
 exports.get_wt_by_id_admin = async function(req, res){
     let wtype = await Watchtype.findOne({_id:req.params.wtid})
     if(wtype){
@@ -99,6 +107,18 @@ exports.get_wt_by_id_admin = async function(req, res){
     }
     else{
         res.json({"error":"wtype not found"})
+        return
+    }
+}
+
+exports.get_wmt_by_id_admin = async function(req, res){
+    let wmtype = await Watchmaintype.findOne({_id:req.params.wmtid})
+    if(wmtype){
+        res.json(wmtype)
+        return
+    }
+    else{
+        res.json({"error":"wmtype not found"})
         return
     }
 }

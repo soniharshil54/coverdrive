@@ -112,7 +112,11 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
 
 router.get('/getwtbyidadmin/:wtid', watch_controller.get_wt_by_id_admin)
 
+router.get('/getwmtbyidadmin/:wmtid', watch_controller.get_wmt_by_id_admin)
+
 router.put('/editwatchtype/:wtid', watch_controller.edit_watch_type)
+
+router.put('/editwatchmaintype/:wmtid', watch_controller.edit_watch_maintype)
 
 router.put('/editwtypestatus/:wtid', watch_controller.edit_wtype_status)
 
