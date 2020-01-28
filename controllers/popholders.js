@@ -1,6 +1,7 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const Popholder = require("../models/popholder")
+const Popholdertype = require("../models/popholdertype")
 const ObjectId = mongoose.Types.ObjectId
 
 
