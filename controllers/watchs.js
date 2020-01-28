@@ -93,7 +93,7 @@ exports.get_active_watch_types = function(req, res){
 
 exports.get_watches_by_main_typeid = function(req, res){
     console.log("gt wt called")
-    Watch.find({maintype_id : req.params.mtypeid ,active_status : 1})
+    Watch.find({maintype_id : req.params.mtypeid ,available_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
