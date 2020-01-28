@@ -75,14 +75,14 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
   })
 
   router.put('/addimage/:kid',upload.fields([{name: 'hImage', maxCount: 1}, {
-    name: 'inImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
+    name: 'shadowImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
     console.log(req.files)
     let imageData = {}
     if(req.files.hImage){
       imageData.h_image = req.files.hImage[0].originalname
     }
-    if(req.files.inImage){
-      imageData.shadow_image = req.files.inImage[0].originalname
+    if(req.files.shadowImage){
+      imageData.shadow_image = req.files.shadowImage[0].originalname
     }
     if(req.files.overlayImage){
       imageData.overlay_image = req.files.overlayImage[0].originalname
