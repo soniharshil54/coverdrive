@@ -45,7 +45,7 @@ exports.get_mugs_by_typeid = async function(req, res){
         res.json(mugs)
     }
     else{
-        res.json("message":"Bad Request")
+        res.json({"message":"Bad Request"})
     }
     
 }
