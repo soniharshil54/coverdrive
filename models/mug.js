@@ -4,6 +4,10 @@ const Order = require('./order')
 
 const MugSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
+    type : {
+        type: String,
+        required: true
+    },
     name : {
         type: String,
         required: true
