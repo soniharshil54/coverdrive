@@ -8,6 +8,22 @@ const WatchSchema = new Schema({
         type: String,
         required: true
     },
+    maintype_id : {
+        type: String,
+        required: true
+    },
+    maintype_name : {
+        type: String,
+        required: true
+    },
+    type_id : {
+        type: String,
+        required: true
+    },
+    subtype_id : {
+        type: String,
+        required: true
+    },
     size : {
         type: String,
         required: true
@@ -16,7 +32,7 @@ const WatchSchema = new Schema({
         type: String,
         required: true
     },
-    in_image : {
+    shadow_image : {
         type: String,
         required: true
     },

@@ -30,11 +30,30 @@ const fileFilter = (req, file, cb) => {
 const upload = multer({
   storage: storage,
   limits: {
-    fileSize: 1024 * 1024 * 6
+    fileSize: 2024 * 2024 * 6
   },
   fileFilter: fileFilter
 });
 
+
+// router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}]),(req,res,next) => {
+//   console.log(req.files)
+//   console.log("wt images")
+//   let imageData = {}
+//   if(req.files.sliderImage){
+//     imageData.slider_image = req.files.sliderImage[0].originalname
+//   }
+//   Wallclocktype.findOneAndUpdate({_id:req.params.wtid},imageData)
+//   .then(result=> {
+//     //console.log(result)
+//     res.json({"result":"wallclock type image updated","updatedwallclocktype":result})
+//   })
+//   .catch(err=>{
+//     console.log(err)
+//     res.status(404).json(err)
+//   }
+//     )
+// })
 
 router.put('/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
   name: 'shadowImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
@@ -64,6 +83,18 @@ router.put('/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
     )
 })
 
+
+// router.post('/addtype', wallclock_controller.add_wallclock_type);
+
+// router.get('/getallwallclocktypes', wallclock_controller.get_all_wallclock_types)
+
+// router.get('/getwallclocktypes', wallclock_controller.get_active_wallclock_types)
+
+// router.get('/getktbyidadmin/:ktid', wallclock_controller.get_kt_by_id_admin)
+
+// router.put('/editwallclocktype/:ktid', wallclock_controller.edit_wallclock_type)
+
+// router.put('/editktypestatus/:ktid', wallclock_controller.edit_ktype_status)
 
 router.get('/wallclocks', wallclock_controller.get_active_wallclocks)
 

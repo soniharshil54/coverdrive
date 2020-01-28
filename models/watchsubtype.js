@@ -2,15 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const WatchtypeSchema = new Schema({
+const WatchsubtypeSchema = new Schema({
   _id : mongoose.Schema.Types.ObjectId,
   name : {
     type: String,
     required: true
-  },
-  slider_image : {
-      type : String,
-      required: true
   },
   active_status : {
     type : Number,
@@ -24,4 +20,4 @@ const WatchtypeSchema = new Schema({
    }
 })
 
-module.exports = Watchtype = mongoose.model('watchtype',WatchtypeSchema)
+module.exports = Watchsubtype = mongoose.model('watchsubtype',WatchsubtypeSchema)

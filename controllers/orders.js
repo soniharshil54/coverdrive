@@ -59,6 +59,18 @@ exports.get_order_by_id = async function(req, res){
     }
 }
 
+exports.get_order_by_custom_id = async function(req, res){
+    let order = await Order.findOne({order_id:req.params.corderid}).populate('products').populate("user_id")
+    if(order){
+        res.json(order)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
 exports.get_orders_by_contact = async function(req, res){
     let users = await User.find({contact: req.params.contact}).select("_id")
     let useridarray = users.map(a => {

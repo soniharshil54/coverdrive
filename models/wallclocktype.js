@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const WatchtypeSchema = new Schema({
+const WallclocktypeSchema = new Schema({
   _id : mongoose.Schema.Types.ObjectId,
   name : {
     type: String,
@@ -24,4 +24,4 @@ const WatchtypeSchema = new Schema({
    }
 })
 
-module.exports = Watchtype = mongoose.model('watchtype',WatchtypeSchema)
+module.exports = Wallclocktype = mongoose.model('wallclocktype',WallclocktypeSchema)

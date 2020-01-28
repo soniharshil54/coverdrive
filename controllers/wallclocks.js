@@ -4,6 +4,65 @@ const Wallclock = require("../models/wallclock")
 const ObjectId = mongoose.Types.ObjectId
 
 
+// exports.add_wallclock_type = function(req, res){
+//     const newWallclocktype = new Wallclocktype(
+//         {
+//             _id: new mongoose.Types.ObjectId(),
+//             name: req.body.kt_name,
+//             slider_image: "noimage.png"
+//         }
+//     )
+//     newWallclocktype.save()
+//     .then((result => {
+//         console.log(result)
+//         res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+//     }))
+//     .catch(err => {
+//         console.log(err)
+//         res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+//     })
+// }
+
+// exports.get_all_wallclock_types = function(req, res){
+//     console.log("gt kt called")
+//     Wallclocktype.find()
+//     .then(result=>res.json(result))
+//     .catch(err=>res.json(err))
+// }
+
+// exports.get_active_wallclock_types = function(req, res){
+//     console.log("gt kt called")
+//     Wallclocktype.find({active_status : 1})
+//     .then(result=>res.json(result))
+//     .catch(err=>res.json(err))
+// }
+
+// exports.edit_wallclock_type = function(req, res){
+//     console.log(req.body)
+//     console.log(req.params)
+//     Wallclocktype.findOneAndUpdate({_id:req.params.ktid},req.body)
+//     .then(result=> res.json({"result":"kt updated","updatedkt":result}))
+//     .catch(err=>res.status(404).json(err))
+// }
+
+// exports.get_kt_by_id_admin = async function(req, res){
+//     let ktype = await Wallclocktype.findOne({_id:req.params.ktid})
+//     if(ktype){
+//         res.json(ktype)
+//         return
+//     }
+//     else{
+//         res.json({"error":"ktype not found"})
+//         return
+//     }
+// }
+
+// exports.edit_ktype_status = function(req, res){
+//     Wallclocktype.findOneAndUpdate({_id:req.params.ktid},req.body)
+//     .then(result=> res.json({"result":"ktype updated","updatedktype":result}))
+//     .catch(err=>res.status(404).json(err))
+// }
+
 exports.edit_wallclock = function(req, res){
     console.log(req.body)
     console.log(req.params)
