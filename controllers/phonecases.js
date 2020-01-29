@@ -240,6 +240,8 @@ exports.add_phonecase = function(req, res){
             image_inner_2d: "noimage.png",
             image_inner_3d: "noimage.png",
             image_inner_4d: "noimage.png",
+            image_mask_2d: "noimage.png",
+            image_mask_3d: "noimage.png",
             available_2d: req.body.available_2d ? req.body.available_2d : 1,
             available_3d: req.body.available_3d ? req.body.available_3d : 1,
             available_4d: req.body.available_4d ? req.body.available_4d : 1,
