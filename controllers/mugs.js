@@ -37,11 +37,11 @@ exports.get_mugs_by_typeid = async function(req, res){
     let typeid = req.params.typeid
     let mugs
     if(typeid === "5e300e62d28880257bd805ad"){
-        mugs = await Mug.find({type:"Custom Mug"})
+        mugs = await Mug.find({type:"Custom Mug", available_status : 1})
         res.json(mugs)
     }
     else if(typeid === "5e300ed4d28880257bd805ae"){
-        mugs = await Mug.find({type:"Regular Mug"})
+        mugs = await Mug.find({type:"Regular Mug", available_status : 1})
         res.json(mugs)
     }
     else{
