@@ -20,6 +20,10 @@ const WatchSchema = new Schema({
         type: String,
         required: true
     },
+    type_name : {
+        type: String,
+        required: true
+    },
     subtype_id : {
         type: String,
         required: true

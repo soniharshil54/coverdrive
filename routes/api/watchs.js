@@ -120,6 +120,8 @@ router.put('/editwatchmaintype/:wmtid', watch_controller.edit_watch_maintype)
 
 router.put('/editwtypestatus/:wtid', watch_controller.edit_wtype_status)
 
+router.get('/editaddwatchtypename', watch_controller.edit_add_watch_type_name)
+
 
 router.get('/getallwatchmaintypes', watch_controller.get_all_watch_main_types)
 

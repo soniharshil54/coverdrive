@@ -98,6 +98,8 @@ exports.get_watches_by_main_typeid = function(req, res){
     .catch(err=>res.json(err))
 }
 
+
+
 exports.edit_watch_type = function(req, res){
     console.log(req.body)
     console.log(req.params)
@@ -164,6 +166,15 @@ exports.edit_all_watchs = function(req, res){
     Watch.updateMany({},req.body)
     .then(result=> res.json({"result":"watch updated","updatedwatchs":result}))
     .catch(err=>res.status(404).json(err))
+}
+
+exports.edit_add_watch_type_name = async function(req, res){
+    //console.log(req.body)
+    //console.log(req.params)
+    await Watch.updateMany({type_id:"5e2fe09fd6506f79a39c6fad"},{type_name:"Men Watch"})
+    await Watch.updateMany({type_id:"5e30038af16db81e325b69c4"},{type_name:"Women Watch"})
+    await Watch.updateMany({type_id:"5e300399f16db81e325b69c7"},{type_name:"Couple Watch"})
+    res.json({"watches":"updated"})
 }
 
 exports.edit_watch_status = function(req, res){
