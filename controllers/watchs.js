@@ -285,6 +285,8 @@ exports.get_watchs_by_type = async function(req, res){
 
 exports.add_watch = async function(req, res){
     let typeid = req.body.watch_type
+    let watchtyperef = await Watchtype.findOne({_id : typeid})
+    let watchtypename = watchtyperef.name
     let subtypeid = req.body.watch_subtype
     console.log(typeid, subtypeid)
     let maintypeid = await Watchmaintype.findOne({type_id : typeid, subtype_id : subtypeid})
@@ -296,6 +298,7 @@ exports.add_watch = async function(req, res){
             maintype_id: maintypeid._id,
             maintype_name: maintypeid.name,
             type_id : typeid,
+            type_name: watchtypename,
             subtype_id : subtypeid,
             size: req.body.watch_size,
             h_image: "noimage.png",
