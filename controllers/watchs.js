@@ -192,6 +192,7 @@ exports.delete_watch_types = async function(req, res){
 });
 
 let deletewatchtypes = await Watchtype.deleteMany({'_id':{'$in': watchsDelete}})
+let deletewatchmaintypes = await Watchmaintype.deleteMany({'type_id':{'$in': watchsDelete}})
 let deletewatches = await Watch.deleteMany({'type_id':{'$in': watchsDelete}})
 res.json({"yoyo":"dodo"})
 }
