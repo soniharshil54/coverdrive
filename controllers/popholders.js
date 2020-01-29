@@ -46,7 +46,7 @@ exports.get_popholders_by_typeid = async function(req, res){
         popholders = await Popholder.find({popholder_type:"Custom Popholder"})
         res.json(popholders)
     }
-    else if(typeid === "5e300ed4d28880257bd805ae"){
+    else if(typeid === "5e301b1afda53f3126a601c2"){
         popholders = await Popholder.find({popholder_type:"Regular Popholder"})
         res.json(popholders)
     }
