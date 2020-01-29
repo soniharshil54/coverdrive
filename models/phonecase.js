@@ -83,12 +83,10 @@ size_4d : {
     default: "36x63"
 },
 available_2d : {
-    type : Number,
-    default : 1
+    type : Number
 },
 available_3d : {
-    type : Number,
-    default : 1
+    type : Number
 },
 available_4d : {
     type : Number,
