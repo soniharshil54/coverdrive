@@ -150,6 +150,7 @@ exports.get_phonecase_by_id = async function(req, res){
         let newphone = phonecase.toObject()
         let data = []
         let obj2d = {
+            type:"2d",
             title: "2D phonecase",
             size: phonecase.size_2d,
             available: phonecase.available_2d ,
@@ -161,6 +162,7 @@ exports.get_phonecase_by_id = async function(req, res){
             pick_image_size: "312x633"
         }
         let obj3d = {
+            type:"3d",
             title: "3D phonecase",
             size: phonecase.size_3d,
             available: phonecase.available_3d ,
@@ -172,6 +174,7 @@ exports.get_phonecase_by_id = async function(req, res){
             pick_image_size: "312x633"
         }
         let obj4d = {
+            type:"4d",
             title: "4D phonecase",
             size: phonecase.size_4d,
             available: phonecase.available_4d,
@@ -184,7 +187,16 @@ exports.get_phonecase_by_id = async function(req, res){
       //  phonecase.data = data
         //console.log(phonecase.data)
         //console.log(phonecase)
-         data.push(obj2d,obj3d,obj4d)
+        if(phonecase.available_2d === 1){
+            data.push(obj2d)
+        }
+        if(phonecase.available_3d === 1){
+            data.push(obj3d)
+        }
+        if(phonecase.available_4d === 1){
+            data.push(obj4d)
+        }
+
          var ndata = {data: data};
          let nphonecase = {...newphone, ...ndata};
          delete nphonecase.size_2d;
