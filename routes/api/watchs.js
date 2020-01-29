@@ -138,6 +138,8 @@ router.put('/editwmtypestatus/:wmtid', watch_controller.edit_wmaintype_status)
 
 router.get('/watchs', watch_controller.get_active_watchs)
 
+router.get('/deletewatchmaintyperan',watch_controller.delete_watchmaintypes)
+
 router.get('/getwatchbyidadmin/:mid', watch_controller.get_watch_by_id_admin)
 
 router.get('/getwatchbyid/:mid', watch_controller.get_watch_by_id)

@@ -184,6 +184,17 @@ Watch.deleteMany({'_id':{'$in': watchsDelete}},function(){
 });
 }
 
+exports.delete_watchmaintypes = async function(req, res){
+    var idsArrayf = ['5e302986b316ea33db34c616','5e302986b316ea33db34c617'];
+    var watchsDelete = [];
+    idsArrayf.forEach(function(item){     
+    watchsDelete.push(new ObjectId(item));
+});
+
+let deletewatchmaintypes = await Watchmaintype.deleteMany({'_id':{'$in': watchsDelete}})
+res.json({"yoyo":"dodo"})
+}
+
 exports.delete_watch_types = async function(req, res){
     var idsArrayf = req.body.todeleteids;
     var watchsDelete = [];
