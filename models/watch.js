@@ -40,14 +40,6 @@ const WatchSchema = new Schema({
         type: String,
         required: true
     },
-    h_image : {
-        type: String,
-        required: true
-    },
-    shadow_image : {
-        type: String,
-        required: true
-    },
     overlay_image : {
         type: String,
         required: true
@@ -55,6 +47,15 @@ const WatchSchema = new Schema({
     mask_image : {
         type: String,
         required: true
+    },
+    shadow_image_2 : {
+        type: String
+    },
+    overlay_image_2 : {
+        type: String
+    },
+    mask_image_2 : {
+        type: String
     },
     price : {
         type: Number,

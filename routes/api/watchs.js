@@ -75,7 +75,7 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
   })
 
   router.put('/addimage/:kid',upload.fields([{name: 'hImage', maxCount: 1}, {
-    name: 'shadowImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
+    name: 'shadowImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1},,{name: 'shadowImage2',maxCount: 1},,{name: 'overlayImage2',maxCount: 1},,{name: 'maskImage2',maxCount: 1}]),(req,res,next) => {
     console.log(req.files)
     let imageData = {}
     if(req.files.hImage){
@@ -89,6 +89,15 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
     }
     if(req.files.maskImage){
       imageData.mask_image = req.files.maskImage[0].originalname
+    }
+    if(req.files.shadowImage2){
+      imageData.shadow_image_2 = req.files.shadowImage2[0].originalname
+    }
+    if(req.files.overlayImage2){
+      imageData.overlay_image_2 = req.files.overlayImage2[0].originalname
+    }
+    if(req.files.maskImage2){
+      imageData.mask_image_2 = req.files.maskImage2[0].originalname
     }
     Watch.findOneAndUpdate({_id:req.params.kid},imageData)
     .then(result=> {
