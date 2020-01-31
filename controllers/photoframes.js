@@ -41,18 +41,8 @@ exports.get_active_photoframe_types = function(req, res){
 exports.get_photoframes_by_typeid = async function(req, res){
     console.log("gt mt called")
     let typeid = req.params.typeid
-    let photoframes
-    if(typeid === "5e301af4fda53f3126a601c1"){
-        photoframes = await Photoframe.find({photoframe_type:"Custom Photoframe", available_status : 1})
+    let photoframes = await Photoframe.find({photoframe_type:typeid, available_status : 1})
         res.json(photoframes)
-    }
-    else if(typeid === "5e301b1afda53f3126a601c2"){
-        photoframes = await Photoframe.find({photoframe_type:"Regular Photoframe", available_status : 1})
-        res.json(photoframes)
-    }
-    else{
-        res.json({"message":"Bad Request"})
-    }
     
 }
 
