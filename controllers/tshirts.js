@@ -56,23 +56,32 @@ exports.add_tshirt_type = async function(req, res){
     res.json(tshirttype)
 }
 
-exports.add_tshirt_sub_type = function(req, res){
-    //let tyid = mongoose.Types.ObjectId(req.body.tyid)
-    const newTshirtsubtype = new Tshirtsubtype(
+exports.add_tshirt_sub_type = async function(req, res){
+    let tyid1 = mongoose.Types.ObjectId("5e32ccfb1d82674557b07784")
+    let tyid2 = mongoose.Types.ObjectId("5e32cd668719bf459bfa93c6")
+    let tyid3 = mongoose.Types.ObjectId("5e32cd728719bf459bfa93c7")
+    const newTshirtsubtype1 = new Tshirtsubtype(
         {
-            _id: new mongoose.Types.ObjectId(),
-            name: req.body.tt_name
+            _id: tyid1,
+            name: "Graphic T-shirt"
         }
     )
-    newTshirtsubtype.save()
-    .then((result => {
-        console.log(result)
-        res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
-    }))
-    .catch(err => {
-        console.log(err)
-        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
-    })
+    const newTshirtsubtype2 = new Tshirtsubtype(
+        {
+            _id: tyid2,
+            name: "Solid T-shirt"
+        }
+    )
+    const newTshirtsubtype3 = new Tshirtsubtype(
+        {
+            _id: tyid3,
+            name: "Custom T-shirt"
+        }
+    )
+    await newTshirtsubtype1.save()
+    await newTshirtsubtype2.save()
+    await newTshirtsubtype3.save()
+    res.json({"tshirt":"added"})
 }
 
 exports.get_all_tshirt_types = function(req, res){

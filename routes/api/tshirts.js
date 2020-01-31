@@ -138,7 +138,9 @@ router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}
 
   router.post('/addtype', tshirt_controller.add_tshirt_type);
 
-  router.post('/addsubtype', tshirt_controller.add_tshirt_sub_type);
+  //router.post('/addsubtype', tshirt_controller.add_tshirt_sub_type);
+
+  router.get('/addsubtypeget', tshirt_controller.add_tshirt_sub_type);
 
   router.get('/getalltshirttypes', tshirt_controller.get_all_tshirt_types)
 
