@@ -170,7 +170,7 @@ exports.get_photoframe_by_id = async function(req, res){
 }
 
 exports.add_photoframe = async function(req, res){
-    let photoframetyperef = await Photoframetype.findOne({_id : photoframe_type})
+    let photoframetyperef = await Photoframetype.findOne({_id : req.body.photoframe_type})
     console.log(photoframetyperef)
     let photoframetypename = photoframetyperef.name
     const newPhotoframe = new Photoframe(
