@@ -8,7 +8,17 @@ const PhotoframeSchema = new Schema({
         type: String,
         required: true
     },
+    photoframe_type : {
+        type:String
+    },
+    photoframe_type_name : {
+        type:String
+    },
     size : {
+        type: String,
+        required: true
+    },
+    pick_image_size : {
         type: String,
         required: true
     },
@@ -16,7 +26,15 @@ const PhotoframeSchema = new Schema({
         type: String,
         required: true
     },
-    in_image : {
+    shadow_image : {
+        type: String,
+        required: true
+    },
+    overlay_image : {
+        type: String,
+        required: true
+    },
+    mask_image : {
         type: String,
         required: true
     },
@@ -31,6 +49,11 @@ const PhotoframeSchema = new Schema({
     available_status : {
         type : Number,
         default : 1
+    },
+    create_date: {
+        type:Date,
+        default: Date.now,
+        required: true
     }
 })
 
