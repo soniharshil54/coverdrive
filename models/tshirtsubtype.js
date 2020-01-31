@@ -2,15 +2,11 @@ const mongoose = require('mongoose')
 const Schema = mongoose.Schema
 const Order = require('./order')
 
-const TshirttypeSchema = new Schema({
+const TshirtsubtypeSchema = new Schema({
   _id : mongoose.Schema.Types.ObjectId,
   name : {
     type: String,
     required: true
-  },
-  slider_image : {
-      type : String,
-      required: true
   },
   active_status : {
     type : Number,
@@ -24,4 +20,4 @@ const TshirttypeSchema = new Schema({
    }
 })
 
-module.exports = Tshirttype = mongoose.model('tshirttype',TshirttypeSchema)
+module.exports = Tshirtsubtype = mongoose.model('tshirtsubtype',TshirtsubtypeSchema)
