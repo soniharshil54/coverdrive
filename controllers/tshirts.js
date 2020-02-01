@@ -94,7 +94,7 @@ exports.get_all_tshirt_types = function(req, res){
 exports.update_it_all = async function(req,res){
     await Tshirttype.updateMany({_id:"5e33ed82abdd2f537529c7e9"},{"type_name":"mentshirt"})
     await Tshirttype.updateMany({_id:"5e33eda1abdd2f537529c7ed"},{"type_name":"womentshirt"})
-    await Tshirttype.updateMany({_id:"5e33edbfabdd2f537529c7f1"},{"type_name":"mentshirt"})
+    await Tshirttype.updateMany({_id:"5e33edbfabdd2f537529c7f1"},{"type_name":"coupletshirt"})
 
     await Tshirtsubtype.updateMany({_id:"5e32ccfb1d82674557b07784"},{"subtype_name":"graphictshirt"})
     await Tshirtsubtype.updateMany({_id:"5e32cd668719bf459bfa93c6"},{"subtype_name":"solidtshirt"})
