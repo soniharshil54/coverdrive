@@ -31,12 +31,12 @@ const storage = multer.diskStorage({
   const upload = multer({
     storage: storage,
     limits: {
-      fileSize: 2024 * 2024 * 5
+      fileSize: 2024 * 2024 * 6
     },
     fileFilter: fileFilter
   });
 
-  router.post('/addproducttocart', upload.fields([{name: 'user_img_full', maxCount: 1},{name: 'user_img_cropped', maxCount: 1}]),async (req,res,next) => {
+  router.post('/addproducttocart', upload.fields([{name: 'user_img_full', maxCount: 1},{name: 'user_img_cropped', maxCount: 1},{name: 'user_img_full_2', maxCount: 1},{name: 'user_img_cropped_2', maxCount: 1}]),async (req,res,next) => {
     console.log("product upload to cart")
     console.log(req.files)
     const newCartproduct = new Cartproduct(
@@ -45,8 +45,10 @@ const storage = multer.diskStorage({
             product_name: req.body.product_name,
             cover_4d_id : req.body.cover_4d_id ? req.body.cover_4d_id : "na",
             cover_type:  req.body.cover_type ? req.body.cover_type : "na",
-            image: req.files.user_img_full ? req.files.user_img_full[0].originalname : "na",
-            cropped_image: req.files.user_img_cropped ? req.files.user_img_cropped[0].originalname : "na",
+            image: req.files.user_img_full ? req.files.user_img_full[0].originalname : "noimage.png",
+            cropped_image: req.files.user_img_cropped ? req.files.user_img_cropped[0].originalname : "noimage.png",
+            image_2: req.files.user_img_full_2 ? req.files.user_img_full_2[0].originalname : "noimage.png",
+            cropped_image_2: req.files.user_img_cropped_2 ? req.files.user_img_cropped_2[0].originalname : "noimage.png",
             print_name : req.body.print_name ? req.body.print_name : "na",
             size: req.body.size ? req.body.size : "na",
             subtotal: req.body.subtotal,

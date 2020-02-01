@@ -24,6 +24,12 @@ const CartproductSchema = new Schema({
         type: String,
         required: true
     },
+    image_2 : {
+        type: String
+    },
+    cropped_image_2 : {
+        type: String
+    },
     print_name : String,
     size: String,
     quantity : String,
