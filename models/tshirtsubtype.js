@@ -8,6 +8,9 @@ const TshirtsubtypeSchema = new Schema({
     type: String,
     required: true
   },
+  subtype_name : {
+    type: String
+  },
   active_status : {
     type : Number,
     required:true,

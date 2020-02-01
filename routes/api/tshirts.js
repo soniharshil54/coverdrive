@@ -144,6 +144,8 @@ router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}
 
   router.get('/getalltshirttypes', tshirt_controller.get_all_tshirt_types)
 
+  router.get('/updatealloftshirts', tshirt_controller.update_it_all)
+
   router.get('/getalltshirtsubtypes', tshirt_controller.get_all_tshirt_subtypes)
 
   router.get('/gettshirttypes', tshirt_controller.get_active_tshirt_types)

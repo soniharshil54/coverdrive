@@ -8,6 +8,9 @@ const TshirttypeSchema = new Schema({
     type: String,
     required: true
   },
+  type_name : {
+    type: String
+  },
   slider_image : {
       type : String,
       required: true

@@ -91,6 +91,37 @@ exports.get_all_tshirt_types = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.update_it_all = async function(req,res){
+    await Tshirttype.updateMany({_id:"5e33ed82abdd2f537529c7e9"},{"type_name":"mentshirt"})
+    await Tshirttype.updateMany({_id:"5e33eda1abdd2f537529c7ed"},{"type_name":"womentshirt"})
+    await Tshirttype.updateMany({_id:"5e33edbfabdd2f537529c7f1"},{"type_name":"mentshirt"})
+
+    await Tshirtsubtype.updateMany({_id:"5e32ccfb1d82674557b07784"},{"subtype_name":"graphictshirt"})
+    await Tshirtsubtype.updateMany({_id:"5e32cd668719bf459bfa93c6"},{"subtype_name":"solidtshirt"})
+    await Tshirtsubtype.updateMany({_id:"5e32cd728719bf459bfa93c7"},{"subtype_name":"customtshirt"})
+
+    await Tshirtmaintype.updateMany({_id:"5e33ed82abdd2f537529c7ea"},{"type":"mentshirt","subtype":"graphictshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33ed82abdd2f537529c7eb"},{"type":"mentshirt","subtype":"solidtshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33ed82abdd2f537529c7ec"},{"type":"mentshirt","subtype":"customtshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33eda1abdd2f537529c7ee"},{"type":"womentshirt","subtype":"graphictshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33eda1abdd2f537529c7ef"},{"type":"womentshirt","subtype":"solidtshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33eda1abdd2f537529c7f0"},{"type":"womentshirt","subtype":"customtshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33edbfabdd2f537529c7f2"},{"type":"coupletshirt","subtype":"graphictshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33edbfabdd2f537529c7f3"},{"type":"coupletshirt","subtype":"solidtshirt"})
+    await Tshirtmaintype.updateMany({_id:"5e33edbfabdd2f537529c7f4"},{"type":"coupletshirt","subtype":"customtshirt"})
+
+    await Tshirt.updateMany({maintype_id:"5e33ed82abdd2f537529c7ea"},{"type":"mentshirt","subtype":"graphictshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33ed82abdd2f537529c7eb"},{"type":"mentshirt","subtype":"solidtshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33ed82abdd2f537529c7ec"},{"type":"mentshirt","subtype":"customtshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33eda1abdd2f537529c7ee"},{"type":"womentshirt","subtype":"graphictshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33eda1abdd2f537529c7ef"},{"type":"womentshirt","subtype":"solidtshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33eda1abdd2f537529c7f0"},{"type":"womentshirt","subtype":"customtshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33edbfabdd2f537529c7f2"},{"type":"coupletshirt","subtype":"graphictshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33edbfabdd2f537529c7f3"},{"type":"coupletshirt","subtype":"solidtshirt"})
+    await Tshirt.updateMany({maintype_id:"5e33edbfabdd2f537529c7f4"},{"type":"coupletshirt","subtype":"customtshirt"})
+    res.json({"all":"updated"})
+}
+
 exports.get_all_tshirt_subtypes = function(req, res){
     console.log("gt tt called")
     Tshirtsubtype.find()

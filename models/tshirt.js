@@ -24,6 +24,12 @@ const TshirtSchema = new Schema({
         type: String,
         required: true
     },
+    type : {
+        type: String
+    },
+    subtype : {
+        type: String
+    },
     subtype_id : {
         type: String,
         required: true

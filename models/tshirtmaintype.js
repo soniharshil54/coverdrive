@@ -12,11 +12,19 @@ const TshirtmaintypeSchema = new Schema({
     type: String,
     required: true
   },
+  type : {
+    type: String,
+    required: true
+  },
   subtype_id : {
       type : String,
       required: true
   },
   subtype_name : {
+    type: String,
+    required: true
+  },
+  subtype : {
     type: String,
     required: true
   },
