@@ -344,12 +344,16 @@ exports.get_tshirts_by_type = async function(req, res){
 
 exports.add_tshirt = async function(req, res){
     let typeid = req.body.tshirt_type
+    let subtypeid = req.body.tshirt_subtype
     console.log(req.body.tshirt_type)
     let tshirttyperef = await Tshirttype.findOne({_id : typeid})
+    let tshirttypestatic = tshirttyperef.type_name
+    let tshirtsubtyperef = await Tshirtsubtype.findOne({_id : subtypeid})
+    let tshirtsubtypestatic = tshirtsubtyperef.subtype_name
   //  console.log(tshirttyperef)
     let tshirttypename = tshirttyperef.name
     console.log(tshirttypename)
-    let subtypeid = req.body.tshirt_subtype
+    
     console.log(typeid, subtypeid)
     let maintypeid = await Tshirtmaintype.findOne({type_id : typeid, subtype_id : subtypeid})
  //   console.log(maintypeid)
@@ -361,6 +365,8 @@ exports.add_tshirt = async function(req, res){
             maintype_name: maintypeid.name,
             type_id : typeid,
             type_name: tshirttypename,
+            type: tshirttypestatic,
+            subtype: tshirtsubtypestatic,
             subtype_id : subtypeid,
             sizes_available: req.body.tshirt_size,
             sizes_available_2: req.body.tshirt_size_2,
