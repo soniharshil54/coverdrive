@@ -111,6 +111,8 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
       )
   })
 
+  router.get('/updateallofwatchs', watch_controller.update_it_all)
+
   router.post('/addtype', watch_controller.add_watch_type);
 
   router.post('/addsubtype', watch_controller.add_watch_sub_type);

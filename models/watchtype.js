@@ -8,6 +8,10 @@ const WatchtypeSchema = new Schema({
     type: String,
     required: true
   },
+  type_name : {
+    type: String,
+    required: true
+  },
   slider_image : {
       type : String,
       required: true

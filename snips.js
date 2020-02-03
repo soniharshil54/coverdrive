@@ -50,3 +50,34 @@ popholder types live
     "create_date": "2020-01-28T11:29:30.802Z",
     "__v": 0
 }
+
+
+exports.update_it_all = async function(req,res){
+    await Watchtype.updateMany({_id:"5e2fe09fd6506f79a39c6fad"},{"type_name":"menwatch"})
+    await Watchtype.updateMany({_id:"5e30038af16db81e325b69c4"},{"type_name":"womenwatch"})
+    await Watchtype.updateMany({_id:"5e300399f16db81e325b69c7"},{"type_name":"couplewatch"})
+
+    await Watchsubtype.updateMany({_id:"5e2e77187d507f1a376667de"},{"subtype_name":"regularwatch"})
+    await Watchsubtype.updateMany({_id:"5e2e76e27d507f1a376667dd"},{"subtype_name":"customwatch"})
+
+    await Watchmaintype.updateMany({_id:"5e2fe09fd6506f79a39c6fae"},{"type":"menwatch","subtype":"customwatch"})
+    await Watchmaintype.updateMany({_id:"5e2fe09fd6506f79a39c6faf"},{"type":"menwatch","subtype":"regularwatch"})
+    //await Watchmaintype.updateMany({_id:"5e33ed82abdd2f537529c7ec"},{"type":"menwatch","subtype":"customwatch"})
+    await Watchmaintype.updateMany({_id:"5e30038af16db81e325b69c5"},{"type":"womenwatch","subtype":"customwatch"})
+    await Watchmaintype.updateMany({_id:"5e30038af16db81e325b69c6"},{"type":"womenwatch","subtype":"regularwatch"})
+    //await Watchmaintype.updateMany({_id:"5e33eda1abdd2f537529c7f0"},{"type":"womenwatch","subtype":"customwatch"})
+    await Watchmaintype.updateMany({_id:"5e300399f16db81e325b69c8"},{"type":"couplewatch","subtype":"customwatch"})
+    await Watchmaintype.updateMany({_id:"5e300399f16db81e325b69c9"},{"type":"couplewatch","subtype":"regularwatch"})
+    //await Watchmaintype.updateMany({_id:"5e33edbfabdd2f537529c7f4"},{"type":"couplewatch","subtype":"customwatch"})
+
+    await Watch.updateMany({maintype_id:"5e2fe09fd6506f79a39c6fae"},{"type":"menwatch","subtype":"customwatch"})
+    await Watch.updateMany({maintype_id:"5e2fe09fd6506f79a39c6faf"},{"type":"menwatch","subtype":"regularwatch"})
+    //await Watch.updateMany({maintype_id:"5e33ed82abdd2f537529c7ec"},{"type":"menwatch","subtype":"customwatch"})
+    await Watch.updateMany({maintype_id:"5e30038af16db81e325b69c5"},{"type":"womenwatch","subtype":"customwatch"})
+    await Watch.updateMany({maintype_id:"5e30038af16db81e325b69c6"},{"type":"womenwatch","subtype":"regularwatch"})
+    //await Watch.updateMany({maintype_id:"5e33eda1abdd2f537529c7f0"},{"type":"womenwatch","subtype":"customwatch"})
+    await Watch.updateMany({maintype_id:"5e300399f16db81e325b69c8"},{"type":"couplewatch","subtype":"customwatch"})
+    await Watch.updateMany({maintype_id:"5e300399f16db81e325b69c9"},{"type":"couplewatch","subtype":"regularwatch"})
+    //await Watch.updateMany({maintype_id:"5e33edbfabdd2f537529c7f4"},{"type":"couplewatch","subtype":"customwatch"})
+    res.json({"all":"updated"})
+}

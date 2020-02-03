@@ -8,6 +8,10 @@ const WatchsubtypeSchema = new Schema({
     type: String,
     required: true
   },
+  subtype_name : {
+    type: String,
+    required: true
+  },
   active_status : {
     type : Number,
     required:true,
