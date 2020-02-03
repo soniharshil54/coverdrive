@@ -70,6 +70,13 @@ exports.get_all_watch_types = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_watch_sub_types = function(req, res){
+    console.log("gt wt called")
+    Watchsubtype.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_all_watch_main_types = function(req, res){
     console.log("gt wt called")
     Watchmaintype.find()
