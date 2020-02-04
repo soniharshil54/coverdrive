@@ -163,7 +163,7 @@ exports.get_keychains_by_type = async function(req, res){
 }
 
 exports.add_keychain = async function(req, res){
-    let keychainexists = Keychain.findOne({name : req.body.keychain_name})
+    let keychainexists = Keychain.findOne({name : req.body.keychain_name}).select("_id").lean();
     console.log(keychainexists)
     if(keychainexists){
         console.log("its in if of keychainexists")
