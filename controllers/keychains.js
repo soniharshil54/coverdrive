@@ -164,10 +164,13 @@ exports.get_keychains_by_type = async function(req, res){
 
 exports.add_keychain = async function(req, res){
     let keychainexists = Keychain.findOne({name : req.body.keychain_name})
+    console.log(keychainexists)
     if(keychainexists){
+        console.log("its in if of keychainexists")
         res.json({status:0, result: "keychain name already exists !!!"})
     }
     else{
+        console.log("its in else of keychainexists")
         const newKeychain = new Keychain(
             {
                 _id: new mongoose.Types.ObjectId(),
