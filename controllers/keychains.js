@@ -162,30 +162,29 @@ exports.get_keychains_by_type = async function(req, res){
     }
 }
 
-exports.add_keychain = function(req, res){
-    const newKeychain = new Keychain(
-        {
-            _id: new mongoose.Types.ObjectId(),
-            name: req.body.keychain_name,
-            type : req.body.keychain_type,
-            h_image: "noimage.png",
-            shadow_image: "noimage.png",
-            mask_image: "noimage.png",
-            overlay_image: "noimage.png",
-            price: req.body.price,
-            description: req.body.description,
-            pick_image_size: req.body.pick_image_size
-        }
-    )
-    newKeychain.save()
-    .then((result => {
-        console.log(result)
-        res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
-    }))
-    .catch(err => {
-        console.log(err)
-        res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
-    })
+exports.add_keychain = async function(req, res){
+    let keychainexists = Keychain.findOne({name : req.body.keychain_name})
+    if(keychainexists){
+        res.json({status:0, result: "keychain name already exists !!!"})
+    }
+    else{
+        const newKeychain = new Keychain(
+            {
+                _id: new mongoose.Types.ObjectId(),
+                name: req.body.keychain_name,
+                type : req.body.keychain_type,
+                h_image: "noimage.png",
+                shadow_image: "noimage.png",
+                mask_image: "noimage.png",
+                overlay_image: "noimage.png",
+                price: req.body.price,
+                description: req.body.description,
+                pick_image_size: req.body.pick_image_size
+            }
+        )
+        let result = await newKeychain.save()
+        res.json(result)
+    }
 }
 
 
