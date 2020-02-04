@@ -65,6 +65,8 @@ router.put('/addimage/:mid',upload.fields([{name: 'hImage', maxCount: 1}, {
 })
 
 
+router.get('/getallsipperbottlenames', sipperbottle_controller.get_all_sipperbottle_names)
+
 router.get('/sipperbottles', sipperbottle_controller.get_active_sipperbottles)
 
 router.get('/getsipperbottlebyidadmin/:mid', sipperbottle_controller.get_sipperbottle_by_id_admin)

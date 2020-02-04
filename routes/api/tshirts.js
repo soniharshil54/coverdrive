@@ -177,6 +177,7 @@ router.get('/gettshirtesbymaintypeid/:mtypeid', tshirt_controller.get_tshirtes_b
 
 router.put('/edittmtypestatus/:tmtid', tshirt_controller.edit_wmaintype_status)
 
+router.get('/getalltshirtnames', tshirt_controller.get_all_tshirt_names)
 
 router.get('/tshirts', tshirt_controller.get_active_tshirts)
 

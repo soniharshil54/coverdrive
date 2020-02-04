@@ -66,6 +66,8 @@ router.put('/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
 
 router.post('/addtype', popholder_controller.add_popholder_type);
 
+router.get('/getallpopholdernames', popholder_controller.get_all_popholder_names)
+
 router.get('/getallpopholdertypes', popholder_controller.get_all_popholder_types)
 
 router.get('/getpopholdersbytypeid/:typeid', popholder_controller.get_popholders_by_typeid)

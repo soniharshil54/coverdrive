@@ -292,6 +292,13 @@ exports.get_all_tshirts = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_tshirt_names = function(req, res){
+    console.log("gt tshirts called")
+    Tshirt.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_tshirt_by_id_admin = async function(req, res){
     let tshirt = await Tshirt.findOne({_id:req.params.mid})
     if(tshirt){

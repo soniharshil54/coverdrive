@@ -135,6 +135,13 @@ exports.get_all_photoframes = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_photoframe_names = function(req, res){
+    console.log("gt photoframes called")
+    Photoframe.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_photoframe_by_id_admin = async function(req, res){
     let photoframe = await Photoframe.findOne({_id:req.params.mid})
     if(photoframe){

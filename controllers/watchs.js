@@ -270,6 +270,13 @@ exports.get_all_watchs = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_watch_names = function(req, res){
+    console.log("gt watchs called")
+    Watch.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_watch_by_id_admin = async function(req, res){
     let watch = await Watch.findOne({_id:req.params.mid})
     if(watch){

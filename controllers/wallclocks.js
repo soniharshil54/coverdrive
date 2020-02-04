@@ -112,6 +112,13 @@ exports.get_all_wallclocks = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_wallclock_names = function(req, res){
+    console.log("gt wallclocks called")
+    Wallclock.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_wallclock_by_id_admin = async function(req, res){
     let wallclock = await Wallclock.findOne({_id:req.params.mid})
     if(wallclock){

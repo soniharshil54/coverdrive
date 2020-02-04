@@ -87,6 +87,8 @@ router.post('/addtype', photoframe_controller.add_photoframe_type);
 
 router.get('/getallphotoframetypes', photoframe_controller.get_all_photoframe_types)
 
+router.get('/getallphotoframenames', photoframe_controller.get_all_photoframe_names)
+
 router.get('/getphotoframesbytypeid/:typeid', photoframe_controller.get_photoframes_by_typeid)
 
 router.get('/getphotoframetypes', photoframe_controller.get_active_photoframe_types)

@@ -131,6 +131,13 @@ exports.get_all_popholders = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_popholder_names = function(req, res){
+    console.log("gt popholders called")
+    Popholder.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_popholder_by_id_admin = async function(req, res){
     let popholder = await Popholder.findOne({_id:req.params.mid})
     if(popholder){

@@ -53,6 +53,13 @@ exports.get_all_sipperbottles = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_sipperbottle_names = function(req, res){
+    console.log("gt sipperbottles called")
+    Sipperbottle.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_sipperbottle_by_id_admin = async function(req, res){
     let sipperbottle = await Sipperbottle.findOne({_id:req.params.mid})
     if(sipperbottle){

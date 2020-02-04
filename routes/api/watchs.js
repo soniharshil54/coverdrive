@@ -150,6 +150,7 @@ router.get('/getwatchesbymaintypeid/:mtypeid', watch_controller.get_watches_by_m
 
 router.put('/editwmtypestatus/:wmtid', watch_controller.edit_wmaintype_status)
 
+router.get('/getallwatchnames', watch_controller.get_all_watch_names)
 
 router.get('/watchs', watch_controller.get_active_watchs)
 

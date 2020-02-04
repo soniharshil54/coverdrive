@@ -98,6 +98,8 @@ router.put('/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
 
 router.get('/wallclocks', wallclock_controller.get_active_wallclocks)
 
+router.get('/getallwallclocknames', wallclock_controller.get_all_wallclock_names)
+
 router.get('/getwallclockbyidadmin/:mid', wallclock_controller.get_wallclock_by_id_admin)
 
 router.get('/getwallclockbyid/:mid', wallclock_controller.get_wallclock_by_id)
