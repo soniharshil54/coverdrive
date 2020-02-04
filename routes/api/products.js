@@ -13,7 +13,9 @@ const storage = multer.diskStorage({
     cb(null, './uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname);
+    let timestampref = Math.floor(Date.now() / 1000)
+    let slidernameref = `${timestampref}-${file.originalname}`
+    cb(null, slidernameref);
   }
 });
 
@@ -40,7 +42,7 @@ router.put('/addslider/:pid',upload.single('modal_slider_image'),(req,res,next) 
   console.log(req.params.pid)
   let imageData = {}
   if(req.file){
-    imageData.slider_image = req.file.originalname
+    imageData.slider_image = req.file.filename
   }
   Mainslide.findOneAndUpdate({_id:req.params.pid},imageData)
   .then(result=> res.json({"result":"keychain image updated","updatedkeychain":result}))
@@ -55,7 +57,7 @@ router.put('/addsecondaryslider/:sid',upload.single('modal_s_slider_image'),(req
     product_name : req.body.product_slider
   }
   if(req.file){
-    imageData.slider_image = req.file.originalname
+    imageData.slider_image = req.file.filename
   }
   Secondaryslide.findOneAndUpdate({_id:req.params.sid},imageData)
   .then(result=> res.json({"result":"keychain image updated","updatedkeychain":result}))

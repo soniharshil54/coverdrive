@@ -12,7 +12,9 @@ const storage = multer.diskStorage({
     cb(null, './uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname);
+    let timestampref = Math.floor(Date.now() / 1000)
+    let slidernameref = `${timestampref}-${file.originalname}`
+    cb(null, slidernameref);
   }
 });
 
@@ -35,11 +37,12 @@ const upload = multer({
 
 router.put('/addimage/:pid',upload.single('offer_image'),(req,res,next) => {
   console.log("below file")
-  console.log(req.file)
+  console.log(req.file.filename)
+  
   console.log(req.params.pid)
   let imageData = {}
   if(req.file){
-    imageData.h_image = req.file.originalname
+    imageData.h_image = req.file.filename
   }
   Offer.findOneAndUpdate({_id:req.params.pid},imageData)
   .then(result=> res.json({"result":"offer image updated","updatedoffer":result}))
