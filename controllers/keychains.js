@@ -163,7 +163,7 @@ exports.get_keychains_by_type = async function(req, res){
 }
 
 exports.add_keychain = async function(req, res){
-    let keychainexists = Keychain.countDocuments({name : req.body.keychain_name})
+    let keychainexists = await Keychain.countDocuments({name : req.body.keychain_name})
     console.log(keychainexists)
     if(keychainexists > 0){
         console.log("its in if of keychainexists")
