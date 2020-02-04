@@ -100,6 +100,8 @@ router.get('/getmugbyidadmin/:mid', mug_controller.get_mug_by_id_admin)
 
 router.get('/getmugbyid/:mid', mug_controller.get_mug_by_id)
 
+router.get('/getallmugnames', mug_controller.get_all_mug_names)
+
 router.get('/getallmugs', mug_controller.get_all_mugs)
 
 router.get('/getmugsbytypeid/:typeid', mug_controller.get_mugs_by_typeid)

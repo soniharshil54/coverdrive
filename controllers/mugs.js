@@ -132,6 +132,13 @@ exports.get_all_mugs = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_mug_names = function(req, res){
+    console.log("gt mugs called")
+    Mug.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_mug_by_id_admin = async function(req, res){
     let mug = await Mug.findOne({_id:req.params.mid})
     if(mug){
