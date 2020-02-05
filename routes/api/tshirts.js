@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
     cb(null, './uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname);
+    let timestampref = Math.floor(Date.now() / 1000)
+    let slidernameref = `${timestampref}-${file.originalname}`
+    cb(null, slidernameref);
   }
 });
 
@@ -43,7 +45,7 @@ router.put('/tmtaddimage/:tmtid',upload.fields([{name: 'sliderImage', maxCount: 
   console.log("tmt images")
   let imageData = {}
   if(req.files.sliderImage){
-    imageData.slider_image = req.files.sliderImage[0].originalname
+    imageData.slider_image = req.files.sliderImage[0].filename
   }
   Tshirtmaintype.findOneAndUpdate({_id:req.params.tmtid},imageData)
   .then(result=> {
@@ -61,12 +63,12 @@ router.put('/tmtaddtshirtimages/:tmtid',upload.array('tshirtImages',5),(req,res,
   console.log(req.files)
   let req_images = req.files
   console.log("tmt images")
-  let tshirt_images = req_images.map(img => img.originalname)
+  let tshirt_images = req_images.map(img => img.filename)
   let imageData = {}
   imageData.regular_images = tshirt_images
   //res.json({"multiple":"images"})
   // if(req.files.sliderImage){
-  //   imageData.slider_image = req.files.sliderImage[0].originalname
+  //   imageData.slider_image = req.files.sliderImage[0].filename
   // }
   Tshirt.findOneAndUpdate({_id:req.params.tmtid},imageData)
   .then(result=> {
@@ -85,7 +87,7 @@ router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}
     console.log("tt images")
     let imageData = {}
     if(req.files.sliderImage){
-      imageData.slider_image = req.files.sliderImage[0].originalname
+      imageData.slider_image = req.files.sliderImage[0].filename
     }
     Tshirttype.findOneAndUpdate({_id:req.params.ttid},imageData)
     .then(result=> {
@@ -104,25 +106,25 @@ router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}
     console.log(req.files)
     let imageData = {}
     if(req.files.hImage){
-      imageData.h_image = req.files.hImage[0].originalname
+      imageData.h_image = req.files.hImage[0].filename
     }
     if(req.files.shadowImage){
-      imageData.shadow_image = req.files.shadowImage[0].originalname
+      imageData.shadow_image = req.files.shadowImage[0].filename
     }
     if(req.files.overlayImage){
-      imageData.overlay_image = req.files.overlayImage[0].originalname
+      imageData.overlay_image = req.files.overlayImage[0].filename
     }
     if(req.files.maskImage){
-      imageData.mask_image = req.files.maskImage[0].originalname
+      imageData.mask_image = req.files.maskImage[0].filename
     }
     if(req.files.shadowImage2){
-      imageData.shadow_image_2 = req.files.shadowImage2[0].originalname
+      imageData.shadow_image_2 = req.files.shadowImage2[0].filename
     }
     if(req.files.overlayImage2){
-      imageData.overlay_image_2 = req.files.overlayImage2[0].originalname
+      imageData.overlay_image_2 = req.files.overlayImage2[0].filename
     }
     if(req.files.maskImage2){
-      imageData.mask_image_2 = req.files.maskImage2[0].originalname
+      imageData.mask_image_2 = req.files.maskImage2[0].filename
     }
     Tshirt.findOneAndUpdate({_id:req.params.kid},imageData)
     .then(result=> {

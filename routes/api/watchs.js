@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
     cb(null, './uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname);
+    let timestampref = Math.floor(Date.now() / 1000)
+    let slidernameref = `${timestampref}-${file.originalname}`
+    cb(null, slidernameref);
   }
 });
 
@@ -41,7 +43,7 @@ router.put('/wmtaddimage/:wmtid',upload.fields([{name: 'sliderImage', maxCount: 
   console.log("wmt images")
   let imageData = {}
   if(req.files.sliderImage){
-    imageData.slider_image = req.files.sliderImage[0].originalname
+    imageData.slider_image = req.files.sliderImage[0].filename
   }
   Watchmaintype.findOneAndUpdate({_id:req.params.wmtid},imageData)
   .then(result=> {
@@ -60,7 +62,7 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
     console.log("wt images")
     let imageData = {}
     if(req.files.sliderImage){
-      imageData.slider_image = req.files.sliderImage[0].originalname
+      imageData.slider_image = req.files.sliderImage[0].filename
     }
     Watchtype.findOneAndUpdate({_id:req.params.wtid},imageData)
     .then(result=> {
@@ -79,25 +81,25 @@ router.put('/wtaddimage/:wtid',upload.fields([{name: 'sliderImage', maxCount: 1}
     console.log(req.files)
     let imageData = {}
     if(req.files.hImage){
-      imageData.h_image = req.files.hImage[0].originalname
+      imageData.h_image = req.files.hImage[0].filename
     }
     if(req.files.shadowImage){
-      imageData.shadow_image = req.files.shadowImage[0].originalname
+      imageData.shadow_image = req.files.shadowImage[0].filename
     }
     if(req.files.overlayImage){
-      imageData.overlay_image = req.files.overlayImage[0].originalname
+      imageData.overlay_image = req.files.overlayImage[0].filename
     }
     if(req.files.maskImage){
-      imageData.mask_image = req.files.maskImage[0].originalname
+      imageData.mask_image = req.files.maskImage[0].filename
     }
     if(req.files.shadowImage2){
-      imageData.shadow_image_2 = req.files.shadowImage2[0].originalname
+      imageData.shadow_image_2 = req.files.shadowImage2[0].filename
     }
     if(req.files.overlayImage2){
-      imageData.overlay_image_2 = req.files.overlayImage2[0].originalname
+      imageData.overlay_image_2 = req.files.overlayImage2[0].filename
     }
     if(req.files.maskImage2){
-      imageData.mask_image_2 = req.files.maskImage2[0].originalname
+      imageData.mask_image_2 = req.files.maskImage2[0].filename
     }
     Watch.findOneAndUpdate({_id:req.params.kid},imageData)
     .then(result=> {

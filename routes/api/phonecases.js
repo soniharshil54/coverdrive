@@ -13,7 +13,9 @@ const storage = multer.diskStorage({
     cb(null, './uploads/');
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname);
+    let timestampref = Math.floor(Date.now() / 1000)
+    let slidernameref = `${timestampref}-${file.originalname}`
+    cb(null, slidernameref);
   }
 });
 
@@ -49,25 +51,25 @@ const upload = multer({
   console.log(req.files)
   let imageData = {}
   if(req.files.image_2d_slider){
-    imageData.image_header_2d = req.files.image_2d_slider[0].originalname
+    imageData.image_header_2d = req.files.image_2d_slider[0].filename
   }
   if(req.files.image_2d_mask){
-    imageData.image_mask_2d = req.files.image_2d_mask[0].originalname
+    imageData.image_mask_2d = req.files.image_2d_mask[0].filename
   }
   if(req.files.image_2d_inner){
-    imageData.image_inner_2d = req.files.image_2d_inner[0].originalname
+    imageData.image_inner_2d = req.files.image_2d_inner[0].filename
   }
   if(req.files.image_3d_slider){
-    imageData.image_header_3d = req.files.image_3d_slider[0].originalname
+    imageData.image_header_3d = req.files.image_3d_slider[0].filename
   }
   if(req.files.image_3d_inner){
-    imageData.image_inner_3d = req.files.image_3d_inner[0].originalname
+    imageData.image_inner_3d = req.files.image_3d_inner[0].filename
   }
   if(req.files.image_3d_mask){
-    imageData.image_mask_3d = req.files.image_3d_mask[0].originalname
+    imageData.image_mask_3d = req.files.image_3d_mask[0].filename
   }
   if(req.files.image_4d_slider){
-    imageData.image_header_4d = req.files.image_4d_slider[0].originalname
+    imageData.image_header_4d = req.files.image_4d_slider[0].filename
   }
   console.log("below data")
   console.log(imageData)
@@ -88,13 +90,13 @@ router.put('/edit4dphonecase/:mid',upload.fields([{name: 'image_4d_slider', maxC
   console.log(req.files)
   let imageData = {}
   if(req.files.image_4d_slider){
-    imageData.image_header_2d = req.files.image_4d_slider[0].originalname
+    imageData.image_header_2d = req.files.image_4d_slider[0].filename
   }
   if(req.files.image_4d_cover){
-    imageData.image_mask_2d = req.files.image_4d_cover[0].originalname
+    imageData.image_mask_2d = req.files.image_4d_cover[0].filename
   }
   if(req.files.image_4d_mask){
-    imageData.image_inner_2d = req.files.image_4d_mask[0].originalname
+    imageData.image_inner_2d = req.files.image_4d_mask[0].filename
   }
   console.log("below data")
   console.log(imageData)
@@ -115,19 +117,19 @@ router.put('/add4dphonecaseimages/:pid',upload.fields([{name: 'slider_image', ma
   //console.log(req.files)
   let imageData = {}
   if(req.files.slider_image){
-    imageData.slider_image = req.files.slider_image[0].originalname
+    imageData.slider_image = req.files.slider_image[0].filename
   }
   if(req.files.header_image){
-    imageData.header_image = req.files.header_image[0].originalname
+    imageData.header_image = req.files.header_image[0].filename
   }
   if(req.files.png_image){
-    imageData.png_image = req.files.png_image[0].originalname
+    imageData.png_image = req.files.png_image[0].filename
   }
   if(req.files.inner_image){
-    imageData.inner_image = req.files.inner_image[0].originalname
+    imageData.inner_image = req.files.inner_image[0].filename
   }
   if(req.files.mask_image){
-    imageData.mask_image = req.files.mask_image[0].originalname
+    imageData.mask_image = req.files.mask_image[0].filename
   }
   console.log("below data")
   console.log(imageData)
@@ -147,19 +149,19 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
   console.log(req.files)
   let imageData = {}
   // if(req.files.slider_image){
-  //   imageData.slider_image = req.files.slider_image[0].originalname
+  //   imageData.slider_image = req.files.slider_image[0].filename
   // }
   // if(req.files.header_image){
-  //   imageData.header_image = req.files.header_image[0].originalname
+  //   imageData.header_image = req.files.header_image[0].filename
   // }
   // if(req.files.png_image){
-  //   imageData.png_image = req.files.png_image[0].originalname
+  //   imageData.png_image = req.files.png_image[0].filename
   // }
   // if(req.files.inner_image){
-  //   imageData.inner_image = req.files.inner_image[0].originalname
+  //   imageData.inner_image = req.files.inner_image[0].filename
   // }
   // if(req.files.mask_image){
-  //   imageData.mask_image = req.files.mask_image[0].originalname
+  //   imageData.mask_image = req.files.mask_image[0].filename
   // }
   console.log("below data")
   console.log(imageData)
