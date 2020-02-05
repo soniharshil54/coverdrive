@@ -8,7 +8,18 @@ console.log(datep)
 // var occurance = getOccurance(filteredcart)
 // var qualifiedcart = getqualifiedcart(occurance, totalbuyget)
 
-
+let products = [
+    {
+      "product_name": "oppo a5",
+    "subtotal": "200",
+    "quantity": "1"
+    },
+    {
+        "product_name": "oppo rr",
+        "subtotal": "250",
+        "quantity": "3"
+    },
+]
 
 // function getqualifiedcart(occurancep, totalbuygetp){
 //     var filteredObject = Object.keys(occurancep).reduce(function(r, e) {

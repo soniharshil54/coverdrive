@@ -41,7 +41,7 @@ const orderRoutes = require("./routes/api/orders")
 const productRoutes = require("./routes/api/products")
 const offerRoutes = require("./routes/api/offers")
 const notificationRoutes = require("./routes/api/notifications")
-//const mailsystemsRoutes = require("./routes/api/mailsystems")
+const mailsystemsRoutes = require("./routes/api/mailsystems")
 //const zipdatabaseRoutes = require("./routes/api/zipdatabases")
 // const pincodeRoutes = require("./routes/api/pincodes")
 
@@ -75,7 +75,7 @@ app.use("/api/tshirt", tshirtRoutes)
 app.use("/api/photoframe", photoframeRoutes)
 app.use("/api/offer",offerRoutes)
 app.use("/api/notification",notificationRoutes)
-//app.use("/api/mailsystem",mailsystemsRoutes)
+app.use("/api/mailsystem",mailsystemsRoutes)
 //app.use("/api/zipdatabase",zipdatabaseRoutes)
 // app.use("/api/pincode",pincodeRoutes)
 
@@ -84,10 +84,10 @@ app.use("/api/notification",notificationRoutes)
 
 const port = process.env.PORT || 5600;
 
-// var server = app.listen(port,()=>{
-//     console.log(server.address().address)
-//     console.log(`server connected on localhost:${port}`)});
-
-var server = app.listen(port,"95.216.71.108",()=>{
+var server = app.listen(port,()=>{
     console.log(server.address().address)
     console.log(`server connected on localhost:${port}`)});
+
+// var server = app.listen(port,"95.216.71.108",()=>{
+//     console.log(server.address().address)
+//     console.log(`server connected on localhost:${port}`)});

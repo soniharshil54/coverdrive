@@ -7,6 +7,7 @@ const Pincode = require("../models/pincode")
 const Ordercounter = require("../models/ordercounter")
 const Modelrequest = require("../models/modelrequest")
 const ObjectId = mongoose.Types.ObjectId
+const mail_controller = require("./mailsystems")
 
 
 
@@ -157,9 +158,60 @@ exports.place_order = async function(req, res) {
         }
     )
     let newOrderRef  =  await  newOrder.save()
+    let orderref = await Order.findOne({order_id:order_id}).populate('products').populate("user_id")
+    let productref = orderref.products
+    let arrayforhtmlref = productref.map(({product_name, cropped_image,quantity, subtotal})=>({product_name, cropped_image, quantity, subtotal}))
+    let htmlgenerated = htmlforcartproducts(arrayforhtmlref)
+    let mailsent = await mail_controller.send_mail(htmlgenerated,orderref)
     let userupdate = await User.findOneAndUpdate({_id:req.body.user_id},{firstordermade : 1})
     //console.log(userupdate)
     res.json({order:newOrderRef})
+}
+
+exports.place_mock_order = async function(req, res) {
+   
+    // let newOrderRef  =  await  newOrder.save()
+    let orderref = await Order.findOne({order_id:"OR4591"}).populate('products').populate("user_id")
+    let productref = orderref.products
+    let arrayforhtmlref = productref.map(({product_name, quantity, subtotal})=>({product_name, quantity, subtotal}))
+    let htmlgenerated = htmlforcartproducts(arrayforhtmlref)
+    let mailsent = await mail_controller.send_mail(htmlgenerated,orderref)
+    //let userupdate = await User.findOneAndUpdate({_id:req.body.user_id},{firstordermade : 1})
+    //console.log(userupdate)
+    res.json({"result":mailsent})
+}
+
+
+function htmlforcartproducts(productarray){
+    let rowhtml = ""
+    for(i=0; i< productarray.length; i++){
+        let imgsrc =  `http://95.216.71.108:5600/admin/uploads/${productarray[i].cropped_image}`
+        rowhtml += `<tr style="font-family:Arial, sans-serif;line-height:1.3em;">
+        <td style="line-height:1.3em;font-family:Arial, sans-serif;text-align:left;word-wrap:break-word;font-size:14px;padding:15px 12px;border-top:1px dotted #c9c9c9;vertical-align:top;">
+          
+         
+        <table cellpadding="0" cellspacing="0" border="0" width="100%" style="font-family:Arial, sans-serif;line-height:1.3em;font-size:13px;vertical-align:top;color:black;"><tbody><tr style="font-family:Arial, sans-serif;line-height:1.3em;">
+        <td style="font-family:Arial, sans-serif;line-height:1.3em;padding-right:15px;">
+          <img width="70" height="70" src="${imgsrc}" alt="" style="border-radius:3px;padding:0;margin:0;">
+        </td>
+          <td width="100%" style="font-family:Arial, sans-serif;line-height:1.3em;">
+          
+          <div style="font-weight:bold;font-size:15px;padding-bottom:3px;">
+          ${productarray[i].product_name} </div>
+          
+          
+          </td>
+         
+        </tr></tbody></table>
+        </td>
+          <td style="line-height:1.3em;font-family:Arial, sans-serif;text-align:left;word-wrap:break-word;font-size:14px;padding:15px 12px;border-top:1px dotted #c9c9c9;vertical-align:top;">
+          ${productarray[i].quantity} </td>
+          <td style="line-height:1.3em;font-family:Arial, sans-serif;word-wrap:break-word;font-size:14px;padding:15px 12px;border-top:1px dotted #c9c9c9;vertical-align:top;text-align:right;">
+          <span><span>₹</span>${productarray[i].subtotal}</span>
+        </td>
+          </tr>`
+    }
+    return rowhtml
 }
 
 
