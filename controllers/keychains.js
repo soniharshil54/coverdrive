@@ -112,6 +112,13 @@ exports.get_all_keychains = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.get_all_keychain_names = function(req, res){
+    console.log("gt keychains called")
+    Keychain.find().select('name')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_keychain_by_id_admin = async function(req, res){
     let keychain = await Keychain.findOne({_id:req.params.mid})
     if(keychain){

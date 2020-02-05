@@ -97,6 +97,8 @@ router.put('/editktypestatus/:ktid', keychain_controller.edit_ktype_status)
 
 router.get('/keychains', keychain_controller.get_active_keychains)
 
+router.get('/getallkeychainnames', keychain_controller.get_all_keychain_names)
+
 router.get('/getkeychainbyidadmin/:mid', keychain_controller.get_keychain_by_id_admin)
 
 router.get('/getkeychainbyid/:mid', keychain_controller.get_keychain_by_id)
