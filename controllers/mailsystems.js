@@ -207,7 +207,7 @@ exports.send_mail = function(hereproducts, orderref) {
               <p style="margin:.6em 0;"><strong>Shipping address:</strong></p>
               
               <address style="font-style:normal;">
-              ${username}<br>${address} </address>
+              ${username}<br>${useraddress} </address>
               </td>
              
             </tr></tbody></table>
