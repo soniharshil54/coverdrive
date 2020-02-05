@@ -84,10 +84,10 @@ app.use("/api/mailsystem",mailsystemsRoutes)
 
 const port = process.env.PORT || 5600;
 
-var server = app.listen(port,()=>{
-    console.log(server.address().address)
-    console.log(`server connected on localhost:${port}`)});
-
-// var server = app.listen(port,"95.216.71.108",()=>{
+// var server = app.listen(port,()=>{
 //     console.log(server.address().address)
 //     console.log(`server connected on localhost:${port}`)});
+
+var server = app.listen(port,"95.216.71.108",()=>{
+    console.log(server.address().address)
+    console.log(`server connected on localhost:${port}`)});
