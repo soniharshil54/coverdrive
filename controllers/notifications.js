@@ -37,3 +37,52 @@ exports.post_order_confirm_sms = function(req, res) {
       console.log(error)
     })
 }
+
+exports.otp_verification = function(req, res) {
+  let mobilenumber = req.body.mobilenumber
+  let username = req.body.username ? req.body.username : ""
+  let otp_generated = generateOTP()
+  let smscontent =`Dear ${username},  ${otp_generated} is the One-Time-Password(OTP) for Phone Case Maker.Thank you`
+  console.log(req.connection.localAddress)
+  //res.json({"run":"runa"})
+  fetch(`https://control.msg91.com/api/sendotp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobile=${mobilenumber}&message=${smscontent}&sender=STYCLS&otp=${otp_generated}`,
+  {
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(tshirtdata)
+  })
+  .then(function(res){ 
+    console.log(res)
+    res.json({status:1,otp:otp_generated})
+    })
+  .catch(function(err){
+     console.log(err) 
+     res.json({status:0,otp:otp_generated})
+    })
+}
+
+function generateOTP()
+{
+
+    var digits = '0123456789';
+
+    var otpLength = 4;
+
+    var otp = '';
+
+    for(let i=1; i<=otpLength; i++)
+
+    {
+
+        var index = Math.floor(Math.random()*(digits.length));
+
+        otp = otp + digits[index];
+
+    }
+
+    return otp;
+
+}

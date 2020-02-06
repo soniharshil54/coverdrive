@@ -16,6 +16,8 @@ var notification_controller = require('../../controllers/notifications');
 
  router.post('/postorderconfirm', notification_controller.post_order_confirm_sms)
 
+ router.post('/otpverification', notification_controller.otp_verification)
+
 // GET request for count of friends of a specific user. 
 // router.get('/countusers', user_controller.count_users);
 

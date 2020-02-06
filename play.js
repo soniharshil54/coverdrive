@@ -1,9 +1,32 @@
-let datep = new Date(Date.now())
-console.log(datep)
+// let datep = new Date(Date.now())
+// console.log(datep)
 
-let daten = new Date(Date.now()).toDateString()
-console.log(daten)
+// let daten = new Date(Date.now()).toDateString()
+// console.log(daten)
+function generateOTP()
+{
 
+    var digits = '0123456789';
+
+    var otpLength = 4;
+
+    var otp = '';
+
+    for(let i=1; i<=otpLength; i++)
+
+    {
+
+        var index = Math.floor(Math.random()*(digits.length));
+
+        otp = otp + digits[index];
+
+    }
+
+    return otp;
+
+}
+
+console.log(generateOTP())
 // let categoriesenabled = ["keychain","phonecase"]
 // let categoriesincart = ["mug","keychain","keychain","phonecase","mug","keychain"]
 // let totalbuyget = 3
@@ -11,8 +34,8 @@ console.log(daten)
 // var occurance = getOccurance(filteredcart)
 // var qualifiedcart = getqualifiedcart(occurance, totalbuyget)
 
-let date = Date.now()
-console.log(date)
+// let date = Date.now()
+// console.log(date)
 
 // function getqualifiedcart(occurancep, totalbuygetp){
 //     var filteredObject = Object.keys(occurancep).reduce(function(r, e) {
