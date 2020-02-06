@@ -103,7 +103,7 @@ router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}
 
   router.put('/addimage/:kid',upload.fields([{name: 'hImage', maxCount: 1}, {
     name: 'shadowImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1},,{name: 'shadowImage2',maxCount: 1},,{name: 'overlayImage2',maxCount: 1},,{name: 'maskImage2',maxCount: 1}]),(req,res,next) => {
-    console.log(req.files)
+    //console.log(req.files)
     let imageData = {}
     if(req.files.hImage){
       imageData.h_image = req.files.hImage[0].filename

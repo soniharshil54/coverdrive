@@ -85,7 +85,7 @@ exports.add_tshirt_sub_type = async function(req, res){
 }
 
 exports.get_all_tshirt_types = function(req, res){
-    console.log("gt tt called")
+    //console.log("gt tt called")
     Tshirttype.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
@@ -123,35 +123,35 @@ exports.update_it_all = async function(req,res){
 }
 
 exports.get_all_tshirt_subtypes = function(req, res){
-    console.log("gt tt called")
+   // console.log("gt tt called")
     Tshirtsubtype.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_all_tshirt_main_types = function(req, res){
-    console.log("gt tt called")
+   // console.log("gt tt called")
     Tshirtmaintype.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_all_tshirt_main_types_by_typeid = function(req, res){
-    console.log("gt tt called")
+   // console.log("gt tt called")
     Tshirtmaintype.find({type_id:req.params.typeid ,active_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_active_tshirt_types = function(req, res){
-    console.log("gt tt called")
+   // console.log("gt tt called")
     Tshirttype.find({active_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_tshirtes_by_main_typeid = function(req, res){
-    console.log("gt tt called")
+   // console.log("gt tt called")
     Tshirt.find({maintype_id : req.params.mtypeid ,available_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
@@ -279,21 +279,21 @@ res.json({"yoyo":"dodo"})
 }
 
 exports.get_active_tshirts = function(req, res){
-    console.log("gt tshirts called")
+   // console.log("gt tshirts called")
     Tshirt.find({available_status : 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_all_tshirts = function(req, res){
-    console.log("gt tshirts called")
+   // console.log("gt tshirts called")
     Tshirt.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_all_tshirt_names = function(req, res){
-    console.log("gt tshirts called")
+   // console.log("gt tshirts called")
     Tshirt.find().select('name')
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
