@@ -7,9 +7,10 @@ let fetch = require('node-fetch');
 exports.post_sms_data = function(req, res) {
     let mobilenumber = req.body.mobilenumber
     let smscontent = req.body.smscontent
+    let senderid = "PHCSMR"
     console.log(req.connection.localAddress)
     //res.json({"run":"runa"})
-    fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=TESTIN&route=4`, { mode: 'no-cors'})
+    fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=${senderid}&route=4`, { mode: 'no-cors'})
       .then(response => {       
         console.log(response)
         res.status(200).json({user:response})
@@ -24,10 +25,11 @@ exports.post_order_confirm_sms = function(req, res) {
   let mobilenumber = req.body.mobilenumber
   let user_name = req.body.user_name
   let order_id = req.body.orderid_user
+  let senderid = "PHCSMR"
   let smscontent =`Dear, ${user_name}  Your order has been received Successfully.Your order no. ${order_id}.confirmation call will be received within 24-48 hours.Thank you`
   console.log(req.connection.localAddress)
   //res.json({"run":"runa"})
-  fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=TESTIN&route=4`, { mode: 'no-cors'})
+  fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=${senderid}&route=4`, { mode: 'no-cors'})
     .then(response => {       
       console.log(response)
       res.status(200).json({user:response})
@@ -38,15 +40,33 @@ exports.post_order_confirm_sms = function(req, res) {
     })
 }
 
+
+exports.send_order_confirm_sms = function(mobilenumber,user_name, order_id) {
+  let smscontent =`Dear, ${user_name}  Your order has been received Successfully.Your order no. ${order_id}.confirmation call will be received within 24-48 hours.Thank you`
+  let senderid = "PHCSMR"
+  console.log(req.connection.localAddress)
+  //res.json({"run":"runa"})
+  fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=${senderid}&route=4`, { mode: 'no-cors'})
+    .then(response => {       
+      console.log(response)
+      return
+    })
+    .catch(error => {
+      console.log(error)
+      return
+    })
+}
+
 exports.otp_verification = function(req, res) {
   let mobilenumber = req.body.mobilenumber
   let username = req.body.username
+  let senderid = "PHCSMR"
   let otp_generated = generateOTP()
   let smscontent =`Dear ${username},  ${otp_generated} is the One-Time-Password(OTP) for Phone Case Maker.Thank you`
   console.log(req.connection.localAddress)
   console.log(req.connection.localAddress)
   //res.json({"run":"runa"})
-  fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=STYCLS&route=4`, { mode: 'no-cors'})
+  fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=${senderid}&route=4`, { mode: 'no-cors'})
     .then(response => {       
       console.log(response)
       res.status(200).json({status:1,otp:otp_generated})

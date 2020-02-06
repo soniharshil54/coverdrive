@@ -8,6 +8,7 @@ const Ordercounter = require("../models/ordercounter")
 const Modelrequest = require("../models/modelrequest")
 const ObjectId = mongoose.Types.ObjectId
 const mail_controller = require("./mailsystems")
+const notification_controller = require("./notifications")
 
 
 
@@ -161,8 +162,11 @@ exports.place_order = async function(req, res) {
     let orderref = await Order.findOne({order_id:order_id}).populate('products').populate("user_id")
     let productref = orderref.products
     let arrayforhtmlref = productref.map(({product_name, cropped_image,quantity, subtotal})=>({product_name, cropped_image, quantity, subtotal}))
+    let contact = orderref.user_id.contact
+    let username = `${orderref.user_id.first_name} ${orderref.user_id.last_name}` 
     let htmlgenerated = htmlforcartproducts(arrayforhtmlref)
     let mailsent = await mail_controller.send_mail(htmlgenerated,orderref)
+    let smssent = notification_controller.send_order_confirm_sms(contact,username,order_id)
     let userupdate = await User.findOneAndUpdate({_id:req.body.user_id},{firstordermade : 1})
     //console.log(userupdate)
     res.json({order:newOrderRef})
