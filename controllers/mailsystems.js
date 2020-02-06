@@ -16,7 +16,8 @@ let transport = nodemailer.createTransport({
 exports.send_mail = function(hereproducts, orderref) {
 
     return new Promise(function(resolve, reject){
-      let dateor = orderref.date_ordered
+     // let dateor = orderref.date_ordered
+      let dateor =  new Date(orderref.date_ordered).toDateString()
       let order_id = orderref.order_id
       let subtotal = orderref.sub_total
       let totalamount = orderref.amount

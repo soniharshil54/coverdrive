@@ -1,6 +1,9 @@
 let datep = new Date(Date.now())
 console.log(datep)
 
+let daten = new Date(Date.now()).toDateString()
+console.log(daten)
+
 // let categoriesenabled = ["keychain","phonecase"]
 // let categoriesincart = ["mug","keychain","keychain","phonecase","mug","keychain"]
 // let totalbuyget = 3
@@ -8,18 +11,8 @@ console.log(datep)
 // var occurance = getOccurance(filteredcart)
 // var qualifiedcart = getqualifiedcart(occurance, totalbuyget)
 
-let products = [
-    {
-      "product_name": "oppo a5",
-    "subtotal": "200",
-    "quantity": "1"
-    },
-    {
-        "product_name": "oppo rr",
-        "subtotal": "250",
-        "quantity": "3"
-    },
-]
+let date = Date.now()
+console.log(date)
 
 // function getqualifiedcart(occurancep, totalbuygetp){
 //     var filteredObject = Object.keys(occurancep).reduce(function(r, e) {
