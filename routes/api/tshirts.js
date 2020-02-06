@@ -59,7 +59,7 @@ router.put('/tmtaddimage/:tmtid',upload.fields([{name: 'sliderImage', maxCount: 
     )
 })
 
-router.put('/tmtaddtshirtimages/:tmtid',upload.array('tshirtImages',5),(req,res,next) => {
+router.put('/tmtaddtshirtimages/:tmtid',upload.array('tshirtImages[]',5),(req,res,next) => {
   console.log(req.files)
   let req_images = req.files
   console.log("tmt images")
