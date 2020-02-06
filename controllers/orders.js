@@ -84,7 +84,7 @@ exports.get_orders_by_contact = async function(req, res){
     usersSelected.push(new ObjectId(item));
 });
 // console.log(usersSelected)
-    let ordersbycon = await Order.find({'user_id':{'$in': usersSelected}})
+    let ordersbycon = await Order.find({'user_id':{'$in': usersSelected}}).sort({date_ordered: -1})
     // console.log(ordersbycon)
     res.json(ordersbycon)
 }
