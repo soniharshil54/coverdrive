@@ -51,8 +51,7 @@ exports.otp_verification = function(req, res) {
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
-      method: "POST",
-      body: JSON.stringify(tshirtdata)
+      method: "POST"
   })
   .then(function(res){ 
     console.log(res)
