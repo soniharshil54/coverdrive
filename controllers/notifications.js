@@ -40,6 +40,25 @@ exports.post_order_confirm_sms = function(req, res) {
 
 exports.otp_verification = function(req, res) {
   let mobilenumber = req.body.mobilenumber
+  let username = req.body.username
+  let otp_generated = generateOTP()
+  let smscontent =`Dear ${username},  ${otp_generated} is the One-Time-Password(OTP) for Phone Case Maker.Thank you`
+  console.log(req.connection.localAddress)
+  console.log(req.connection.localAddress)
+  //res.json({"run":"runa"})
+  fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=STYCLS&route=4`, { mode: 'no-cors'})
+    .then(response => {       
+      console.log(response)
+      res.status(200).json({status:1,otp:otp_generated})
+    })
+    .catch(error => {
+      res.status(200).json({status:0})
+      console.log(error)
+    })
+}
+
+exports.otp_verification_old = function(req, res) {
+  let mobilenumber = req.body.mobilenumber
   let username = req.body.username ? req.body.username : ""
   let otp_generated = generateOTP()
   let smscontent =`Dear ${username},  ${otp_generated} is the One-Time-Password(OTP) for Phone Case Maker.Thank you`
