@@ -44,7 +44,7 @@ exports.post_order_confirm_sms = function(req, res) {
 exports.send_order_confirm_sms = function(mobilenumber,user_name, order_id) {
   let smscontent =`Dear, ${user_name}  Your order has been received Successfully.Your order no. ${order_id}.confirmation call will be received within 24-48 hours.Thank you`
   let senderid = "PHCSMR"
-  console.log(req.connection.localAddress)
+  //console.log(req.connection.localAddress)
   //res.json({"run":"runa"})
   fetch(`https://api.msg91.com/api/sendhttp.php?authkey=156882AcKCbmqX8fWL5e16b85cP1&mobiles=${mobilenumber}&country=91&message=${smscontent}&sender=${senderid}&route=4`, { mode: 'no-cors'})
     .then(response => {       
