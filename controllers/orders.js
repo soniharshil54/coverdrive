@@ -160,6 +160,7 @@ exports.place_order = async function(req, res) {
     )
     let newOrderRef  =  await  newOrder.save()
     let orderref = await Order.findOne({order_id:order_id}).populate('products').populate("user_id")
+    console.log(orderref)
     let productref = orderref.products
     let arrayforhtmlref = productref.map(({product_name, cropped_image,quantity, subtotal})=>({product_name, cropped_image, quantity, subtotal}))
     let contact = orderref.user_id.contact
