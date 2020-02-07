@@ -1,32 +1,43 @@
 // let datep = new Date(Date.now())
 // console.log(datep)
 
+
+function getindextosplitarray(oldimagesref){
+    let newoldimagesref = oldimagesref.filter(function(item){
+      let checkit = item.split('-')[1]
+      return checkit=='p';
+    }).length
+    let indexref = newoldimagesref - 1
+    return indexref
+}
+console.log(getindextosplitarray( [ '1-p', '2-p','3-p', '1' ] ))
+
 // let daten = new Date(Date.now()).toDateString()
 // console.log(daten)
-function generateOTP()
-{
+// function generateOTP()
+// {
 
-    var digits = '0123456789';
+//     var digits = '0123456789';
 
-    var otpLength = 4;
+//     var otpLength = 4;
 
-    var otp = '';
+//     var otp = '';
 
-    for(let i=1; i<=otpLength; i++)
+//     for(let i=1; i<=otpLength; i++)
 
-    {
+//     {
 
-        var index = Math.floor(Math.random()*(digits.length));
+//         var index = Math.floor(Math.random()*(digits.length));
 
-        otp = otp + digits[index];
+//         otp = otp + digits[index];
 
-    }
+//     }
 
-    return otp;
+//     return otp;
 
-}
+// }
 
-console.log(generateOTP())
+// console.log(generateOTP())
 // let categoriesenabled = ["keychain","phonecase"]
 // let categoriesincart = ["mug","keychain","keychain","phonecase","mug","keychain"]
 // let totalbuyget = 3

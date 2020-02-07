@@ -66,10 +66,7 @@ router.put('/tmtaddtshirtimages/:tmtid',upload.array('tshirtImages[]',5),(req,re
   let tshirt_images = req_images.map(img => img.filename)
   let imageData = {}
   imageData.regular_images = tshirt_images
-  //res.json({"multiple":"images"})
-  // if(req.files.sliderImage){
-  //   imageData.slider_image = req.files.sliderImage[0].filename
-  // }
+
   Tshirt.findOneAndUpdate({_id:req.params.tmtid},imageData)
   .then(result=> {
     //console.log(result)
@@ -81,6 +78,59 @@ router.put('/tmtaddtshirtimages/:tmtid',upload.array('tshirtImages[]',5),(req,re
   }
     )
 })
+
+router.put('/tmtedittshirtimages/:tmtid',upload.array('tshirtImages[]',8),async (req,res,next) => {
+ // console.log(req.files)
+  let req_images = req.files
+  let oldimagesref = req.body.old
+  console.log("oldimagesref",oldimagesref, '\n')
+  let indextosplitarray = getindextosplitarray(oldimagesref)
+  console.log("indextosplitarray", indextosplitarray, '\n')
+  let updatedoldimagesref = oldimagesref.slice(0, indextosplitarray)
+  console.log("updatedoldimagesref", updatedoldimagesref, '\n')
+  let updatedoldimagesindex = updatedoldimagesref.map(item => {
+    let indexref = item.split('-')[0]
+    let index = parseInt(indexref)
+    return index
+  })
+  console.log("updatedoldimagesindex", updatedoldimagesindex, '\n')
+  let newimagesindex = oldimagesref.slice(indextosplitarray)
+  console.log("newimagesindex", newimagesindex, '\n')
+  let oldimagesindbref = await Tshirt.findOne({_id:req.params.tmtid}).select('regular_images')
+  let oldimagesindb = oldimagesindbref.regular_images
+  console.log("oldimagesindb")
+  console.log(oldimagesindb)
+  let remainedoldimages = updatedoldimagesindex.map(item => oldimagesindb[item])
+  console.log("remainedoldimages", remainedoldimages, '\n')
+  let newimagesreq = req_images.map(img => img.filename)
+  console.log("newimagesreq", newimagesreq, '\n')
+  let newimages = newimagesindex.map(item => newimagesreq[item])
+  console.log("newimages", newimages, '\n')
+  const concat = (...arrays) => [].concat(...arrays.filter(Array.isArray))
+  let newregularimages = concat(remainedoldimages, newimages)
+  console.log("newregularimages", newregularimages, '\n')
+ // let newregularimages = [...remainedoldimages, ...newimages];
+  let imageData = {
+    regular_images : newregularimages
+  }
+  console.log("imageData")
+  console.log(imageData)
+  let tshirtimages = await Tshirt.findOneAndUpdate({_id:req.params.tmtid},imageData)
+  res.json(tshirtimages)
+})
+
+function getindextosplitarray(oldimagesref){
+  let newoldimagesref = oldimagesref.filter(function(item){
+    let checkit = item.split('-')[1]
+    return checkit=='p';
+  }).length
+  let indexref = newoldimagesref 
+  // let indexref = newoldimagesref - 1
+  // if(indexref === -1){
+  //   indexref = 0
+  // }
+  return indexref
+}
 
 router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}]),(req,res,next) => {
     console.log(req.files)

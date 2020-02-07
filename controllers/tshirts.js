@@ -212,8 +212,8 @@ exports.edit_wmaintype_status = function(req, res){
 }
 
 exports.edit_tshirt = function(req, res){
-    console.log(req.body)
-    console.log(req.params)
+  //  console.log(req.body)
+   // console.log(req.params)
     Tshirt.findOneAndUpdate({_id:req.params.mid},req.body)
     .then(result=> res.json({"result":"tshirt updated","updatedtshirt":result}))
     .catch(err=>res.status(404).json(err))
