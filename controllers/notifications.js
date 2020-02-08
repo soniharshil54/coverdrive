@@ -22,6 +22,7 @@ exports.post_sms_data = function(req, res) {
 }
 
 exports.post_order_confirm_sms = function(req, res) {
+  console.log(req.body)
   let mobilenumber = req.body.mobilenumber
   let user_name = req.body.user_name
   let order_id = req.body.orderid_user
@@ -42,7 +43,7 @@ exports.post_order_confirm_sms = function(req, res) {
 
 
 exports.send_order_confirm_sms = function(mobilenumber,user_name, order_id) {
-  let smscontent =`Dear, ${user_name}  Your order has been received Successfully.Your order no. ${order_id}.confirmation call will be received within 24-48 hours.Thank you`
+  let smscontent =`Dear, ${user_name}  Your order has been received Successfully. Your order no. ${order_id}. confirmation call will be received within 24-48 hours. Thank you`
   let senderid = "PHCSMR"
   //console.log(req.connection.localAddress)
   //res.json({"run":"runa"})
