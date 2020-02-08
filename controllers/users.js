@@ -113,7 +113,10 @@ exports.get_user = async function(req, res){
 
 exports.get_all_users = function(req, res){
         User.find()
-             .then(result=>res.json(result))
+             .then(result=>{
+                 console.log(Date.now())
+                 res.json(result)}
+                 )
              .catch(err=>res.json(err))
 }
 
