@@ -4,6 +4,31 @@ const Smsdata = require("../models/smsdata")
 let fetch = require('node-fetch');
 
 
+async function send_notification(registration_ids, message){
+  let fields = {
+    registration_ids : registration_ids,
+    data : message
+  }
+  let sendnotif = await fetch('https://fcm.googleapis.com/fcm/send',
+  {
+      headers: {
+        'Authorization': 'key=AIzaSyBtZpE7ponG878QsoI4sUuSPVjArpQs0fA',
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(fields)
+  })
+  return sendnotif
+}
+
+exports.send_notification_to_android = async function(req, res){
+  // let registration_ids = await getregids()
+  let message = req.body.message
+  let notificationssent = await send_notification(registration_ids, message)
+  res.json(notificationssent)
+}
+
 exports.post_sms_data = function(req, res) {
     let mobilenumber = req.body.mobilenumber
     let smscontent = req.body.smscontent

@@ -194,15 +194,9 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.get('/getall4dphonecases', phonecase_controller.get_all_4d_phonecases)
 
-  router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
+  router.put('/editall4dphonecases', phonecase_controller.edit_all_4d_phonecases)
 
   router.get('/get4dphonecasebyid/:id',phonecase_controller.get_4d_phonecase_by_id)
-
-  router.get('/getphonecasebyidadmin/:pid',phonecase_controller.get_phonecase_by_id_admin)
-
-  router.get('/getphonecasesbycompany/:company', phonecase_controller.get_phonecases_by_company)
-
-  router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
 
   router.get('/get4dcoversbymodel/:model_id', phonecase_controller.get_4dcovers_by_model)
 
@@ -210,9 +204,47 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.get('/get4dcoversbycompany/:company', phonecase_controller.get_4dcovers_by_company)
 
+  router.get('/get4dcoversbycompany3/:company', phonecase_controller.get_4dcovers_by_company_3)
+
+  router.delete('/delete4dphonecase', phonecase_controller.delete_4d_phonecases)
+
+  router.put('/edit4dphonecasestatus/:eid', phonecase_controller.edit_4d_phonecase_status)
+
+  router.post('/add4dphonecase/:modelid', phonecase_controller.add_4d_phonecase);
+
+
+  router.get('/getall3dphonecases', phonecase_controller.get_all_3d_phonecases)
+
+  router.put('/editall3dphonecases', phonecase_controller.edit_all_3d_phonecases)
+
+  router.get('/get3dphonecasebyid/:id',phonecase_controller.get_3d_phonecase_by_id)
+
+  router.get('/get3dcoversbymodel/:model_id', phonecase_controller.get_3dcovers_by_model)
+
+  router.get('/get3dcoversbymodel2/:model_id', phonecase_controller.get_3dcovers_by_model_2)
+
+  router.get('/get3dcoversbycompany/:company', phonecase_controller.get_3dcovers_by_company)
+
+  router.get('/get3dcoversbycompany3/:company', phonecase_controller.get_3dcovers_by_company_3)
+
+  router.delete('/delete3dphonecase', phonecase_controller.delete_3d_phonecases)
+
+  router.put('/edit3dphonecasestatus/:eid', phonecase_controller.edit_3d_phonecase_status)
+
+  router.post('/add3dphonecase/:modelid', phonecase_controller.add_3d_phonecase);
+
+
+  router.get('/getphonecasebyid/:id',phonecase_controller.get_phonecase_by_id)
+
   
 
-  router.get('/get4dcoversbycompany3/:company', phonecase_controller.get_4dcovers_by_company_3)
+  router.get('/getphonecasebyidadmin/:pid',phonecase_controller.get_phonecase_by_id_admin)
+
+  router.get('/getphonecasesbycompany/:company', phonecase_controller.get_phonecases_by_company)
+
+  router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
+
+ 
 
   //router.get('/get4dcoversbycompany2/:company', phonecase_controller.get_4dcovers_by_company_2)
 
@@ -222,7 +254,7 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   //router.post('/addphonecase', phonecase_controller.add_phonecase);
 
-  router.post('/add4dphonecase/:modelid', phonecase_controller.add_4d_phonecase);
+
 
   //router.get('/get4dphonecases/:modelid', phonecase_controller.get_4d_phonecases);
 
@@ -230,7 +262,7 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.delete('/deletephonecase', phonecase_controller.delete_phonecases)
 
-  router.delete('/delete4dphonecase', phonecase_controller.delete_4d_phonecases)
+
 
   router.delete('/deletecompany', phonecase_controller.delete_companies)
 
@@ -238,7 +270,7 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.put('/editphonecasestatus/:eid', phonecase_controller.edit_phonecase_status)
 
-  router.put('/edit4dphonecasestatus/:eid', phonecase_controller.edit_4d_phonecase_status)
+
 
   router.put('/editcompany/:cid', phonecase_controller.edit_company)
 
@@ -246,7 +278,7 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.put('/editallphonecases', phonecase_controller.edit_all_phonecases)
 
-  router.put('/editall4dphonecases', phonecase_controller.edit_all_4d_phonecases)
+  
 
   // GET request to get all users. 
   //router.post('/addcategory', product_controller.add_category);

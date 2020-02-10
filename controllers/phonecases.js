@@ -70,14 +70,16 @@ exports.get_all_phonecases = function(req, res){
     .catch(err=>res.json(err))
 }
 
-exports.get_all_4d_phonecases = function(req, res){
-    Phonecase4d.find()
+
+
+exports.get_phonecases_by_company = function(req, res){
+    Phonecase.find({company: req.params.company})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
-exports.get_phonecases_by_company = function(req, res){
-    Phonecase.find({company: req.params.company})
+exports.get_all_4d_phonecases = function(req, res){
+    Phonecase4d.find()
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
@@ -114,22 +116,8 @@ exports.get_4dcovers_by_company_3 = function(req, res){
     // .catch(err=>res.json(err))
 }
 
-
-exports.get_models_by_company = function(req, res){
-    Phonecase.find({company: req.params.company})
-    .select('name _id')
-    .then(result=>res.json(result))
-    .catch(err=>res.json(err))
-}
-
 exports.get_4dcovers_by_model = function(req, res){
     Phonecase4d.find({model_id: req.params.model_id})
-    .then(result=>res.json(result))
-    .catch(err=>res.json(err))
-}
-
-exports.get_phonecase_by_id_admin = function(req, res){
-    Phonecase.findOne({_id: req.params.pid})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
@@ -139,6 +127,84 @@ exports.get_4d_phonecase_by_id = function(req, res){
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
+
+exports.edit_all_4d_phonecases = async function(req, res){
+    console.log(req.body)
+    let editbody = {
+        slider_image : "cover4dn.jpg",
+        inner_image : "mask.png",
+    }
+    let phonecaseupdate = await Phonecase4d.updateMany({}, editbody)
+    console.log(phonecaseupdate)
+   res.json({"result":"done"})
+}
+
+exports.add_4d_phonecase = async function(req, res){
+    console.log(req.body)
+    let mid = req.params.modelid
+    console.log(mid)
+    //let model_id = mongoose.Types.ObjectId(mid);
+    const newPhonecase4d = new Phonecase4d(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            model_name: req.body.model_name,
+            model_id: req.body.model_id,
+            company: req.body.company,
+            slider_image: "noimage.png",
+            inner_image: "noimage.png",
+            mask_image: "noimage.png",
+            png_image: "noimage.png",
+            header_image: "noimage.png"
+        }
+    )
+    let cover_id = await newPhonecase4d.save()
+    console.log("cover_id")
+    console.log(cover_id._id)
+    let cover_id_mon = mongoose.Types.ObjectId(cover_id._id);
+    console.log("cover_id_mon")
+    console.log(cover_id_mon)
+    let phonemodel = await Phonecase.findOne({_id:req.params.modelid})
+   // console.log(phonemodel)
+    let covers_4d = phonemodel.covers_4d
+    covers_4d.push(cover_id_mon)
+    let cover_data = {
+        covers_4d : covers_4d
+    }
+    let phonemodeladd = await Phonecase.findOneAndUpdate({_id:req.params.modelid},cover_data)
+
+    console.log(phonemodeladd)
+    res.json({result:cover_id})
+    
+}
+
+exports.delete_4d_phonecases = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Phonecase4d.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
+}
+
+exports.get_models_by_company = function(req, res){
+    Phonecase.find({company: req.params.company})
+    .select('name _id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+
+
+exports.get_phonecase_by_id_admin = function(req, res){
+    Phonecase.findOne({_id: req.params.pid})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+
 
 exports.get_phonecase_by_id = async function(req, res){
     let phonecase = await Phonecase.findOne({_id:req.params.id}).populate('covers_4d')
@@ -535,5 +601,116 @@ exports.update_subcategory = async function(req, res){
     Product.findOneAndUpdate({_id:product_id},{categories})
     .then(result=> res.json({"result":"user updated","updateduser":result}))
     .catch(err=>res.status(404).json(err))
+}
+
+exports.get_all_3d_phonecases = function(req, res){
+    Phonecase3d.find()
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_3dcovers_by_company = function(req, res){
+    Phonecase3d.find({company: req.params.company})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_3dcovers_by_company_2 = function(req, res){
+    Phonecase.find({company: req.params.company})
+    .populate('covers_3d')
+    .select('covers_id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_3dcovers_by_model_2 = function(req, res){
+    Phonecase.findOne({_id: req.params.model_id})
+    .populate('covers_3d')
+    .select('covers_id')
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_3dcovers_by_company_3 = function(req, res){
+    let models = Phonecase.find({company: req.params.company}).populate('covers_3d').select('name _id covers_3d')
+    res.json({"models":models})
+    // Phonecase.find({company: req.params.company})
+    // .populate('covers_3d')
+    // .select('covers_id')
+    // .then(result=>res.json(result))
+    // .catch(err=>res.json(err))
+}
+
+exports.get_3dcovers_by_model = function(req, res){
+    Phonecase3d.find({model_id: req.params.model_id})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.get_3d_phonecase_by_id = function(req, res){
+    Phonecase3d.findOne({_id: req.params.id})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
+exports.edit_all_3d_phonecases = async function(req, res){
+    console.log(req.body)
+    let editbody = {
+        slider_image : "cover3dn.jpg",
+        inner_image : "mask.png",
+    }
+    let phonecaseupdate = await Phonecase3d.updateMany({}, editbody)
+    console.log(phonecaseupdate)
+   res.json({"result":"done"})
+}
+
+exports.add_3d_phonecase = async function(req, res){
+    console.log(req.body)
+    let mid = req.params.modelid
+    console.log(mid)
+    //let model_id = mongoose.Types.ObjectId(mid);
+    const newPhonecase3d = new Phonecase3d(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            model_name: req.body.model_name,
+            model_id: req.body.model_id,
+            company: req.body.company,
+            slider_image: "noimage.png",
+            inner_image: "noimage.png",
+            mask_image: "noimage.png",
+            png_image: "noimage.png",
+            header_image: "noimage.png"
+        }
+    )
+    let cover_id = await newPhonecase3d.save()
+    console.log("cover_id")
+    console.log(cover_id._id)
+    let cover_id_mon = mongoose.Types.ObjectId(cover_id._id);
+    console.log("cover_id_mon")
+    console.log(cover_id_mon)
+    let phonemodel = await Phonecase.findOne({_id:req.params.modelid})
+   // console.log(phonemodel)
+    let covers_3d = phonemodel.covers_3d
+    covers_3d.push(cover_id_mon)
+    let cover_data = {
+        covers_3d : covers_3d
+    }
+    let phonemodeladd = await Phonecase.findOneAndUpdate({_id:req.params.modelid},cover_data)
+
+    console.log(phonemodeladd)
+    res.json({result:cover_id})
+    
+}
+
+exports.delete_3d_phonecases = function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var usersDelete = [];
+    idsArrayf.forEach(function(item){     
+    usersDelete.push(new ObjectId(item));
+});
+
+Phonecase3d.deleteMany({'_id':{'$in': usersDelete}},function(){
+    res.json({"dodo":"yoyo"});
+});
 }
 
