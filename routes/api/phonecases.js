@@ -145,6 +145,30 @@ router.put('/add4dphonecaseimages/:pid',upload.fields([{name: 'slider_image', ma
     )
 })
 
+router.put('/add3dphonecaseimages/:pid',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}]),(req,res,next) => {
+  console.log("upload images 3d called")
+  //console.log(req.files)
+  let imageData = {}
+  if(req.files.slider_image){
+    imageData.slider_image = req.files.slider_image[0].filename
+  }
+  if(req.files.header_image){
+    imageData.header_image = req.files.header_image[0].filename
+  }
+  console.log("below data")
+  console.log(imageData)
+  Phonecase3d.findOneAndUpdate({_id:req.params.pid},imageData)
+  .then(result=> {
+    //console.log(result)
+    res.json({"result":"keychain image updated","updatedkeychain":result})
+  })
+  .catch(err=>{
+    console.log(err)
+    res.status(404).json(err)
+  }
+    )
+})
+
 router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCount: 1},{name: 'header_image', maxCount: 1}, {name: 'png_image', maxCount: 1}, {name: 'inner_image', maxCount: 1}, {name: 'mask_image', maxCount: 1}]),(req,res,next) => {
   console.log(req.files)
   let imageData = {}

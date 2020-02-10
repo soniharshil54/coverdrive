@@ -3,6 +3,7 @@ const mongoose = require("mongoose")
 const Product = require("../models/product")
 const Phonecase = require("../models/phonecase")
 const Phonecase4d = require("../models/phonecase4d")
+const Phonecase3d = require("../models/phonecase3d")
 const Phonecomp = require("../models/phonecomp")
 const ObjectId = mongoose.Types.ObjectId
 
@@ -688,16 +689,16 @@ exports.add_3d_phonecase = async function(req, res){
     let cover_id_mon = mongoose.Types.ObjectId(cover_id._id);
     console.log("cover_id_mon")
     console.log(cover_id_mon)
-    let phonemodel = await Phonecase.findOne({_id:req.params.modelid})
-   // console.log(phonemodel)
-    let covers_3d = phonemodel.covers_3d
-    covers_3d.push(cover_id_mon)
-    let cover_data = {
-        covers_3d : covers_3d
-    }
-    let phonemodeladd = await Phonecase.findOneAndUpdate({_id:req.params.modelid},cover_data)
+//     let phonemodel = await Phonecase.findOne({_id:req.params.modelid})
+//    // console.log(phonemodel)
+//     let covers_3d = phonemodel.covers_3d
+//     covers_3d.push(cover_id_mon)
+//     let cover_data = {
+//         covers_3d : covers_3d
+//     }
+//     let phonemodeladd = await Phonecase.findOneAndUpdate({_id:req.params.modelid},cover_data)
 
-    console.log(phonemodeladd)
+    // console.log(phonemodeladd)
     res.json({result:cover_id})
     
 }
@@ -712,5 +713,13 @@ exports.delete_3d_phonecases = function(req, res){
 Phonecase3d.deleteMany({'_id':{'$in': usersDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
+}
+
+exports.edit_3d_phonecase_status = function(req, res){
+    console.log(req.body)
+    console.log(req.params)
+    Phonecase3d.findOneAndUpdate({_id:req.params.eid},req.body)
+    .then(result=> res.json({"result":"3d phonecase updated","updated3dphonecase":result}))
+    .catch(err=>res.status(404).json(err))
 }
 
