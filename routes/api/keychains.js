@@ -45,6 +45,9 @@ router.put('/ktaddimage/:ktid',upload.fields([{name: 'sliderImage', maxCount: 1}
     if(req.files.sliderImage){
       imageData.slider_image = req.files.sliderImage[0].filename
     }
+    if(req.body.edit_kt_name){
+      imageData.name = req.body.edit_kt_name
+    }
     Keychaintype.findOneAndUpdate({_id:req.params.ktid},imageData)
     .then(result=> {
       //console.log(result)
