@@ -166,7 +166,7 @@ exports.place_order = async function(req, res) {
     let contact = orderref.user_id.contact
     let username = `${orderref.user_id.first_name} ${orderref.user_id.last_name}` 
     let htmlgenerated = htmlforcartproducts(arrayforhtmlref)
-    let mailsent = await mail_controller.send_mail(htmlgenerated,orderref)
+   // let mailsent = await mail_controller.send_mail(htmlgenerated,orderref)
     let smssent = notification_controller.send_order_confirm_sms(contact,username,order_id)
     let userupdate = await User.findOneAndUpdate({_id:req.body.user_id},{firstordermade : 1})
     //console.log(userupdate)
