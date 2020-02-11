@@ -195,7 +195,10 @@ Phonecase4d.deleteMany({'_id':{'$in': usersDelete}},function(){
 }
 
 exports.get_models_by_company = function(req, res){
-    Phonecase.find({company: req.params.company})
+    let reqcomp = req.params.company
+    let lowerc = reqcomp.toLowerCase()
+     let bcomp = lowerc.charAt(0).toUpperCase() + lowerc.slice(1)
+    Phonecase.find({company: bcomp})
     .select('name _id')
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
