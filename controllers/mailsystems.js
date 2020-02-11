@@ -26,11 +26,11 @@ exports.send_mail = function(hereproducts, orderref) {
       let useraddress = orderref.user_id.address
       let useremail = orderref.user_id.email_id
       let usercontact = orderref.user_id.contact
-        const message = {
+       const message = {
             from: 'soniharshil55@gmail.com', // Sender address
             to: useremail,         // List of recipients
             subject: 'Stayclassy.in Order Receipt', // Subject line
-            html: `<div style="margin:0;padding:0;font-family:Arial, sans-serif;line-height:1.3em;">
+            html: `<div style="margin: 0;padding:0;font-family:Arial, sans-serif;line-height:1.3em;">
           
          
             <table border="0" cellpadding="0" cellspacing="0" height="100%" width="100%" style="line-height:1.3em;font-family:Arial, sans-serif;font-size:14px;color:#232323;background-color:#dcd8d4;width:100%;margin:0;padding:50px 0 50px 0;"><tbody><tr style="font-family:Arial, sans-serif;line-height:1.3em;">
@@ -270,6 +270,63 @@ exports.send_mail = function(hereproducts, orderref) {
         });
     })
    
+}
+
+
+exports.send_forget_password_mail = function(otpdata){
+  return new Promise(function(resolve, reject){
+    let otpid = otpdata._id
+    let otpbody = otpdata.tempotp
+    //let mailotp = generateOTP()
+    // let htmlmessage = `<p>Here is the otp ( One Time Password ) to reset your password. :  ${mailotp}</p>
+    // <p>Enter this otp in below page to reset your password...</p>
+    // <a href="http://patelsolartechnology.com/jaydeep2/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
+
+    let htmlmessage = `<p>Here is the otp ( One Time Password ) to reset your password. :  ${mailotp}</p>
+    <p>Enter this otp in below page to reset your password...</p>
+    <a href="http://patelsolartechnology.com/jaydeep2/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
+    const message = {
+      from: 'soniharshil55@gmail.com', // Sender address
+      to: useremail,         // List of recipients
+      subject: 'Forget Password', // Subject line
+      text: textmessage
+    }
+    transport.sendMail(message, function(err, info) {
+      if (err) {
+          console.log("error mail")
+        console.log(err)
+        reject(err)
+      } else {
+          console.log("success mail")
+        console.log(info);
+        resolve(info)
+      }
+  });
+  })
+}
+
+
+function generateOTP()
+{
+
+    var digits = '0123456789';
+
+    var otpLength = 6;
+
+    var otp = '';
+
+    for(let i=1; i<=otpLength; i++)
+
+    {
+
+        var index = Math.floor(Math.random()*(digits.length));
+
+        otp = otp + digits[index];
+
+    }
+
+    return otp;
+
 }
 
 // exports.post_order_confirm_sms = function(req, res) {

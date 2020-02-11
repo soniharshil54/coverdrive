@@ -1,6 +1,10 @@
 // let datep = new Date(Date.now())
 // console.log(datep)
 
+let reqcomp = "VIVO"
+let lowerc = reqcomp.toLowerCase()
+console.log(lowerc)
+console.log(lowerc.charAt(0).toUpperCase() + lowerc.slice(1))
 
 function getindextosplitarray(oldimagesref){
     let newoldimagesref = oldimagesref.filter(function(item){

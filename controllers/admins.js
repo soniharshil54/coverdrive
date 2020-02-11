@@ -6,6 +6,7 @@ const Adminside = require("../models/adminside")
 const jwt = require("jsonwebtoken")
 const Order = require("../models/order")
 const User = require("../models/user")
+const Otptemp = require("../models/otptemp")
 const Phonecase = require("../models/phonecase")
 const Keychain = require("../models/keychain")
 const Mug = require("../models/mug")
@@ -223,4 +224,57 @@ exports.change_password = function(req, res){
             }
         })
     })
+}
+
+exports.send_mail_forget_password = async function(req, res){
+    const generateotp = generateOTPmail()
+    const newOtptemp = new Otptemp(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            tempotp : generateotp
+        }
+    )
+    let otpdata = await newOtptemp.save()
+}
+
+exports.verify_mail_otp = async function(req, res){
+    let otpindbref = await Otptemp.findOne()
+    let otpindb = otpindbref.tempotp
+    let userotp = req.body_writtenotp
+    if(otpindb === userotp){
+        res.json({status : 1, message : "otp verified successfully..."})
+    }
+    else {
+        res.json({status : 0, message : "otp couldnot be verified"})
+    }
+}
+
+exports.add_mail_otp = function(req,res){
+    const newOtptemp = new Otptemp(
+        {
+            _id: new mongoose.Types.ObjectId(),
+            tempotp : "itstartedhere56456"
+        }
+    )
+    newOtptemp.save()
+        .then((result => {
+            console.log(result)
+            res.status(201).header("Access-Control-Allow-Origin", "*").json(result)
+        }))
+        .catch(err => {
+            console.log(err)
+            res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+        })
+}
+
+function generateOTPmail(){
+    var digits = '0123456789';
+    var otpLength = 9;
+    var otp = '';
+    for(let i=1; i<=otpLength; i++)
+    {
+        var index = Math.floor(Math.random()*(digits.length));
+        otp = otp + digits[index];
+    }
+    return otp;
 }

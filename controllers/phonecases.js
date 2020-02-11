@@ -74,7 +74,11 @@ exports.get_all_phonecases = function(req, res){
 
 
 exports.get_phonecases_by_company = function(req, res){
-    Phonecase.find({company: req.params.company})
+    let reqcomp = req.params.company
+    let lowerc = reqcomp.toLowerCase()
+     let bcomp = lowerc.charAt(0).toUpperCase() + lowerc.slice(1)
+   // let bcomp = reqcomp.toLowerCase().charAt(0).toUpperCase() + string.slice(1);
+    Phonecase.find({company: bcomp})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
