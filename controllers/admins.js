@@ -7,6 +7,7 @@ const jwt = require("jsonwebtoken")
 const Order = require("../models/order")
 const User = require("../models/user")
 const Otptemp = require("../models/otptemp")
+const mail_controller = require("./mailsystems")
 const Phonecase = require("../models/phonecase")
 const Keychain = require("../models/keychain")
 const Mug = require("../models/mug")
@@ -235,18 +236,83 @@ exports.send_mail_forget_password = async function(req, res){
         }
     )
     let otpdata = await newOtptemp.save()
+    let mailsent = await mail_controller.send_forget_password_mail(otpdata)
+    res.json(mailsent)
+}
+
+exports.forget_password_otp_verify = async function(req, res){
+    let otpid = req.body.nhash
+    let otpwritten = req.body.otpwritten
+    let otpdata = await Otptemp.findOne({_id : otpid, tempotp : otpwritten})
+    
+    if(otpdata){
+        let isexpired = checkexpirartion(otpdata.create_time)
+        if(!isexpired){
+            res.json({status : 1, message : "otp verified successfully"})
+        }
+        else {
+            res.json({status : 2, message : "otp expired"})
+        }
+    }
+    else {
+        res.json({status : 0, message : "otp does not match"})
+    }
 }
 
 exports.verify_mail_otp = async function(req, res){
-    let otpindbref = await Otptemp.findOne()
-    let otpindb = otpindbref.tempotp
-    let userotp = req.body_writtenotp
-    if(otpindb === userotp){
-        res.json({status : 1, message : "otp verified successfully..."})
+    let otpid = req.body.nhash
+    let otpindbref = await Otptemp.findOne({_id:otpid})
+    let npassword = req.body.newpassword
+    let hashpass = await bcryptpassword(npassword)
+    let passwordbody = {
+        password : hashpass
+    }
+    // let otptext = req.body.
+    if(otpindbref){
+        let passup = await Admin.findOneAndUpdate({_id:"5df20218a5186c3aa5ab36e6"},passwordbody)
+        res.json(passup)
+    }
+   
+   else{
+       res.json({status : 0, message : "something went wrong"})
+   }
+}
+
+exports.check_forget_pass_url = async function(req, res){
+    let otpindbref = await Otptemp.findOne({_id : req.body.forgetid})
+    let isexpired = checkexpirartion(otpindbref.create_time)
+    // let otpindb = otpindbref.tempotp
+    // let userotp = req.body_writtenotp
+    if(otpindbref && !isexpired){
+        res.json({status : 1, message : "link working..."})
     }
     else {
-        res.json({status : 0, message : "otp couldnot be verified"})
+        res.json({status : 0, message : "link expired"})
     }
+}
+
+function checkexpirartion(dbdate){
+    var date1 = new Date();
+var date2 = new Date(dbdate);
+if(date1-date2 > 5*60*1000){
+  return true
+}
+else{
+    return false
+}
+}
+
+function bcryptpassword(password){
+    return new Promise(function(resolve, reject){
+        bcrypt.hash(password,10,(err,hash) => {
+            if(err){
+                reject(err)
+            }
+            else {
+                resolve(hash)
+            }
+        })
+    })
 }
 
 exports.add_mail_otp = function(req,res){

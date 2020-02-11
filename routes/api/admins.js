@@ -43,6 +43,10 @@ router.get('/admins', admin_controller.get_all_admins);
 
   router.post('/verifymailotp', admin_controller.verify_mail_otp)
 
+  router.post('/forgetpasswordotpverify', admin_controller.forget_password_otp_verify)
+
+  router.post('/checkforgetpassurl', admin_controller.check_forget_pass_url)
+
 // GET request for count of friends requests of a specific user. 
  router.put('/editadmin/:eid', admin_controller.edit_admin);
 

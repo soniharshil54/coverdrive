@@ -277,19 +277,19 @@ exports.send_forget_password_mail = function(otpdata){
   return new Promise(function(resolve, reject){
     let otpid = otpdata._id
     let otpbody = otpdata.tempotp
-    //let mailotp = generateOTP()
+    // let mailotp = generateOTP()
     // let htmlmessage = `<p>Here is the otp ( One Time Password ) to reset your password. :  ${mailotp}</p>
     // <p>Enter this otp in below page to reset your password...</p>
     // <a href="http://patelsolartechnology.com/jaydeep2/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
 
-    let htmlmessage = `<p>Here is the otp ( One Time Password ) to reset your password. :  ${mailotp}</p>
+    let htmlmessage = `<p>Here is the otp ( One Time Password ) to reset your password. :  ${otpbody}</p>
     <p>Enter this otp in below page to reset your password...</p>
-    <a href="http://patelsolartechnology.com/jaydeep2/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
+    <a href="http://localhost/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
     const message = {
       from: 'soniharshil55@gmail.com', // Sender address
-      to: useremail,         // List of recipients
+      to: 'sharshil43@yahoo.com',         // List of recipients
       subject: 'Forget Password', // Subject line
-      text: textmessage
+      html: htmlmessage
     }
     transport.sendMail(message, function(err, info) {
       if (err) {
