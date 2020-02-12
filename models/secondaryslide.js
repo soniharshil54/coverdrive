@@ -19,6 +19,9 @@ const SecondaryslideSchema = new Schema({
         type: String,
         default: "noimage.png"
     },
+    sort_order : {
+        type: Number
+    },
     active_status : {
         type: Number,
         default: "1"

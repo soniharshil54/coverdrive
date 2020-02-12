@@ -236,7 +236,7 @@ router.put('/slipperbottle/addimage/:pid',upload.fields([{name: 'hImage', maxCou
 
 router.get('/sliders', product_controller.get_sliders)
 
-router.get('/updateallsliders', product_controller.update_all_sliders)
+router.get('/updateallsecsliders', product_controller.update_all_sliders)
 
 router.get('/secondarysliders', product_controller.get_secondary_sliders)
 

@@ -39,7 +39,7 @@ exports.get_all_sliders = function(req, res){
 }
 
 exports.update_all_sliders = async function(req, res){
-   let slides =   await Mainslide.updateMany({}, {sort_order:0})
+   let slides =   await Secondaryslide.updateMany({}, {sort_order:0})
    res.json(slides)
 }
 
