@@ -7,8 +7,8 @@ const nodemailer = require('nodemailer');
 let transport = nodemailer.createTransport({
     service: 'Gmail',
     auth: {
-        user: 'soniharshil55@gmail.com',
-        pass: 'soni2203'
+        user: 'casemateinbox@gmail.com',
+        pass: 'India_123'
     }
 });
 
@@ -286,7 +286,7 @@ exports.send_forget_password_mail = function(otpdata){
     <p>Enter this otp in below page to reset your password...</p>
     <a href="http://localhost/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
     const message = {
-      from: 'soniharshil55@gmail.com', // Sender address
+      from: 'casemateinbox@gmail.com', // Sender address
       to: 'sharshil43@yahoo.com',         // List of recipients
       subject: 'Forget Password', // Subject line
       html: htmlmessage
