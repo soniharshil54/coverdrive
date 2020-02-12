@@ -21,20 +21,20 @@ exports.get_sliders = function(req, res){
 }
 
 exports.get_secondary_sliders = function(req, res){
-    Secondaryslide.find({active_status: 1})
+    Secondaryslide.find({active_status: 1}).sort({sort_order: 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_all_secondary_sliders = function(req, res){
-    Secondaryslide.find()
+    Secondaryslide.find().sort({sort_order: 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
 exports.get_all_sliders = function(req, res){
     Mainslide.find()
-    .then(result=>res.json(result))
+    .then(result=>res.json(result)).sort({sort_order: 1})
     .catch(err=>res.json(err))
 }
 
