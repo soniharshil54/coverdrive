@@ -294,7 +294,7 @@ exports.check_forget_pass_url = async function(req, res){
 function checkexpirartion(dbdate){
     var date1 = new Date();
 var date2 = new Date(dbdate);
-if(date1-date2 > 5*60*1000){
+if(date1-date2 > 10*60*1000){
   return true
 }
 else{
