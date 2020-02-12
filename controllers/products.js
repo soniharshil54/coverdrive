@@ -15,7 +15,7 @@ const ObjectId = mongoose.Types.ObjectId
 
 
 exports.get_sliders = function(req, res){
-    Mainslide.find({active_status: 1})
+    Mainslide.find({active_status: 1}).sort({sort_order: 1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
