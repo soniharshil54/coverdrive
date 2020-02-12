@@ -33,8 +33,8 @@ exports.get_all_secondary_sliders = function(req, res){
 }
 
 exports.get_all_sliders = function(req, res){
-    Mainslide.find()
-    .then(result=>res.json(result)).sort({sort_order: 1})
+    Mainslide.find().sort({sort_order: 1})
+    .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
 
