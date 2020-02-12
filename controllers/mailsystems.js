@@ -284,10 +284,11 @@ exports.send_forget_password_mail = function(otpdata){
 
     let htmlmessage = `<p>Here is the otp ( One Time Password ) to reset your password. :  ${otpbody}</p>
     <p>Enter this otp in below page to reset your password...</p>
-    <a href="http://localhost/coverclient/forgetpass.html#${otpid}">Reset Password</a>`
+    <a href="http://localhost/coverclient/forgetpass.html#${otpid}">Reset Password</a>
+    <p>This link will be expired after 5 minutes</p>`
     const message = {
       from: 'casemateinbox@gmail.com', // Sender address
-      to: 'sharshil43@yahoo.com',         // List of recipients
+      to: 'jaydipvd@gmail.com',         // List of recipients
       subject: 'Forget Password', // Subject line
       html: htmlmessage
     }
