@@ -114,9 +114,11 @@ router.put('/photoframe/addimage/:pid',upload.fields([{name: 'hImage', maxCount:
 
 router.put('/editsliderstatus/:sid', product_controller.edit_slider_status)
 
-router.put('/editslidersortorder/:sid', product_controller.edit_slider_status)
+router.put('/editslidersortorder/:sid', product_controller.edit_slider_sort_order)
 
 router.put('/editsecsliderstatus/:sid', product_controller.edit_sec_slider_status)
+
+router.put('/editsecslidersortorder/:sid', product_controller.edit_sec_slider_sort_order)
 
 router.put('/mug/addimage/:pid',upload.fields([{name: 'hImage', maxCount: 1}, {
   name: 'inImage', maxCount: 1
