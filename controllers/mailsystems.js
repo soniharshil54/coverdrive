@@ -28,7 +28,7 @@ exports.send_mail = function(hereproducts, orderref) {
       let usercontact = orderref.user_id.contact
        const message = {
             from: 'soniharshil55@gmail.com', // Sender address
-            to: useremail,         // List of recipients
+            to: 'sharshil43@yahoo.com',         // List of recipients
             subject: 'Stayclassy.in Order Receipt', // Subject line
             html: `<div style="margin: 0;padding:0;font-family:Arial, sans-serif;line-height:1.3em;">
           

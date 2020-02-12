@@ -95,13 +95,13 @@ exports.get_admin = function(req, res){
 }
 
 exports.get_all_admins = function(req, res){
-        Users.find()
+    Admin.find()
              .then(result=>res.json(result))
              .catch(err=>res.json(err))
     
-        Users.countDocuments()	
-              .then(result=>console.log(result))
-              .catch(err=>console.log(err))	 
+        // Users.countDocuments()	
+        //       .then(result=>console.log(result))
+        //       .catch(err=>console.log(err))	 
 }
 
 exports.login_admin = function(req, res){
