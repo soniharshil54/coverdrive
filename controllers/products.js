@@ -38,6 +38,11 @@ exports.get_all_sliders = function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.update_all_sliders = async function(req, res){
+   let slides =   await Mainslide.updateMany({}, {sort_order:0})
+   res.json(slides)
+}
+
 exports.add_product_slide = function(req, res){
     console.log(req.body)
     const newMainslide = new Mainslide(
