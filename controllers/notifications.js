@@ -39,6 +39,11 @@ exports.get_registration_tokens = async function(req, res){
   return registration_ids
 }
 
+exports.get_notifications = async function(req, res){
+    let result = await Notification.find()
+    res.json(result)
+}
+
 exports.add_send_notification = async function(req,res,next){
   console.log("below file")
   console.log(req.file.filename)

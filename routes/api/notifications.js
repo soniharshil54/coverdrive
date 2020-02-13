@@ -36,6 +36,7 @@ const storage = multer.diskStorage({
   
   router.post('/addsendnotification',upload.single('notification_image'),notification_controller.add_send_notification)
 
+  router.get('/getnotifications', notification_controller.get_notifications)
 //const checkAuth = require("../../middlewares/checkAuth")
 
 
