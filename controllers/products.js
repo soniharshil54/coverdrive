@@ -113,20 +113,54 @@ exports.edit_slider_status = function(req, res){
     .catch(err=>res.status(404).json(err))
 }
 
-exports.edit_slider_sort_order = function(req, res){
-    console.log(req.body)
-    console.log(req.params)
-    Mainslide.findOneAndUpdate({_id:req.params.sid},req.body)
-    .then(result=> res.json({"result":"slider status updated","updatedslider":result}))
-    .catch(err=>res.status(404).json(err))
+exports.edit_slider_sort_order = async function(req, res){
+    let olddigitref = await Mainslide.findOne({_id:req.params.sid}).select("sort_order")
+    let olddigit = olddigitref.sort_order
+    let newdigit = req.body.sort_order
+    if(newdigit > olddigit){
+        await Mainslide.updateMany({ sort_order: {
+            "$lte": parseInt(newdigit),
+            "$gt": parseInt(olddigit)
+        }},{ $inc: { sort_order: -1 }})
+        await Mainslide.findOneAndUpdate({_id:req.params.sid},{sort_order:newdigit})
+        res.json({status:1,message:"new is greater than old"})
+    }
+    else if(newdigit < olddigit){
+        await Mainslide.updateMany({ sort_order: {
+            "$gte": parseInt(newdigit),
+            "$lt": parseInt(olddigit)
+        }},{ $inc: { sort_order: 1 }})
+        await Mainslide.findOneAndUpdate({_id:req.params.sid},{sort_order:newdigit})
+        res.json({status:1,message:"new is less than old"})
+    }
+    else{
+        res.json({status:1,message:"new is equal to old"})
+    }
 }
 
 exports.edit_sec_slider_sort_order = function(req, res){
-    console.log(req.body)
-    console.log(req.params)
-    Secondaryslide.findOneAndUpdate({_id:req.params.sid},req.body)
-    .then(result=> res.json({"result":"slider status updated","updatedslider":result}))
-    .catch(err=>res.status(404).json(err))
+        let olddigitref = await Secondaryslide.findOne({_id:req.params.sid}).select("sort_order")
+    let olddigit = olddigitref.sort_order
+    let newdigit = req.body.sort_order
+    if(newdigit > olddigit){
+        await Secondaryslide.updateMany({ sort_order: {
+            "$lte": parseInt(newdigit),
+            "$gt": parseInt(olddigit)
+        }},{ $inc: { sort_order: -1 }})
+        await Secondaryslide.findOneAndUpdate({_id:req.params.sid},{sort_order:newdigit})
+        res.json({status:1,message:"new is greater than old"})
+    }
+    else if(newdigit < olddigit){
+        await Secondaryslide.updateMany({ sort_order: {
+            "$gte": parseInt(newdigit),
+            "$lt": parseInt(olddigit)
+        }},{ $inc: { sort_order: 1 }})
+        await Secondaryslide.findOneAndUpdate({_id:req.params.sid},{sort_order:newdigit})
+        res.json({status:1,message:"new is less than old"})
+    }
+    else{
+        res.json({status:1,message:"new is equal to old"})
+    }
 }
 
 // exports.edit_slider_name = function(req, res){
