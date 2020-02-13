@@ -114,8 +114,12 @@ exports.edit_slider_status = function(req, res){
 }
 
 exports.edit_slider_sort_order = async function(req, res){
+    console.log("sid", req.params.sid)
     let olddigitref = await Mainslide.findOne({_id:req.params.sid}).select("sort_order")
+    console.log("olddigitref")
+    console.log(olddigitref)
     let olddigit = olddigitref.sort_order
+    console.log("old digit", olddigit)
     let newdigit = req.body.sort_order
     if(newdigit > olddigit){
         await Mainslide.updateMany({ sort_order: {
