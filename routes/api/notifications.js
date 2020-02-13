@@ -1,7 +1,40 @@
 const express = require("express")
 const router = express.Router()
+const multer = require("multer")
+
+
 
 var notification_controller = require('../../controllers/notifications');
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+      cb(null, './uploads/');
+    },
+    filename: function(req, file, cb) {
+      let timestampref = Math.floor(Date.now() / 1000)
+      let slidernameref = `${timestampref}-${file.originalname}`
+      cb(null, slidernameref);
+    }
+  });
+  
+  const fileFilter = (req, file, cb) => {
+    // reject a file
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+      cb(null, true);
+    } else {
+      cb(null, false);
+    }
+  };
+  
+  const upload = multer({
+    storage: storage,
+    limits: {
+      fileSize: 2024 * 2024 * 5
+    },
+    fileFilter: fileFilter
+  });
+  
+  router.post('/addsendnotification',upload.single('notification_image'),notification_controller.add_send_notification)
 
 //const checkAuth = require("../../middlewares/checkAuth")
 

@@ -3,25 +3,17 @@ const Schema = mongoose.Schema
 
 const NotificationSchema = new Schema({
     _id : mongoose.Schema.Types.ObjectId,
-    content : {
-        type: String,
-        required: true
+    title : {
+        type : String
     },
-    date: {
-        type: String,
-        required: true
+    message : {
+        type : String
     },
-    sent_by: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'Admin'
+    image : {
+        type : String
     },
-    send_to: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: 'User'
-      }]  ,
-    send_status: {
-        type:Number,
-        required: true
+    isImage : {
+        type: Number
     }
 })
 

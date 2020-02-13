@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const Smsdata = require("../models/smsdata")
 const Notiffcmid = require("../models/notiffcmid")
+const Notification = require("../models/notification")
 let fetch = require('node-fetch');
 
 
@@ -28,12 +29,49 @@ exports.get_registration_tokens = async function(req, res){
   res.json({registration_ids:registration_ids})
 }
 
+ async function get_registration_tokens_send(){
+  let registration_idsref = await Notiffcmid.find()
+  console.log("registration_idsref")
+  console.log(registration_idsref)
+  let registration_ids = registration_idsref.map(regid => regid.registration_id)
+  console.log("registration_ids")
+  console.log(registration_ids)
+  return registration_ids
+}
 
-async function send_notification(registration_ids, message){
-  let fields = {
-    registration_ids : registration_ids,
-    data : message
+exports.add_send_notification = async function(req,res,next){
+  console.log("below file")
+  console.log(req.file.filename)
+  
+  //console.log(req.params.pid)
+  let notificationData = {}
+  if(req.file){
+      notificationData.isImage = 1
+      notificationData.image = `http://95.216.71.108:5600/admin/uploads/${req.file.filename}`
   }
+  else{
+      notificationData.isImage = 0
+  }
+  notificationData._id = new mongoose.Types.ObjectId()
+  notificationData.title = req.body.n_title
+  notificationData.message = req.body.n_message
+  const newNotification = new Notification(notificationData)
+  let notificationadd =  await newNotification.save()
+  let registration_ids = await get_registration_tokens_send()
+  console.log("registration_ids")
+  console.log(registration_ids)
+  let notificationssent = await send_notification(registration_ids, notificationData)
+  console.log(notificationssent)
+  res.json({status:1})
+}
+
+
+async function send_notification(registration_ids, notifData){
+  let fields = {
+    data : notifData,
+    registration_ids : registration_ids
+    }
+    console.log(fields)
   let sendnotif = await fetch('https://fcm.googleapis.com/fcm/send',
   {
       headers: {
@@ -48,7 +86,7 @@ async function send_notification(registration_ids, message){
 }
 
 exports.send_notification_to_android = async function(req, res){
-  // let registration_ids = await getregids()
+  let registration_ids = await get_registration_tokens_send()
   let message = req.body.message
   let notificationssent = await send_notification(registration_ids, message)
   res.json(notificationssent)
