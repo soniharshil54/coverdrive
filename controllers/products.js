@@ -138,7 +138,7 @@ exports.edit_slider_sort_order = async function(req, res){
     }
 }
 
-exports.edit_sec_slider_sort_order = function(req, res){
+exports.edit_sec_slider_sort_order = async function(req, res){
         let olddigitref = await Secondaryslide.findOne({_id:req.params.sid}).select("sort_order")
     let olddigit = olddigitref.sort_order
     let newdigit = req.body.sort_order
