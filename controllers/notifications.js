@@ -14,11 +14,11 @@ exports.add_registration_token = function(req, res) {
   newNotiffcmid.save()
       .then((result => {
           console.log(result)
-          res.status(200).header("Access-Control-Allow-Origin", "*").json({registration_id:result})
+          res.status(200).header("Access-Control-Allow-Origin", "*").json({status:1,registration_id:result})
       }))
       .catch(err => {
           console.log(err)
-          res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+          res.status(500).header("Access-Control-Allow-Origin", "*").json({status:0,error:err})
       })
 }
 
