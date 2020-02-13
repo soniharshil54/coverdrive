@@ -12,6 +12,10 @@ var notification_controller = require('../../controllers/notifications');
 
 //router.get('/getsmsdata', user_controller.get_sms_data)
 
+ router.post('/addregistrationtoken', notification_controller.add_registration_token)
+
+ router.post('/getregistrationtoken', notification_controller.get_registration_tokens)
+
  router.post('/postsmsdata', notification_controller.post_sms_data)
 
  router.post('/postorderconfirm', notification_controller.post_order_confirm_sms)

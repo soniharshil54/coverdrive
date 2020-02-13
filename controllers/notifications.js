@@ -1,7 +1,32 @@
 const express = require("express")
 const mongoose = require("mongoose")
 const Smsdata = require("../models/smsdata")
+const Notiffcmid = require("../models/notiffcmid")
 let fetch = require('node-fetch');
+
+
+exports.add_registration_token = function(req, res) {
+  let regbody = {
+    _id: new mongoose.Types.ObjectId(),
+    registration_id: req.body.registration_id
+}
+  const newNotiffcmid = new Notiffcmid(regbody)
+  newNotiffcmid.save()
+      .then((result => {
+          console.log(result)
+          res.status(200).header("Access-Control-Allow-Origin", "*").json({registration_id:registration_id})
+      }))
+      .catch(err => {
+          console.log(err)
+          res.status(500).header("Access-Control-Allow-Origin", "*").json({error:err})
+      })
+}
+
+exports.get_registration_tokens = async function(req, res){
+  let registration_idsref = await Notiffcmid.find()
+  let registration_ids = registration_idsref.map(regid => regid.registration_id)
+  res.json({registration_ids:registration_ids})
+}
 
 
 async function send_notification(registration_ids, message){
