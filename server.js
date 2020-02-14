@@ -19,8 +19,6 @@ const cors = require("cors")
 const app = express()
 const bodyParser = require("body-parser")
 const fs = require("fs")
-//let Offer = require('./models/offer');
-//require('./models/Comments');
 
 
 //app.use(bodyParser.urlencoded({ extended: false }));
@@ -46,21 +44,6 @@ const razorpaysRoutes = require("./routes/api/razorpays")
 //const zipdatabaseRoutes = require("./routes/api/zipdatabases")
 // const pincodeRoutes = require("./routes/api/pincodes")
 
-
-
-
-
-
-
-
-
-
-// app.use(function(req, res, next) {
-//   res.header("Access-Control-Allow-Origin", "*");
-//   res.header("Access-Control-Allow-Headers", "*");
-//   res.header("Access-Control-Allow-Methods", "*");
-//   next();
-// });
 app.use("/api/user",userRoutes)
 app.use("/api/admin",adminRoutes)
 app.use("/api/order",orderRoutes)

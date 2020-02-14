@@ -269,6 +269,8 @@ router.put('/updateall4dphonecases',upload.fields([{name: 'slider_image', maxCou
 
   router.get('/getmodelsbycompany/:company', phonecase_controller.get_models_by_company)
 
+  router.get('/getmodelsbycompanyid/:cid', phonecase_controller.get_models_by_company_id)
+
  
 
   //router.get('/get4dcoversbycompany2/:company', phonecase_controller.get_4dcovers_by_company_2)
