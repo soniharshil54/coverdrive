@@ -149,6 +149,7 @@ router.put('/add3dphonecaseimages/:pid',upload.fields([{name: 'slider_image', ma
   console.log("upload images 3d called")
   //console.log(req.files)
   let imageData = {}
+  imageData.name = req.body.cover_name
   if(req.files.slider_image){
     imageData.slider_image = req.files.slider_image[0].filename
   }

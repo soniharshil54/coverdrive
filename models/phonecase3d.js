@@ -12,6 +12,9 @@ const Phonecase3dSchema = new Schema({
   model_id : {
     type: String
   },
+  name : {
+    type: String
+  },
   company : {
       type: String,
       required: true
