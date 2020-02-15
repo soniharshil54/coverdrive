@@ -6,6 +6,18 @@ const Notification = require("../models/notification")
 let fetch = require('node-fetch');
 
 
+exports.get_notification = async function(req, res){
+  let offer = await Notification.findOne({_id:req.params.nid})
+  if(offer){
+      res.json(offer)
+      return
+  }
+  else{
+      res.json({"error":"notification not found"})
+      return
+  }
+}
+
 exports.add_registration_token = function(req, res) {
   let regbody = {
     _id: new mongoose.Types.ObjectId(),
