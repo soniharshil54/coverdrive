@@ -60,6 +60,7 @@ exports.add_send_notification = async function(req,res,next){
   notificationData._id = new mongoose.Types.ObjectId()
   notificationData.title = req.body.n_title
   notificationData.message = req.body.n_message
+  //let notificationexists = await Notification.findOne({title:req.body.n_title, message: req.body.n_message})
   const newNotification = new Notification(notificationData)
   let notificationadd =  await newNotification.save()
   let registration_ids = await get_registration_tokens_send()
