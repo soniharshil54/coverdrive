@@ -91,7 +91,7 @@ exports.send_old_notification = async function(req,res){
 
   let notification = await Notification.findOne({_id : req.body.notification_id})
   console.log(notification)
-
+  let notificationData = {}
   if(notification.image){
       notificationData.isImage = 1
       notificationData.image = notification.image
