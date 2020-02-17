@@ -86,29 +86,31 @@ exports.add_send_notification = async function(req,res,next){
 
 exports.send_old_notification = async function(req,res){
   console.log("below file")
+  console.log(req.body)
   //console.log(req.file.filename)
 
   let notification = await Notification.findOne({_id : req.body.notification_id})
+  console.log(notification)
 
-  if(notification.image){
-      notificationData.isImage = 1
-      notificationData.image = notification.image
-  }
-  else{
-      notificationData.isImage = 0
-  }
-  notificationData._id = new mongoose.Types.ObjectId()
-  notificationData.title = notification.title
-  notificationData.message = notification.message
-  //let notificationexists = await Notification.findOne({title:req.body.n_title, message: req.body.n_message})
- // const newNotification = new Notification(notificationData)
- // let notificationadd =  await newNotification.save()
-  let registration_ids = await get_registration_tokens_send()
-  console.log("registration_ids")
-  console.log(registration_ids)
-  let notificationssent = await send_notification(registration_ids, notificationData)
-  console.log(notificationssent)
-  res.json({status:1})
+//   if(notification.image){
+//       notificationData.isImage = 1
+//       notificationData.image = notification.image
+//   }
+//   else{
+//       notificationData.isImage = 0
+//   }
+//   notificationData._id = new mongoose.Types.ObjectId()
+//   notificationData.title = notification.title
+//   notificationData.message = notification.message
+//   //let notificationexists = await Notification.findOne({title:req.body.n_title, message: req.body.n_message})
+//  // const newNotification = new Notification(notificationData)
+//  // let notificationadd =  await newNotification.save()
+//   let registration_ids = await get_registration_tokens_send()
+//   console.log("registration_ids")
+//   console.log(registration_ids)
+//   let notificationssent = await send_notification(registration_ids, notificationData)
+//   console.log(notificationssent)
+//   res.json({status:1})
 }
 
 
