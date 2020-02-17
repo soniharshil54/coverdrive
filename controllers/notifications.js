@@ -86,7 +86,7 @@ exports.add_send_notification = async function(req,res,next){
 
 exports.send_old_notification = async function(req,res){
   console.log("below file")
-  console.log(req.file.filename)
+  //console.log(req.file.filename)
 
   let notification = await Notification.findOne({_id : req.body.notification_id})
 
