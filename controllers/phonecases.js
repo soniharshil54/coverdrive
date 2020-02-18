@@ -66,7 +66,7 @@ exports.get_active_phonecases = function(req, res){
 }
 
 exports.get_all_phonecases = function(req, res){
-    Phonecase.find()
+    Phonecase.find().sort({create_date: -1})
     .then(result=>res.json(result))
     .catch(err=>res.json(err))
 }
