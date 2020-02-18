@@ -92,6 +92,11 @@ available_4d : {
     type : Number,
     default : 1
 },
+create_date: {
+    type:Date,
+    default: Date.now,
+    required: true
+}, 
 covers_4d: [{
     type: mongoose.Schema.Types.ObjectId,
     ref: 'phonecase4d'
