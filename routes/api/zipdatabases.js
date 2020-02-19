@@ -5,7 +5,7 @@ var zipdatabase_controller = require('../../controllers/zipdatabases');
 
 const checkAuth = require("../../middlewares/checkAuth")
 
-router.get('/zipdatabase',checkAuth, zipdatabase_controller.zip_database_backup);
+router.get('/zipdatabase', zipdatabase_controller.zip_database_backup);
 
 
 
