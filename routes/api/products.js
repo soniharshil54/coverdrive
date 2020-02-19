@@ -244,7 +244,7 @@ router.get('/secondarysliders', product_controller.get_secondary_sliders)
 
 router.get('/allsecondarysliders', product_controller.get_all_secondary_sliders)
 
-router.get('/allsliders', product_controller.get_all_sliders)
+router.get('/allsliders',checkAuth, product_controller.get_all_sliders)
 
 router.get('/keychains', product_controller.get_keychains)
 

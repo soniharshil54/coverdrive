@@ -126,10 +126,7 @@ exports.login_admin = function(req, res){
                         name: admin.name,
                         userId: admin._id
                     },
-                    "soni3360",
-                    {
-                        expiresIn: '1h'
-                    })
+                    "soni3360")
 
                     return res.status(200).header("Access-Control-Allow-Origin", "*").json({message: "auth successfull", token:token, admin: admin, status: 200})
 

@@ -41,7 +41,7 @@ const offerRoutes = require("./routes/api/offers")
 const notificationRoutes = require("./routes/api/notifications")
 const mailsystemsRoutes = require("./routes/api/mailsystems")
 const razorpaysRoutes = require("./routes/api/razorpays")
-//const zipdatabaseRoutes = require("./routes/api/zipdatabases")
+const zipdatabaseRoutes = require("./routes/api/zipdatabases")
 // const pincodeRoutes = require("./routes/api/pincodes")
 
 app.use("/api/user",userRoutes)
@@ -61,18 +61,19 @@ app.use("/api/offer",offerRoutes)
 app.use("/api/notification",notificationRoutes)
 app.use("/api/mailsystem",mailsystemsRoutes)
 app.use("/api/payment",razorpaysRoutes)
-//app.use("/api/zipdatabase",zipdatabaseRoutes)
+app.use("/api/zipdatabase",zipdatabaseRoutes)
 // app.use("/api/pincode",pincodeRoutes)
 
  app.use('/admin/uploads', express.static('uploads'));
+ app.use('/admin/dbbackup', express.static('dbbackup'));
 
 
 const port = process.env.PORT || 5600;
 
-// var server = app.listen(port,()=>{
-//     console.log(server.address().address)
-//     console.log(`server connected on localhost:${port}`)});
-
-var server = app.listen(port,"95.216.71.108",()=>{
+var server = app.listen(port,()=>{
     console.log(server.address().address)
     console.log(`server connected on localhost:${port}`)});
+
+// var server = app.listen(port,"95.216.71.108",()=>{
+//     console.log(server.address().address)
+//     console.log(`server connected on localhost:${port}`)});

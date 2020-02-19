@@ -15,9 +15,9 @@ router.get('/getuser/:uid', user_controller.get_user);
 router.get('/getsmsdata', user_controller.get_sms_data)
 
 // GET request to get specific user. 
-router.get('/users', user_controller.get_all_users);  
+router.get('/users',checkAuth, user_controller.get_all_users);  
 
-router.get('/activeusers', user_controller.get_active_users); 
+router.get('/activeusers',checkAuth, user_controller.get_active_users); 
 
 router.get('/getcontacts', user_controller.get_contacts);
 
