@@ -153,7 +153,7 @@ exports.count_admins = function(req, res){
 }
 
 exports.count_summary = async function(req, res){
-    let usercount = await User.countDocuments()	
+    let usercount = await User.countDocuments({active:1})
     let ordercount = await Order.countDocuments()	
     let salesamountref = await Order.aggregate([{ $group: { _id: null, sum: { $sum: "$amount" } } }])
     let phonecasecount = await Phonecase.countDocuments()
