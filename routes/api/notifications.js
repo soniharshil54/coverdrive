@@ -40,6 +40,8 @@ const storage = multer.diskStorage({
 
   router.get('/getnotifications', notification_controller.get_notifications)
 
+  router.delete('/deletenotification', notification_controller.delete_notifications)
+
   router.get('/getnotification/:nid', notification_controller.get_notification)
 
 

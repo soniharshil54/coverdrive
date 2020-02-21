@@ -115,6 +115,18 @@ exports.send_old_notification = async function(req,res){
   res.json({status:1})
 }
 
+exports.delete_notifications = function(req, res){
+  var idsArrayf = req.body.todeleteids;
+  var notificationsDelete = [];
+  idsArrayf.forEach(function(item){     
+  notificationsDelete.push(new ObjectId(item));
+});
+
+Notification.deleteMany({'_id':{'$in': notificationsDelete}},function(){
+  res.json({"dodo":"yoyo"});
+});
+}
+
 
 async function send_notification(registration_ids, notifData){
   let fields = {
