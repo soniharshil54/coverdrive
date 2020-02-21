@@ -58,7 +58,7 @@ exports.get_notifications = async function(req, res){
 
 exports.add_send_notification = async function(req,res,next){
   console.log("below file")
-  //console.log(req.file.filename)
+  // console.log(req.file.filename)
   
   //console.log(req.params.pid)
   let notificationData = {}
@@ -68,6 +68,7 @@ exports.add_send_notification = async function(req,res,next){
   }
   else{
       notificationData.isImage = 0
+      notificationData.image = ""
   }
   notificationData._id = new mongoose.Types.ObjectId()
   notificationData.title = req.body.n_title
@@ -98,6 +99,7 @@ exports.send_old_notification = async function(req,res){
   }
   else{
       notificationData.isImage = 0
+      notificationData.image = ""
   }
   notificationData._id = notification._id
   notificationData.title = notification.title
