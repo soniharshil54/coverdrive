@@ -58,7 +58,7 @@ exports.get_notifications = async function(req, res){
 
 exports.add_send_notification = async function(req,res,next){
   console.log("below file")
-  console.log(req.file.filename)
+  //console.log(req.file.filename)
   
   //console.log(req.params.pid)
   let notificationData = {}
