@@ -114,6 +114,7 @@ exports.get_user = async function(req, res){
 exports.get_all_users = function(req, res){
         User.find()
              .then(result=>{
+                 console.log(req.ip)
                  let consoledate = new Date(Date.now())
                  console.log(consoledate)
                  res.json(result)}
