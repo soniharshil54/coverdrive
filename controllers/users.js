@@ -123,6 +123,7 @@ exports.get_all_users = function(req, res){
 }
 
 exports.get_active_users = function(req, res){
+    console.log(req.ip)
     User.find({active : 1})
          .then(result=>res.json(result))
          .catch(err=>res.json(err))
