@@ -1,20 +1,25 @@
 // let datep = new Date(Date.now())
 // console.log(datep)
 
-let reqcomp = "VIVO"
-let lowerc = reqcomp.toLowerCase()
-console.log(lowerc)
-console.log(lowerc.charAt(0).toUpperCase() + lowerc.slice(1))
+var godaw = "hello its thor"
+var godawcap = godaw.replace(/\s/g, "")
 
-function getindextosplitarray(oldimagesref){
-    let newoldimagesref = oldimagesref.filter(function(item){
-      let checkit = item.split('-')[1]
-      return checkit=='p';
-    }).length
-    let indexref = newoldimagesref - 1
-    return indexref
-}
-console.log(getindextosplitarray( [ '1-p', '2-p','3-p', '1' ] ))
+console.log(godaw)
+console.log(godawcap)
+// let reqcomp = "VIVO"
+// let lowerc = reqcomp.toLowerCase()
+// console.log(lowerc)
+// console.log(lowerc.charAt(0).toUpperCase() + lowerc.slice(1))
+
+// function getindextosplitarray(oldimagesref){
+//     let newoldimagesref = oldimagesref.filter(function(item){
+//       let checkit = item.split('-')[1]
+//       return checkit=='p';
+//     }).length
+//     let indexref = newoldimagesref - 1
+//     return indexref
+// }
+// console.log(getindextosplitarray( [ '1-p', '2-p','3-p', '1' ] ))
 
 // let daten = new Date(Date.now()).toDateString()
 // console.log(daten)

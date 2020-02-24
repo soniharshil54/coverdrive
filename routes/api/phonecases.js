@@ -14,7 +14,9 @@ const storage = multer.diskStorage({
   },
   filename: function(req, file, cb) {
     let timestampref = Math.floor(Date.now() / 1000)
-    let slidernameref = `${timestampref}-${file.originalname}`
+    let filenameref = file.originalname
+    let trimmedfilename = filenameref.replace(/\s/g, "")
+    let slidernameref = `${timestampref}-${trimmedfilename}`
     cb(null, slidernameref);
   }
 });
