@@ -136,7 +136,7 @@ router.get('/getordersbycontact/:contact', order_controller.get_orders_by_contac
 
 router.get('/getorderswithdata',checkAuth, order_controller.get_orders_with_data);
 
-router.get('/getorderswithdataopt',checkAuth, order_controller.get_orders_with_data_optimized);
+router.get('/getorderswithdataopt', order_controller.get_orders_with_data_optimized);
 
 router.get('/getmodelrequests', order_controller.get_modelrequests)
 
