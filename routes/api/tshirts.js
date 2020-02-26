@@ -151,30 +151,17 @@ router.put('/ttaddimage/:ttid',upload.fields([{name: 'sliderImage', maxCount: 1}
       )
   })
 
-  router.put('/addimage/:kid',upload.fields([{name: 'hImage', maxCount: 1}, {
-    name: 'shadowImage',maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1},,{name: 'shadowImage2',maxCount: 1},,{name: 'overlayImage2',maxCount: 1},,{name: 'maskImage2',maxCount: 1}]),(req,res,next) => {
+  router.put('/addimage/:kid',upload.fields([{name: 'hImage', maxCount: 1},{name: 'overlayImage',maxCount: 1},{name: 'maskImage',maxCount: 1}]),(req,res,next) => {
     //console.log(req.files)
     let imageData = {}
     if(req.files.hImage){
       imageData.h_image = req.files.hImage[0].filename
-    }
-    if(req.files.shadowImage){
-      imageData.shadow_image = req.files.shadowImage[0].filename
     }
     if(req.files.overlayImage){
       imageData.overlay_image = req.files.overlayImage[0].filename
     }
     if(req.files.maskImage){
       imageData.mask_image = req.files.maskImage[0].filename
-    }
-    if(req.files.shadowImage2){
-      imageData.shadow_image_2 = req.files.shadowImage2[0].filename
-    }
-    if(req.files.overlayImage2){
-      imageData.overlay_image_2 = req.files.overlayImage2[0].filename
-    }
-    if(req.files.maskImage2){
-      imageData.mask_image_2 = req.files.maskImage2[0].filename
     }
     Tshirt.findOneAndUpdate({_id:req.params.kid},imageData)
     .then(result=> {
