@@ -74,15 +74,9 @@ exports.get_orders = async function(req, res){
 }
 
 exports.get_active_orders = async function(req, res){
-    let orders = await Order.find({active:1})
-    if(orders){
-        res.json(orders)
-        return
-    }
-    else{
-        res.json({"error":"order not found"})
-        return
-    }
+    Order.find({active : 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
 }
 
 exports.get_order_by_id = async function(req, res){
