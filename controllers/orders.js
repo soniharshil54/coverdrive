@@ -327,7 +327,7 @@ Order.deleteMany({'_id':{'$in': ordersDelete}},function(){
 
 exports.deactivate_orders = function(req, res){
     // console.log(req.body.todeactiveids)
-     var idsArrayf = req.body.todeactiveids;
+     var idsArrayf = req.body.todeleteids;
     // console.log(idsArrayf)
      var ordersDeactive = [];
      idsArrayf.forEach(function(item){     
