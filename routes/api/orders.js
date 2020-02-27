@@ -126,6 +126,8 @@ router.post('/placemodelrequest', order_controller.place_model_request);
 
 router.delete('/deleteorder', order_controller.delete_orders)
 
+router.delete('/deactivateorder', order_controller.deactivate_orders)
+
 router.put('/changeorderstatus/:oid', order_controller.change_order_status)
 
 router.get('/getorderbyid/:orderid', order_controller.get_order_by_id)
@@ -137,6 +139,8 @@ router.get('/getordersbycontact/:contact', order_controller.get_orders_by_contac
 router.get('/getorderswithdata',checkAuth, order_controller.get_orders_with_data);
 
 router.get('/getorderswithdataopt', order_controller.get_orders_with_data_optimized);
+
+router.get('/getactiveorderswithdataopt', order_controller.get_active_orders_with_data_optimized);
 
 router.get('/getmodelrequests', order_controller.get_modelrequests)
 

@@ -37,6 +37,18 @@ exports.get_orders_with_data_optimized = async function(req, res){
     }
 }
 
+exports.get_active_orders_with_data_optimized = async function(req, res){
+    let orders = await Order.find({active:1}).select('_id order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
+    if(orders){
+        res.json(orders)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
 exports.get_modelrequests = async function(req, res){
     let modelreqs = await Modelrequest.find().populate("user_id")
     if(modelreqs){
@@ -299,6 +311,49 @@ exports.delete_orders = function(req, res){
 Order.deleteMany({'_id':{'$in': ordersDelete}},function(){
     res.json({"dodo":"yoyo"});
 });
+}
+
+exports.deactivate_orders = function(req, res){
+    // console.log(req.body.todeactiveids)
+     var idsArrayf = req.body.todeactiveids;
+    // console.log(idsArrayf)
+     var ordersDeactive = [];
+     idsArrayf.forEach(function(item){     
+     ordersDeactive.push(new ObjectId(item));
+ });
+ 
+ let deactivebody = {
+     active : 0
+ }
+ 
+ Order.updateMany({'_id':{'$in': ordersDeactive}}, deactivebody,function(err, result){
+    // console.log(result)
+     res.json({"dodo":"yoyo"});
+ });
+ }
+
+exports.delete_orders_new = async function(req, res){
+    var idsArrayf = req.body.todeleteids;
+    var ordersDelete = [];
+    idsArrayf.forEach(function(item){     
+    ordersDelete.push(new ObjectId(item));
+});
+let orders = await Order.find({'_id':{'$in': ordersDelete}}).populate('products','image cropped_image')
+let products = orders.map(order => order.products)
+let imagestodelete = []
+for(i=0; i < products.length; i++){
+    let img = products[i].image
+    let cropped_img = products[i].cropped_image
+    imagestodelete.push(img, cropped_img)
+}
+    let orderdelete = await Order.deleteMany({'_id':{'$in': ordersDelete}})
+    if(orderdelete){
+        console.log(imagestodelete)
+        res.json({"delete":"records deleted"})
+    }
+    else{
+        res.json({"delete":"error in records delete"})
+    }
 }
 
 exports.delete_model_requests = function(req, res){

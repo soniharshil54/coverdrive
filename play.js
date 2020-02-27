@@ -86,3 +86,71 @@ console.log(godawcap)
 
 // let unique = [...new Set(names)];
 // console.log(unique);
+
+exports.delete_gallery = async function(req, res) {
+    console.log(req.body)
+    var idsArrayf = req.body.todeleteids;
+    var galleryDelete = [];
+    idsArrayf.forEach(function (item) {
+    let objid = new ObjectId(item)
+    galleryDelete.push(objid);
+    });
+    
+    let imagesref = await Gallery.find({ '_id': { '$in': galleryDelete }})
+    console.log("galaary images deleted")
+    console.log(imagesref)
+    let images = imagesref.map(img => img.cover_image)
+    console.log("cover images")
+    console.log(images)
+    let multiimgdelete = []
+    
+    //let multimage = imagesref.map(img => img.multi_image)
+    for(let i = 0; i < imagesref.length; i++){
+    let multiimages = imagesref[i].multi_image
+    // console.log("outer for loop")
+    // console.log(multiimages)
+    for(let j = 0; j < multiimages.length; j++){
+    multiimgdelete.push(multiimages[j])
+    }
+    }
+    //console.log(imagesref)
+    //console.log(multiimgdelete)
+    
+    await Gallery.deleteMany({ '_id': { '$in': galleryDelete } })
+    for(k = 0; k<images.length; k++){
+    let pathimg = `./uploads/gallery/${images[k]}`
+    //console.log(pathimg)
+    fs.unlinkSync(pathimg)
+    }
+    for(l = 0; l<multiimgdelete.length; l++){
+    //console.log(multiimgdelete[l])
+    let pathimg = `./uploads/gallery/${multiimgdelete[l]}`
+    //console.log(pathimg)
+    fs.unlinkSync(pathimg)
+    }
+    res.json({"deleted":"done"})
+    }
+
+    exports.delete_orders = async function(req, res){
+        var idsArrayf = req.body.todeleteids;
+        var ordersDelete = [];
+        idsArrayf.forEach(function(item){     
+        ordersDelete.push(new ObjectId(item));
+    });
+    let orders = await Order.find({'_id':{'$in': ordersDelete}}).populate('products','image cropped_image')
+    let products = orders.map(order => order.products)
+    let imagestodelete = []
+    for(i=0; i < products.length; i++){
+        let img = products[i].image
+        let cropped_img = products[i].cropped_image
+        imagestodelete.push(img, cropped_img)
+    }
+        let orderdelete = await Order.deleteMany({'_id':{'$in': ordersDelete}})
+        if(orderdelete){
+            console.log(imagestodelete)
+            res.json({"delete":"records deleted"})
+        }
+        else{
+            res.json({"delete":"error in records delete"})
+        }
+    }

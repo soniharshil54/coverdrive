@@ -38,6 +38,10 @@ const OrderSchema = new Schema({
         type: String,
         required: false
     },
+    active: {
+        type: Number,
+        default: 1
+    },
     gst_tax: {
         type: Number
     },
