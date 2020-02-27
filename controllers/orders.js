@@ -38,7 +38,7 @@ exports.get_orders_with_data_optimized = async function(req, res){
 }
 
 exports.get_active_orders_with_data_optimized = async function(req, res){
-    let orders = await Order.find({active:1}).select('_id active order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
+    let orders = await Order.find({active : 1}).select('_id active order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
     if(orders){
         res.json(orders)
         return
