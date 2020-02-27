@@ -79,6 +79,12 @@ exports.get_active_orders = async function(req, res){
     .catch(err=>res.json(err))
 }
 
+exports.set_active_orders = async function(req, res){
+    Order.updateMany({},{active : 1})
+    .then(result=>res.json(result))
+    .catch(err=>res.json(err))
+}
+
 exports.get_order_by_id = async function(req, res){
     let order = await Order.findOne({_id:req.params.orderid}).populate('products').populate("user_id")
     if(order){
