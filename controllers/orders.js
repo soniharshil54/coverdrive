@@ -337,9 +337,9 @@ exports.deactivate_orders = function(req, res){
  let deactivebody = {
      active : 0
  }
- 
+ console.log(ordersDeactive)
  Order.updateMany({'_id':{'$in': ordersDeactive}}, deactivebody,function(err, result){
-    // console.log(result)
+    console.log(result)
      res.json({"dodo":"yoyo"});
  });
  }

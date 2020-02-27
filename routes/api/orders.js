@@ -150,7 +150,7 @@ router.get('/getorders', order_controller.get_orders);
 
 router.get('/getactiveorders', order_controller.get_active_orders);
 
-router.get('/setactiveorders', order_controller.set_active_orders);
+//router.get('/setactiveorders', order_controller.set_active_orders);
 
 router.get('/getcartproductbyid/:cpid', order_controller.get_cartproduct_by_id)
 
