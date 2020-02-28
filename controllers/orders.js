@@ -26,7 +26,7 @@ exports.get_orders_with_data = async function(req, res){
 }
 
 exports.get_orders_with_data_optimized = async function(req, res){
-    let orders = await Order.find().select('_id order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
+    let orders = await Order.find().select('_id order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact address first_name last_name")
     if(orders){
         res.json(orders)
         return
