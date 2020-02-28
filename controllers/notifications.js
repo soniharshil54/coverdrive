@@ -214,9 +214,10 @@ exports.post_all_sms_data = async function(req, res) {
 
 async function getcontacts() {
   let contactsref = await User.find().select('contact')
-  let contacts = contactsref.map(b => {
+  let contactsrefd = contactsref.map(b => {
     return b.contact
   })
+  let contacts = new Set(contactsrefd)
   console.log(contacts)
   return contacts
 }
