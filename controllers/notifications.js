@@ -175,7 +175,7 @@ exports.post_sms_data = function(req, res) {
 
 exports.post_all_sms_data = function(req, res) {
  // let mobilenumber = req.body.mobilenumber
-  let smscontent = req.body.smscontent
+ // let smscontent = req.body.smscontent
   let senderid = "PHCSMR"
   //console.log(req.connection.localAddress)
   //res.json({"run":"runa"})
