@@ -173,7 +173,7 @@ exports.post_sms_data = function(req, res) {
       })
 }
 
-exports.post_all_sms_data = function(req, res) {
+exports.post_all_sms_data = async function(req, res) {
  // let mobilenumber = req.body.mobilenumber
  let smscontent = req.body.smscontent
   let senderid = "PHCSMR"
