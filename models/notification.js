@@ -14,6 +14,11 @@ const NotificationSchema = new Schema({
     },
     isImage : {
         type: Number
+    },
+    create_date: {
+        type:Date,
+        default: Date.now,
+        required: true
     }
 })
 

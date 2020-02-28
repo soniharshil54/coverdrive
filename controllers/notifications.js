@@ -53,7 +53,7 @@ exports.get_registration_tokens = async function(req, res){
 }
 
 exports.get_notifications = async function(req, res){
-    let result = await Notification.find()
+    let result = await Notification.find().sort({create_date: -1})
     res.json(result)
 }
 
