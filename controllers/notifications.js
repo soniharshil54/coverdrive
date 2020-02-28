@@ -217,10 +217,14 @@ async function getcontacts() {
   let contactsrefd = contactsref.map(b => {
     return b.contact
   })
-  let contacts = new Set(contactsrefd)
+  let contacts = removeDuplicates(contactsrefd)
   console.log(contacts)
   return contacts
 }
+
+function removeDuplicates(array) {
+  return array.filter((a, b) => array.indexOf(a) === b)
+};
 
 exports.post_order_confirm_sms = function(req, res) {
   console.log(req.body)
