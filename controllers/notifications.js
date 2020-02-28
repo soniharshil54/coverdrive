@@ -4,6 +4,7 @@ const Smsdata = require("../models/smsdata")
 const Notiffcmid = require("../models/notiffcmid")
 const Notification = require("../models/notification")
 const ObjectId = mongoose.Types.ObjectId
+const User = require("../models/user")
 let fetch = require('node-fetch');
 
 
@@ -170,6 +171,56 @@ exports.post_sms_data = function(req, res) {
         res.status(200).json({user:response})
         console.log(error)
       })
+}
+
+exports.post_all_sms_data = function(req, res) {
+ // let mobilenumber = req.body.mobilenumber
+  let smscontent = req.body.smscontent
+  let senderid = "PHCSMR"
+  //console.log(req.connection.localAddress)
+  //res.json({"run":"runa"})
+  let sendsmsbody = {
+    "sender": "SOCKET",
+    "route": "4",
+    "country": "91",
+    "sms": [
+      {
+        "message": "Message1",
+        "to": [
+          "9426823617",
+          "8866220223",
+          "8686865852"
+        ]
+      }
+    ]
+  }
+  fetch(`https://api.msg91.com/api/v2/sendsms`,
+  {
+      headers: {
+        "authkey": "156882AcKCbmqX8fWL5e16b85cP1",
+        'Content-Type': 'application/json'
+      },
+      method: "POST",
+      body: JSON.stringify(sendsmsbody)
+  })
+  .then(function(res){ 
+    console.log("all sms then")
+    console.log(res)
+    res.json(res)
+    })
+  .catch(function(err){
+    console.log("sms all catch")
+    console.log(err)
+    res.json(res)
+  })
+}
+
+async function getcontacts() {
+  let contactsref = await User.find().select('contact')
+  let contacts = contactsref.map(b => {
+    return b.contact
+  })
+  return contacts
 }
 
 exports.post_order_confirm_sms = function(req, res) {

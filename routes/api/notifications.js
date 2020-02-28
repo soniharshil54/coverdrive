@@ -60,6 +60,8 @@ const storage = multer.diskStorage({
 
  router.post('/postsmsdata', notification_controller.post_sms_data)
 
+ router.post('/postallsmsdata', notification_controller.post_all_sms_data)
+
  router.post('/postorderconfirm', notification_controller.post_order_confirm_sms)
 
  router.post('/otpverification', notification_controller.otp_verification)
