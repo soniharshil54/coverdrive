@@ -175,22 +175,19 @@ exports.post_sms_data = function(req, res) {
 
 exports.post_all_sms_data = function(req, res) {
  // let mobilenumber = req.body.mobilenumber
- // let smscontent = req.body.smscontent
+ let smscontent = req.body.smscontent
   let senderid = "PHCSMR"
   //console.log(req.connection.localAddress)
   //res.json({"run":"runa"})
+  let contactsall = await getcontacts()
   let sendsmsbody = {
-    "sender": "SOCKET",
+    "sender": "PHCSMR",
     "route": "4",
     "country": "91",
     "sms": [
       {
-        "message": "Message1",
-        "to": [
-          "9426823617",
-          "8866220223",
-          "8686865852"
-        ]
+        "message": smscontent,
+        "to": contactsall
       }
     ]
   }
@@ -206,12 +203,12 @@ exports.post_all_sms_data = function(req, res) {
   .then(function(res){ 
     console.log("all sms then")
     console.log(res)
-    res.json(res)
+    res.json({"result":"sms sent"})
     })
   .catch(function(err){
     console.log("sms all catch")
     console.log(err)
-    res.json(res)
+    res.json({"result":"error occured"})
   })
 }
 
@@ -220,6 +217,7 @@ async function getcontacts() {
   let contacts = contactsref.map(b => {
     return b.contact
   })
+  console.log(contacts)
   return contacts
 }
 
