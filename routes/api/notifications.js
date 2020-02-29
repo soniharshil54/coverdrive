@@ -53,7 +53,6 @@ const storage = multer.diskStorage({
 //router.get('/getuser/:uid', user_controller.get_user);
 
 //router.get('/getsmsdata', user_controller.get_sms_data)
-router.get('/getnotificationravi', notification_controller.send_notification_ravi)
 
  router.post('/addregistrationtoken', notification_controller.add_registration_token)
 

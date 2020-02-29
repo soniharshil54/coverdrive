@@ -262,12 +262,6 @@ exports.send_order_confirm_sms = function(mobilenumber,user_name, order_id) {
       return
     })
 }
-exports.send_notification_ravi = async function (req, res){
-
-  //console.log("hello")
-  let noti = await User.find().select('address contact')
-  res.json(noti)
-}
 
 exports.otp_verification = function(req, res) {
   let mobilenumber = req.body.mobilenumber
