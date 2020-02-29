@@ -207,7 +207,7 @@ exports.get_models_by_company = function(req, res){
 exports.get_models_by_company_id = async function(req, res){
     let companyref = await Phonecomp.findOne({_id:req.params.cid})
     let bcomp = companyref.name
-    let phonecases = await Phonecase.find({company: bcomp}).select('name _id')
+    let phonecases = await Phonecase.find({company: bcomp,available_status: 1}).select('name _id')
     res.json(phonecases)
 }
 
