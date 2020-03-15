@@ -74,7 +74,7 @@ exports.edit_keychain = function(req, res){
 exports.edit_all_keychains = function(req, res){
     //console.log(req.body)
     //console.log(req.params)
-    Keychain.updateMany({},req.body)
+    Keychain.updateMany({},{type:"CustomKeychain"})
     .then(result=> res.json({"result":"keychain updated","updatedkeychains":result}))
     .catch(err=>res.status(404).json(err))
 }

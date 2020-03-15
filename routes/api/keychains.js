@@ -116,7 +116,7 @@ router.get('/getallkeychains', keychain_controller.get_all_keychains)
 
 router.put('/editkeychain/:mid', keychain_controller.edit_keychain)
 
-router.put('/editallkeychains', keychain_controller.edit_all_keychains)
+router.get('/editallkeychains', keychain_controller.edit_all_keychains)
 
 router.put('/editkeychainstatus/:mid', keychain_controller.edit_keychain_status)
 
