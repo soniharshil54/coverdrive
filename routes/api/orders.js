@@ -142,6 +142,8 @@ router.get('/getorderswithdataopt', order_controller.get_orders_with_data_optimi
 
 router.get('/getactiveorderswithdataopt', order_controller.get_active_orders_with_data_optimized);
 
+router.get('/getactiveorderswithdataoptfilt/:filtertype/:filterparam', order_controller.get_active_orders_with_data_optimized_filtered);
+
 router.get('/getactiveorderswithdata', order_controller.get_active_orders_with_data);
 
 router.get('/getmodelrequests', order_controller.get_modelrequests)

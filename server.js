@@ -1,7 +1,15 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const db = require("./configs/config").mongoURI
-mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, ()=> console.log("connected to mongodb"))
+mongoose.connect(db, { useNewUrlParser: true, useUnifiedTopology: true }, (err,result)=> {
+    if(err){
+        console.log(err)
+    }else{
+        // console.log(result)
+        console.log("connected to mongodb")
+    }
+    
+})
 // var backup = require('mongodb-backup');
 // backup({
 //         uri: db,
@@ -70,10 +78,10 @@ app.use("/api/zipdatabase",zipdatabaseRoutes)
 
 const port = process.env.PORT || 5600;
 
-// var server = app.listen(port,()=>{
-//     console.log(server.address().address)
-//     console.log(`server connected on localhost:${port}`)});
-
-var server = app.listen(port,"95.216.71.108",()=>{
+var server = app.listen(port,()=>{
     console.log(server.address().address)
     console.log(`server connected on localhost:${port}`)});
+
+// var server = app.listen(port,"95.216.71.108",()=>{
+//     console.log(server.address().address)
+//     console.log(`server connected on localhost:${port}`)});
