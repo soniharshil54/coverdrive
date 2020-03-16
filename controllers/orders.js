@@ -49,6 +49,73 @@ exports.get_active_orders_with_data = async function(req, res){
     }
 }
 
+exports.get_active_orders_with_data_filtered = async function(req, res){
+    let orders
+    var d = new Date();
+    let filtertype = req.params.filtertype
+    if(filtertype == "tmonth"){
+        let n = d.getMonth() + 1
+        orders = await Order.find({active : 1, "$expr": { "$eq": [{ "$month": "$date_ordered" }, n] }}).populate('products').populate("user_id")
+    }
+    else if(filtertype == "lmonth"){
+        let n = d.getMonth() 
+        orders = await Order.find({active : 1, "$expr": { "$eq": [{ "$month": "$date_ordered" }, n] }}).populate('products').populate("user_id")
+    }
+    else if(filtertype == "year"){
+        let n = d.getFullYear() 
+        orders = await Order.find({active : 1, "$expr": { "$eq": [{ "$year": "$date_ordered" }, n] }}).populate('products').populate("user_id")
+    }
+    else if(filtertype == "all"){ 
+        orders = await Order.find({active : 1}).populate('products').populate("user_id")
+    }
+    else if(filtertype == "week"){
+        let startrange = getLastWeek()
+        let endrange = new Date() 
+        orders = await Order.find({active : 1,date_ordered: {
+            $gte: startrange,
+            $lte: endrange
+        }}).populate('products').populate("user_id")
+    }
+    else if(filtertype == "yesterday"){
+        var yesterdayStart = new Date();
+        yesterdayStart.setDate(yesterdayStart.getDate() - 1);
+        yesterdayStart.setHours(0,0,0,0);
+        
+
+        var yesterdayEnd = new Date();
+        yesterdayEnd.setDate(yesterdayEnd.getDate() - 1);
+        yesterdayEnd.setHours(23,59,59,999);
+        orders = await Order.find({active : 1,date_ordered: {
+            $gte: yesterdayStart,
+            $lte: yesterdayEnd
+        }}).populate('products').populate("user_id")
+    }
+    else if(filtertype == "today"){
+        var todayStart = new Date();
+        todayStart.setHours(0,0,0,0);
+        console.log(todayStart)
+        orders = await Order.find({active : 1,date_ordered: {
+            $gte: todayStart
+        }}).populate('products').populate("user_id")
+    }
+    else{
+        var todayStart = new Date();
+        todayStart.setHours(0,0,0,0);
+        orders = await Order.find({active : 1,date_ordered: {
+            $gte: todayStart
+        }}).populate('products').populate("user_id")
+    }
+    
+    if(orders){
+        res.json(orders)
+        return
+    }
+    else{
+        res.json({"error":"order not found"})
+        return
+    }
+}
+
 exports.get_active_orders_with_data_optimized = async function(req, res){
     let orders = await Order.find({active : 1}).select('_id active order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
     if(orders){
@@ -76,6 +143,9 @@ exports.get_active_orders_with_data_optimized_filtered = async function(req, res
     else if(filtertype == "year"){
         let n = d.getFullYear() 
         orders = await Order.find({active : 1, "$expr": { "$eq": [{ "$year": "$date_ordered" }, n] }}).select('_id active order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
+    }
+    else if(filtertype == "all"){ 
+        orders = await Order.find({active : 1}).select('_id active order_id amount date_ordered order_status').populate('products','_id product_name').populate("user_id","_id contact first_name last_name")
     }
     else if(filtertype == "week"){
         let startrange = getLastWeek()

@@ -146,6 +146,8 @@ router.get('/getactiveorderswithdataoptfilt/:filtertype/:filterparam', order_con
 
 router.get('/getactiveorderswithdata', order_controller.get_active_orders_with_data);
 
+router.get('/getactiveorderswithdatafilt/:filtertype/:filterparam', order_controller.get_active_orders_with_data_filtered);
+
 router.get('/getmodelrequests', order_controller.get_modelrequests)
 
 router.delete('/deletemodelrequests', order_controller.delete_model_requests)
