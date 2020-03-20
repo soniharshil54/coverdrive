@@ -315,7 +315,7 @@ Offer.deleteMany({'_id':{'$in': offersDelete}},function(){
 
 exports.get_offers = async function(req, res){
     await edit_offer_status_again()
-    let result = await Offer.find({active_status : 1})
+    let result = await Offer.find({active_status : 1}).sort({create_date: -1})
     res.json(result)
 }
 
