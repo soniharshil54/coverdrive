@@ -64,6 +64,9 @@ exports.add_offer = async function(req, res) {
     res.status(201).header("Access-Control-Allow-Origin", "*").json(offer)
 }
 
+function findCommonElements(arr1, arr2) { 
+    return arr1.some(item => arr2.includes(item)) 
+} 
 
 exports.apply_coupon = async function(req, res){
     console.log("apply coupon called")
@@ -99,6 +102,16 @@ exports.apply_coupon = async function(req, res){
         res.status(201).json({result:resultRes})
     }
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
+    let cartProductsincart = cartProducts.map(productcat => productcat.category)
+    let categoriesenabledall = offer.categories
+    let commonElements = findCommonElements(cartProductsincart, categoriesenabledall)
+    if(!commonElements){
+        let resultRes = {
+            "status":0,
+            "message":"Offer not applicable for the products in your cart"
+        }
+        res.status(201).json({result:resultRes})
+    }
     let totalAmount = parseInt(subamount) + parseInt(gst) + parseInt(shipping) + parseInt(codcharges)
     let maxSpend = offer.max_spend
     let only_online = offer.only_online
