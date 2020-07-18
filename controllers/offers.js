@@ -88,7 +88,7 @@ exports.apply_coupon = async function(req, res){
             "status":0,
             "message":"Coupon doesn't exist"
         }
-        res.status(201).json({result:resultRes})
+        return res.status(201).json({result:resultRes})
     }
     let offerType = offer.offer_type
     let freeshippingallow = offer.free_shipping_allow === 1 ? true : false
@@ -99,7 +99,7 @@ exports.apply_coupon = async function(req, res){
             "status":0,
             "message":"You have already used this coupon"
         }
-        res.status(201).json({result:resultRes})
+        return res.status(201).json({result:resultRes})
     }
     let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
     let cartProductsincart = cartProducts.map(productcat => productcat.category)
@@ -110,7 +110,7 @@ exports.apply_coupon = async function(req, res){
             "status":0,
             "message":"Offer not applicable for the products in your cart"
         }
-        res.status(201).json({result:resultRes})
+        return res.status(201).json({result:resultRes})
     }
     let totalAmount = parseInt(subamount) + parseInt(gst) + parseInt(shipping) + parseInt(codcharges)
     let maxSpend = offer.max_spend
@@ -122,7 +122,7 @@ exports.apply_coupon = async function(req, res){
             "status":0,
             "message":"Cart amount is not sufficient for this coupon"
         }
-        res.status(201).json({result:resultRes})
+        return res.status(201).json({result:resultRes})
     }
     else {
     if(offerType === "freeshipping"){
@@ -136,7 +136,7 @@ exports.apply_coupon = async function(req, res){
         }
         await User.findOneAndUpdate({ _id: userid },{ $push: { code_used: offer._id } });
         await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
-        res.status(200).json({result:responseBody})
+        return res.status(200).json({result:responseBody})
     }
     else if(offerType === "flatdis"){
         console.log("in flatdis")
@@ -158,7 +158,7 @@ exports.apply_coupon = async function(req, res){
         }
         await User.findOneAndUpdate({ _id: userid },{ $push: { code_used: offer._id } });
         await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
-        res.status(200).json({result:responseBody})
+        return res.status(200).json({result:responseBody})
     }
     else if(offerType === "firsttime"){
         console.log("in firsttim")
@@ -182,7 +182,7 @@ exports.apply_coupon = async function(req, res){
             }
             await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
             
-            res.status(200).json({result:responseBody})
+            return res.status(200).json({result:responseBody})
         }
         else{
             console.log("not a first order")
@@ -190,7 +190,7 @@ exports.apply_coupon = async function(req, res){
                 "status":0,
                 "message":"Coupon only valid for the first order"
             }
-            res.status(201).json({result:resultRes})
+            return res.status(201).json({result:resultRes})
         }
     }
     else if(offerType === "bogo"){
@@ -226,7 +226,7 @@ exports.apply_coupon = async function(req, res){
                 "status":0,
                 "message":"offer doesnt match the quantity"
             }
-            res.status(201).json({result:resultRes})
+            return res.status(201).json({result:resultRes})
             return
         }
         for(i=0; i < qualcatsarray.length; i++){
@@ -253,7 +253,7 @@ exports.apply_coupon = async function(req, res){
         }
         await User.findOneAndUpdate({ _id: userid },{ $push: { code_used: offer._id } });
         await Offer.findOneAndUpdate({code: couponCode}, {$inc : {'usage_count' : 1}})
-        res.status(200).json({result:responseBody})
+        return res.status(200).json({result:responseBody})
     }
     else{
         console.log("no offers matched")
@@ -261,7 +261,7 @@ exports.apply_coupon = async function(req, res){
             "status":0,
             "message":"Coupon is not valid"
         }
-        res.status(201).json({result:resultRes})
+        return res.status(201).json({result:resultRes})
     }
 }
    // console.log(cartProducts)
