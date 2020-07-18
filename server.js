@@ -74,6 +74,7 @@ app.use("/api/zipdatabase",zipdatabaseRoutes)
 
  app.use('/admin/uploads', express.static('uploads'));
  app.use('/admin/dbbackup', express.static('dbbackup'));
+ app.use('/admin/ccavenue', express.static('ccavenue'));
 
 
 const port = process.env.PORT || 5600;
