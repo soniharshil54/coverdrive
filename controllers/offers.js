@@ -2,6 +2,7 @@ const express = require("express")
 const mongoose = require("mongoose")
 const User = require("../models/user")
 const Offer = require("../models/offer")
+const CartProduct = require("../models/cartproduct")
 const ObjectId = mongoose.Types.ObjectId
 
 //expo
@@ -101,10 +102,12 @@ exports.apply_coupon = async function(req, res){
         }
         return res.status(201).json({result:resultRes})
     }
-    let cartProducts = await Cartproduct.find({'_id':{'$in': productsCart}})
+    let cartProducts = await CartProduct.find({'_id':{'$in': productsCart}})
     let cartProductsincart = cartProducts.map(productcat => productcat.category)
     let categoriesenabledall = offer.categories
     let commonElements = findCommonElements(cartProductsincart, categoriesenabledall)
+    console.log("cartProductsincart", cartProductsincart)
+    console.log("categoriesenabledall", categoriesenabledall)
     if(!commonElements){
         let resultRes = {
             "status":0,
