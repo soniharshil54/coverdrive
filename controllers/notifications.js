@@ -66,7 +66,7 @@ exports.add_send_notification = async function(req,res,next){
   let notificationData = {}
   if(req.file){
       notificationData.isImage = 1
-      notificationData.image = `http://95.216.71.108:5600/admin/uploads/${req.file.filename}`
+      notificationData.image = `161.97.102.232:5600/admin/uploads/${req.file.filename}`
   }
   else{
       notificationData.isImage = 0

@@ -378,7 +378,7 @@ exports.place_mock_order = async function(req, res) {
 function htmlforcartproducts(productarray){
     let rowhtml = ""
     for(i=0; i< productarray.length; i++){
-        let imgsrc =  `http://95.216.71.108:5600/admin/uploads/${productarray[i].cropped_image}`
+        let imgsrc =  `161.97.102.232:5600/admin/uploads/${productarray[i].cropped_image}`
         rowhtml += `<tr style="font-family:Arial, sans-serif;line-height:1.3em;">
         <td style="line-height:1.3em;font-family:Arial, sans-serif;text-align:left;word-wrap:break-word;font-size:14px;padding:15px 12px;border-top:1px dotted #c9c9c9;vertical-align:top;">
           
